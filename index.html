@@ -2367,13 +2367,14 @@ function initUpOrnaments(){
 function initTone(){
   var darkSections = [].slice.call(document.querySelectorAll('.hero, .date-hero'));
   if(!darkSections.length) return;
-  var last = '', ticking = false;
+  var last = '', lastRun = 0;
 
-  // Se evalua el estado real en cada frame en vez de llevar un contador de
+  // Se evalua el estado real en cada scroll en vez de llevar un contador de
   // entradas/salidas: un salto de scroll grande puede omitir un callback y
-  // dejar el contador descuadrado para siempre.
+  // dejar el contador descuadrado para siempre. Sin requestAnimationFrame,
+  // porque el navegador lo congela cuando la pestana no compone frames.
   function update(){
-    ticking = false;
+    lastRun = new Date().getTime();
     var mid = window.innerHeight * 0.5;
     var dark = darkSections.some(function(s){
       var r = s.getBoundingClientRect();
@@ -2382,7 +2383,7 @@ function initTone(){
     var tone = dark ? 'dark' : 'light';
     if(tone !== last){ last = tone; document.body.dataset.tone = tone; }
   }
-  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  function onScroll(){ if(new Date().getTime() - lastRun > 70) update(); }
 
   update();
   window.addEventListener('scroll', onScroll, {passive:true});
