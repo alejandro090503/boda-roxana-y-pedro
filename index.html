@@ -65,7 +65,7 @@ body{
   overscroll-behavior-y:none;
 }
 .wrap{position:relative;z-index:2;overflow:clip}
-.container{max-width:1240px;margin:0 auto;padding:0 clamp(24px,4vw,56px);position:relative;z-index:1}
+.container{max-width:1240px;margin:0 auto;padding:0 clamp(24px,4vw,56px);position:relative;z-index:1;text-align:center}
 h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.015em;line-height:1.12;color:var(--ink)}
 h1 em,h2 em,h3 em{font-style:italic;font-weight:600;color:var(--gold)}
 .script{font-family:var(--script);font-weight:400;font-size:1.5em;color:var(--gold-deep);letter-spacing:0}
@@ -742,7 +742,7 @@ footer{padding:min(9vh,74px) 0 !important}
 /* ============ HOSPEDAJE ============ */
 .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));
   gap:22px;margin-top:44px;text-align:left}
-.hotel-card{background:rgba(255,255,255,.90);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+.hotel-card{text-align:left;background:rgba(255,255,255,.90);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border:1px solid var(--hair-gold);padding:28px 24px 26px;display:flex;flex-direction:column;
   box-shadow:0 14px 34px -18px rgba(21,45,79,.24)}
 .hotel-tag{font-family:var(--sans);font-size:12px;letter-spacing:.28em;text-transform:uppercase;
@@ -779,7 +779,7 @@ footer{padding:min(9vh,74px) 0 !important}
    aunque las animaciones se pausen. */
 .faq-a{overflow:hidden;max-height:0;
   transition:max-height .45s cubic-bezier(.2,.7,.2,1)}
-.faq-a-inner{padding:0 4px 22px;
+.faq-a-inner{padding:0 4px 22px;text-align:left;
   font-family:var(--serif);font-size:17px;line-height:1.65;
   color:var(--ink-soft);font-weight:500}
 @media(prefers-reduced-motion:reduce){ .faq-a{transition:none} }
