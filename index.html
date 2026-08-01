@@ -715,9 +715,16 @@ footer{padding:min(9vh,74px) 0 !important}
 .faq-ico::after{width:1.5px;height:13px}
 .faq-item.is-open .faq-ico{transform:rotate(180deg)}
 .faq-item.is-open .faq-ico::after{opacity:0}
-.faq-a{overflow:hidden;height:0}
-.faq-a-inner{padding:0 4px 22px;font-family:var(--serif);font-size:17px;line-height:1.65;
+/* Apertura con CSS puro (grid-template-rows 0fr -> 1fr): no depende del ticker
+   de GSAP, asi la FAQ sigue funcionando aunque las animaciones se pausen. */
+.faq-a{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .42s cubic-bezier(.2,.7,.2,1)}
+.faq-item.is-open .faq-a{grid-template-rows:1fr}
+.faq-a-inner{overflow:hidden;min-height:0;padding:0 4px;
+  font-family:var(--serif);font-size:17px;line-height:1.65;
   color:var(--ink-soft);font-weight:500}
+.faq-item.is-open .faq-a-inner{padding-bottom:22px}
+@media(prefers-reduced-motion:reduce){ .faq-a{transition:none} }
 
 /* ============ DESPEDIDA ============ */
 .despedida{position:relative;overflow:hidden;text-align:center}
@@ -2685,22 +2692,20 @@ function initFAQ(){
     item.classList.remove('is-open');
     var b = item.querySelector('.faq-q');
     if(b) b.setAttribute('aria-expanded','false');
-    gsap.to(item.querySelector('.faq-a'),{height:0,duration:.38,ease:'power2.inOut'});
   }
 
   items.forEach(function(item){
     var btn = item.querySelector('.faq-q');
-    var panel = item.querySelector('.faq-a');
-    if(!btn || !panel) return;
+    if(!btn) return;
     btn.addEventListener('click', function(){
       var isOpen = item.classList.contains('is-open');
       document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o !== item) close(o); });
       if(isOpen){ close(item); return; }
       item.classList.add('is-open');
       btn.setAttribute('aria-expanded','true');
-      // 'auto' deja el panel adaptable si cambia el ancho o el zoom del navegador
-      gsap.to(panel,{height:'auto',duration:.45,ease:'power2.out',
-        onComplete:function(){ if(window.ScrollTrigger) ScrollTrigger.refresh(); }});
+      // La altura la anima el CSS; solo hay que avisar a ScrollTrigger de que
+      // el documento cambio de alto para que no se descoloquen los triggers.
+      setTimeout(function(){ if(window.ScrollTrigger) ScrollTrigger.refresh(); }, 460);
     });
   });
 }
