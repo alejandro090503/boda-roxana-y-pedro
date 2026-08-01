@@ -2830,14 +2830,35 @@ if(musicBtn){
    ============================================================ */
 (function(){
   if(!window.ScrollTrigger) return;
+
+  /* Con toggleActions por defecto ('play none none none') la animacion solo
+     arranca en el onEnter, es decir al CRUZAR el inicio hacia abajo. Si las
+     posiciones cambian mientras tanto, ese cruce se pierde y el tween se queda
+     pausado en progreso 0 para siempre: el elemento nunca aparece.
+     Aqui se rescatan justo esos casos — el scroll ya paso el inicio pero la
+     animacion sigue sin empezar — dejando que GSAP la reproduzca normalmente. */
+  function revelarPendientes(){
+    ScrollTrigger.getAll().forEach(function(st){
+      var a = st.animation;
+      if(!a || !st.progress) return;
+      if(a.progress() === 0 && a.paused()) a.play();
+    });
+  }
+
   var t = null;
   function refrescar(){
     clearTimeout(t);
-    t = setTimeout(function(){ ScrollTrigger.refresh(); }, 180);
+    t = setTimeout(function(){ ScrollTrigger.refresh(); revelarPendientes(); }, 180);
   }
 
+  var s = null;
+  window.addEventListener('scroll', function(){
+    clearTimeout(s);
+    s = setTimeout(revelarPendientes, 250);
+  }, {passive:true});
+
   window.addEventListener('resize', refrescar);
-  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); revelarPendientes(); });
 
   // cada imagen que termina de cargar puede cambiar el alto del documento
   document.querySelectorAll('img').forEach(function(img){
@@ -2848,12 +2869,12 @@ if(musicBtn){
 
   // las fuentes tambien reflowean el texto al aplicarse
   if(document.fonts && document.fonts.ready){
-    document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
+    document.fonts.ready.then(function(){ ScrollTrigger.refresh(); revelarPendientes(); });
   }
 
   // red de seguridad: dos pasadas tardias por si algo cargo fuera de estos avisos
-  setTimeout(function(){ ScrollTrigger.refresh(); }, 1200);
-  setTimeout(function(){ ScrollTrigger.refresh(); }, 3500);
+  setTimeout(function(){ ScrollTrigger.refresh(); revelarPendientes(); }, 1200);
+  setTimeout(function(){ ScrollTrigger.refresh(); revelarPendientes(); }, 3500);
 })();
 </script>
 </body>
