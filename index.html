@@ -2857,6 +2857,35 @@ if(musicBtn){
     s = setTimeout(revelarPendientes, 250);
   }, {passive:true});
 
+  /* Garantia final, independiente de los calculos de ScrollTrigger: cuando una
+     seccion entra en pantalla, se comprueba medio segundo despues si algo suyo
+     sigue invisible. Si es asi, se completa su animacion (progress(1), que
+     respeta los valores finales del tween). Solo si no hubiera tween asociado
+     se fuerza la opacidad, y sin tocar el transform, porque las fotos de la
+     rueda lo usan para colocarse en circulo. */
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(en){
+        if(!en.isIntersecting) return;
+        var sec = en.target;
+        obs.unobserve(sec);
+        setTimeout(function(){
+          sec.querySelectorAll('*').forEach(function(el){
+            if(el.closest('#particles')) return;
+            var cs = getComputedStyle(el);
+            if(cs.display === 'none' || cs.visibility === 'hidden') return;
+            if(parseFloat(cs.opacity) > 0.05) return;
+            if(el.classList.contains('mono-wm')) return;   // marca de agua, va al 4% a proposito
+            var tws = gsap.getTweensOf(el);
+            if(tws.length){ tws.forEach(function(t){ t.progress(1); }); }
+            if(parseFloat(getComputedStyle(el).opacity) < 0.05) gsap.set(el, {opacity:1});
+          });
+        }, 550);
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.wrap > section, .wrap > footer').forEach(function(sec){ obs.observe(sec); });
+  }
+
   window.addEventListener('resize', refrescar);
   window.addEventListener('load', function(){ ScrollTrigger.refresh(); revelarPendientes(); });
 
