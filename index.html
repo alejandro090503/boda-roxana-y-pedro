@@ -699,6 +699,25 @@ footer{padding:min(9vh,74px) 0 !important}
 .std-nota{font-family:var(--sans);font-size:13px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--ink-soft);font-weight:600;margin-top:26px;padding-left:.24em}
 
+/* ============ HOSPEDAJE ============ */
+.hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));
+  gap:22px;margin-top:44px;text-align:left}
+.hotel-card{background:rgba(255,255,255,.90);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--hair-gold);padding:28px 24px 26px;display:flex;flex-direction:column;
+  box-shadow:0 14px 34px -18px rgba(21,45,79,.24)}
+.hotel-tag{font-family:var(--sans);font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-deep);font-weight:600;margin-bottom:12px;padding-left:.28em}
+.hotel-name{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);
+  line-height:1.25;margin-bottom:12px}
+.hotel-meta{font-family:var(--sans);font-size:14px;color:var(--ink-soft);font-weight:600;
+  line-height:1.6;margin-bottom:4px}
+.hotel-detalle{font-family:var(--serif);font-size:16px;color:var(--ink-soft);line-height:1.55;
+  font-weight:500;margin:14px 0 22px;flex:1}
+.hotel-card .loc-btn{align-self:flex-start;padding:12px 24px;font-size:12px;letter-spacing:.28em;
+  padding-left:calc(24px + .28em)}
+.hotel-nota{font-family:var(--sans);font-size:14px;color:var(--ink-soft);font-weight:500;
+  line-height:1.6;margin-top:30px;max-width:640px;margin-left:auto;margin-right:auto}
+
 /* ============ FAQ — preguntas frecuentes ============ */
 .faq-list{max-width:720px;margin:44px auto 0;text-align:left}
 .faq-item{border-bottom:1px solid var(--hair)}
@@ -715,15 +734,15 @@ footer{padding:min(9vh,74px) 0 !important}
 .faq-ico::after{width:1.5px;height:13px}
 .faq-item.is-open .faq-ico{transform:rotate(180deg)}
 .faq-item.is-open .faq-ico::after{opacity:0}
-/* Apertura con CSS puro (grid-template-rows 0fr -> 1fr): no depende del ticker
-   de GSAP, asi la FAQ sigue funcionando aunque las animaciones se pausen. */
-.faq-a{display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .42s cubic-bezier(.2,.7,.2,1)}
-.faq-item.is-open .faq-a{grid-template-rows:1fr}
-.faq-a-inner{overflow:hidden;min-height:0;padding:0 4px;
+/* Apertura por max-height con transicion CSS: el alto exacto lo fija el JS con
+   scrollHeight. No depende del ticker de GSAP, asi la FAQ sigue funcionando
+   aunque las animaciones se pausen. */
+.faq-a{overflow:hidden;max-height:0;
+  transition:max-height .45s cubic-bezier(.2,.7,.2,1)}
+.faq-a-inner{padding:0 4px 22px;
   font-family:var(--serif);font-size:17px;line-height:1.65;
   color:var(--ink-soft);font-weight:500}
-.faq-item.is-open .faq-a-inner{padding-bottom:22px}
+@media(prefers-reduced-motion:reduce){ .faq-a{transition:none} }
 @media(prefers-reduced-motion:reduce){ .faq-a{transition:none} }
 
 /* ============ DESPEDIDA ============ */
@@ -1372,7 +1391,7 @@ footer{padding:min(9vh,74px) 0 !important}
     </div>
   </section>
 
-  <div class="seam" style="--from:var(--bg);--to:var(--surface)" aria-hidden="true"></div>
+  <div class="seam" style="--from:var(--bg);--to:var(--bg)" aria-hidden="true"></div>
 
   <!-- GALLERY -->
   <section class="gallery" aria-label="Galería de fotos">
@@ -1507,7 +1526,48 @@ footer{padding:min(9vh,74px) 0 !important}
     </div>
   </section>
 
-  <div class="seam" style="--from:var(--surface);--to:var(--bg)" aria-hidden="true"></div>
+  <div class="seam" style="--from:var(--surface);--to:var(--paper)" aria-hidden="true"></div>
+
+  <!-- HOSPEDAJE -->
+  <section class="section-paper hospedaje section-tight" id="hospedaje">
+    <div class="container">
+      <div class="eyebrow">Para quienes vienen de lejos</div>
+      <h2>Dónde <em>quedarse</em></h2>
+
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <div class="hotel-tag">A 3 minutos del salón</div>
+          <div class="hotel-name">Holiday Inn Express &amp; Suites Boynton Beach West</div>
+          <div class="hotel-meta">2001 Ocean Drive, Boynton Beach</div>
+          <div class="hotel-meta">1.1 km · desde ~$110 USD la noche</div>
+          <p class="hotel-detalle">El más cercano de los tres, casi enfrente. Desayuno caliente y estacionamiento incluidos, alberca y gimnasio 24 h.</p>
+          <a class="loc-btn" href="https://www.ihg.com/holidayinnexpress/hotels/us/en/boynton-beach/boyhi/hoteldetail" target="_blank" rel="noopener">Ver disponibilidad</a>
+        </div>
+
+        <div class="hotel-card">
+          <div class="hotel-tag">A 8 minutos del salón</div>
+          <div class="hotel-name">Hampton Inn &amp; Suites Boynton Beach</div>
+          <div class="hotel-meta">1475 W Gateway Blvd, Boynton Beach</div>
+          <div class="hotel-meta">5.2 km · desde ~$110 USD la noche</div>
+          <p class="hotel-detalle">Desayuno caliente y estacionamiento gratuitos, alberca, habitaciones comunicadas y admite mascotas.</p>
+          <a class="loc-btn" href="https://www.hilton.com/en/hotels/boybhhx-hampton-suites-boynton-beach/" target="_blank" rel="noopener">Ver disponibilidad</a>
+        </div>
+
+        <div class="hotel-card">
+          <div class="hotel-tag">A 13 minutos · frente al mar</div>
+          <div class="hotel-name">Opal Grand Oceanfront Resort &amp; Spa</div>
+          <div class="hotel-meta">10 N Ocean Blvd, Delray Beach</div>
+          <div class="hotel-meta">10.3 km · desde ~$300 USD la noche</div>
+          <p class="hotel-detalle">Frente a la playa y sobre Atlantic Avenue, con spa, dos albercas y rooftop. Ten en cuenta que solo tiene valet ($35 la noche) y cobra cuota de resort aparte.</p>
+          <a class="loc-btn" href="https://www.opalcollection.com/opal-grand/" target="_blank" rel="noopener">Ver disponibilidad</a>
+        </div>
+      </div>
+
+      <p class="hotel-nota">Los precios son orientativos y no corresponden a una cotización para el 12 de diciembre. Diciembre es temporada alta en el sur de Florida, así que conviene reservar con tiempo. El aeropuerto más práctico es <strong>Palm Beach International (PBI)</strong>, a unos 21 minutos del salón; Fort Lauderdale (FLL) queda a unos 45.</p>
+    </div>
+  </section>
+
+  <div class="seam" style="--from:var(--paper);--to:var(--surface)" aria-hidden="true"></div>
 
   <!-- PREGUNTAS FRECUENTES -->
   <section class="section-surface faq section-tight" id="faq">
@@ -1541,23 +1601,37 @@ footer{padding:min(9vh,74px) 0 !important}
           <button class="faq-q" type="button" aria-expanded="false">
             <span>¿Las dos sedes están en el mismo lugar?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">No. La ceremonia es en <strong>St. Luke Catholic Church</strong> (Palm Springs) y la recepción en <strong>The Delray Ballroom</strong> (Boynton Beach). Hay unos 21 km entre ambas, de 20 a 25 minutos en coche por la I-95. Con dos horas y media entre una y otra vas sobrado.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">No. La ceremonia es en <strong>St. Luke Catholic Church</strong> (Palm Springs) y la recepción en <strong>The Delray Ballroom</strong> (Boynton Beach). Hay unos 16 km entre ambas, de 16 a 20 minutos en coche por la I-95. Con dos horas y media entre una y otra vas sobrado.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
             <span>¿Hay estacionamiento?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner"><!-- PENDIENTE: confirmar estacionamiento de ambas sedes -->Por confirmar. En cuanto lo tengamos cerrado actualizamos esta sección.</div></div>
+          <div class="faq-a"><div class="faq-a-inner"><!-- El salon declara parking gratuito en su ficha de Google, pero NO en su sitio oficial. La iglesia no esta confirmada por fuente oficial. Confirmar por telefono: salon 561-359-2222, parroquia 561-965-8980. -->En <strong>The Delray Ballroom</strong> hay estacionamiento propio y gratuito. En la iglesia estamos confirmando los detalles; en cuanto los tengamos actualizamos aquí.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
             <span>¿Qué tiempo hace en diciembre?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner"><!-- PENDIENTE: confirmar rangos de temperatura -->Por confirmar.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">Diciembre en el sur de Florida es cálido y agradable: entre <strong>25&nbsp;°C</strong> de día y <strong>18&nbsp;°C</strong> por la noche (77&nbsp;°F / 65&nbsp;°F). Aun así, el salón tendrá aire acondicionado y algún frente frío puede refrescar la noche, así que un chal o saco ligero no sobra.</div></div>
         </div>
 
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Qué hoteles recomiendan?</span><span class="faq-ico" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Te dejamos tres opciones a distintos precios en la sección <a href="#hospedaje" style="color:var(--gold-deep);text-decoration:underline">Dónde quedarse</a>, todas a menos de 15 minutos del salón.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>¿Cómo me muevo por la zona?</span><span class="faq-ico" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Uber y Lyft funcionan con normalidad en todo el condado de Palm Beach y en el aeropuerto. Aun así, la zona depende mucho del coche: si vienes de fuera, rentar uno te va a facilitar bastante el fin de semana.</div></div>
+        </div>
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
             <span>¿Puedo tomar fotos?</span><span class="faq-ico" aria-hidden="true"></span>
@@ -1670,7 +1744,7 @@ footer{padding:min(9vh,74px) 0 !important}
     </div>
   </section>
 
-  <div class="seam" style="--from:var(--surface);--to:var(--paper)" aria-hidden="true"></div>
+  <div class="seam" style="--from:var(--bg);--to:var(--paper)" aria-hidden="true"></div>
 
   <!-- FOOTER -->
   <footer>
@@ -2692,6 +2766,14 @@ function initFAQ(){
     item.classList.remove('is-open');
     var b = item.querySelector('.faq-q');
     if(b) b.setAttribute('aria-expanded','false');
+    item.querySelector('.faq-a').style.maxHeight = '0px';
+  }
+  function open(item){
+    var panel = item.querySelector('.faq-a');
+    item.classList.add('is-open');
+    item.querySelector('.faq-q').setAttribute('aria-expanded','true');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    setTimeout(function(){ if(window.ScrollTrigger) ScrollTrigger.refresh(); }, 470);
   }
 
   items.forEach(function(item){
@@ -2700,14 +2782,19 @@ function initFAQ(){
     btn.addEventListener('click', function(){
       var isOpen = item.classList.contains('is-open');
       document.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o !== item) close(o); });
-      if(isOpen){ close(item); return; }
-      item.classList.add('is-open');
-      btn.setAttribute('aria-expanded','true');
-      // La altura la anima el CSS; solo hay que avisar a ScrollTrigger de que
-      // el documento cambio de alto para que no se descoloquen los triggers.
-      setTimeout(function(){ if(window.ScrollTrigger) ScrollTrigger.refresh(); }, 460);
+      if(isOpen) close(item); else open(item);
     });
   });
+
+  // Si cambia el ancho, el texto se re-ajusta y el alto fijado deja de valer
+  window.addEventListener('resize', function(){
+    var abierto = document.querySelector('.faq-item.is-open');
+    if(!abierto) return;
+    var panel = abierto.querySelector('.faq-a');
+    panel.style.maxHeight = 'none';
+    var h = panel.scrollHeight;
+    panel.style.maxHeight = h + 'px';
+  }, {passive:true});
 }
 
 function startUpLayer(){
