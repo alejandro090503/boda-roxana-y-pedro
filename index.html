@@ -229,6 +229,16 @@ body[data-tone="light"] .b--silver{
 .hero-frame-corners::before{top:-8px;right:-8px;border-left:none;border-bottom:none}
 .hero-frame-corners::after{bottom:-8px;left:-8px;border-right:none;border-top:none}
 .hero-content{position:relative;z-index:1;text-align:center;color:#F8F5EC;padding:40px 32px;max-width:960px;}
+/* Velo local detras del bloque de texto. Oscurecer toda la foto la apagaria;
+   esto solo asienta la zona donde va el texto, que segun la foto puede caer
+   sobre el vestido claro y dejar el crema practicamente ilegible. */
+.hero-content::before{
+  content:"";position:absolute;inset:-6% -8%;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 52%,
+    rgba(11,21,44,.62) 0%, rgba(11,21,44,.50) 38%,
+    rgba(11,21,44,.28) 62%, transparent 78%);
+  filter:blur(6px);
+}
 .hero-ornament-top{display:block;margin:0 auto 28px;width:180px;height:auto;opacity:.75}
 .hero-eyebrow{
   font-family:var(--sans);font-weight:500;
