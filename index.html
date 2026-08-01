@@ -93,6 +93,14 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:600;color:var(--gold)}
   background:linear-gradient(to right, transparent 0%, var(--gold) 50%, transparent 100%);
 }
 .hair-word span{font-family:var(--script);color:var(--gold-deep);font-size:28px;line-height:1}
+/* En movil el letter-spacing de .55em hace que los eyebrows largos no quepan
+   en 327px utiles: se parten en dos lineas y las rayas decorativas quedan
+   colgando sueltas. Se reduce el track y se acortan las rayas. */
+@media(max-width:600px){
+  .eyebrow{letter-spacing:.26em;font-size:11.5px;padding-left:.26em;margin-bottom:24px}
+  .eyebrow::before,.eyebrow::after{width:16px;margin:0 9px 4px 0}
+  .eyebrow::after{margin:0 0 4px 9px}
+}
 
 /* ============ PARTICLES — SHIMMER + SPARKLE ============ */
 #particles{position:fixed;inset:0;pointer-events:none;z-index:3;overflow:hidden;contain:strict}
@@ -160,11 +168,11 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:600;color:var(--gold)}
    Segun el tono de la seccion que domina la pantalla, cambian a azul polvo
    con una sombra suave para que se lean sobre papel blanco. */
 body[data-tone="light"] .cloud{
-  background:rgba(155,183,214,.50);
-  filter:blur(10px) drop-shadow(0 10px 18px rgba(21,45,79,.13));
+  background:rgba(146,176,208,.92);
+  filter:blur(10px) drop-shadow(0 12px 20px rgba(21,45,79,.16));
 }
 body[data-tone="dark"] .cloud{
-  background:rgba(255,255,255,.78);
+  background:rgba(255,255,255,.86);
   filter:blur(9px);
 }
 /* Mismo problema con los globos blancos y plata sobre fondo claro */
@@ -687,7 +695,12 @@ footer{padding:min(9vh,74px) 0 !important}
   .hist-line{left:23px}
   .hist-item{grid-template-columns:46px 1fr;column-gap:18px;align-items:start;margin-bottom:26px}
   .hist-node{grid-column:1;grid-row:1}
-  .hist-item .hist-card{grid-column:2;grid-row:1;text-align:left;padding:18px 20px}
+  /* Los dos selectores repiten :nth-child a proposito: si no, la regla de
+     escritorio (grid-column:3) gana por especificidad y la tarjeta cae en una
+     columna implicita inexistente, donde el texto se apila letra por letra. */
+  .hist-item:nth-child(odd)  .hist-card,
+  .hist-item:nth-child(even) .hist-card{
+    grid-column:2;grid-row:1;text-align:left;padding:18px 20px}
   .hist-title{font-size:20px}
 }
 
@@ -945,7 +958,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- PENDIENTE: textos provisionales. Los novios van a corregirlos con su historia real. -->
   <section class="section-paper historia">
     <div class="container">
-      <div class="eyebrow">Cómo llegamos hasta aquí</div>
+      <div class="eyebrow">Cómo empezó todo</div>
       <h2>Nuestra <em>historia</em></h2>
 
       <div class="hist-track">
@@ -1530,7 +1543,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- HOSPEDAJE -->
   <section class="section-paper hospedaje section-tight" id="hospedaje">
     <div class="container">
-      <div class="eyebrow">Para quienes vienen de lejos</div>
+      <div class="eyebrow">Si vienes de fuera</div>
       <h2>Dónde <em>quedarse</em></h2>
 
       <div class="hotel-grid">
@@ -1667,7 +1680,7 @@ footer{padding:min(9vh,74px) 0 !important}
             </g>
           </svg>
 
-          <div class="eyebrow">Confirmación de asistencia</div>
+          <div class="eyebrow">Confírmanos</div>
           <h2 class="rsvp-title">Tu presencia <em>lo es</em> todo</h2>
           <p class="rsvp-text">Por favor confirma tu asistencia antes del <strong>domingo 1 de noviembre de 2026</strong>. Con un solo toque nos ayudas a preparar cada detalle de nuestra gran aventura.</p>
 
@@ -2631,7 +2644,7 @@ function launchCloud(){
   el.style.left=(dir===1?-220:vw()+220)+'px';
   el.style.transform='scale('+scale.toFixed(2)+')';
   particlesContainer.appendChild(el);
-  var peak=.20+Math.random()*.22;
+  var peak=.40+Math.random()*.28;
   var tl=gsap.timeline({onComplete:function(){el.remove();setTimeout(launchCloud,3000+Math.random()*9000);}});
   tl.to(el,{opacity:peak,duration:5,ease:'sine.out'},0);
   tl.to(el,{x:dir*(vw()+440),duration:life,ease:'none'},0);
