@@ -2365,18 +2365,28 @@ function initUpOrnaments(){
 /* Marca el tono de fondo dominante en <body data-tone>. Las nubes y los globos
    claros lo leen para no perderse sobre las secciones de papel blanco. */
 function initTone(){
-  var darkCount = 0;
-  document.body.dataset.tone = 'light';
-  function setTone(){ document.body.dataset.tone = darkCount > 0 ? 'dark' : 'light'; }
-  document.querySelectorAll('.hero, .date-hero').forEach(function(s){
-    ScrollTrigger.create({
-      trigger: s, start: 'top 62%', end: 'bottom 38%',
-      onEnter:     function(){ darkCount++; setTone(); },
-      onEnterBack: function(){ darkCount++; setTone(); },
-      onLeave:     function(){ darkCount = Math.max(0, darkCount-1); setTone(); },
-      onLeaveBack: function(){ darkCount = Math.max(0, darkCount-1); setTone(); }
+  var darkSections = [].slice.call(document.querySelectorAll('.hero, .date-hero'));
+  if(!darkSections.length) return;
+  var last = '', ticking = false;
+
+  // Se evalua el estado real en cada frame en vez de llevar un contador de
+  // entradas/salidas: un salto de scroll grande puede omitir un callback y
+  // dejar el contador descuadrado para siempre.
+  function update(){
+    ticking = false;
+    var mid = window.innerHeight * 0.5;
+    var dark = darkSections.some(function(s){
+      var r = s.getBoundingClientRect();
+      return r.top < mid && r.bottom > mid;
     });
-  });
+    var tone = dark ? 'dark' : 'light';
+    if(tone !== last){ last = tone; document.body.dataset.tone = tone; }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+
+  update();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
 }
 
 function startUpLayer(){
