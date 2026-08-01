@@ -811,6 +811,14 @@ footer{padding:min(9vh,74px) 0 !important}
 }
 @media(max-width:600px){ .verse-photo{max-width:250px} }
 
+/* Los atributos width/height del HTML reservan espacio y evitan que el
+   documento cambie de alto al cargar, pero si el CSS solo fija el ancho, el
+   alto del atributo se aplica tal cual y deforma la imagen. height:auto
+   devuelve la proporcion. (.dc-img y .hero-bg no entran: la primera fija el
+   alto y deja el ancho automatico, y la segunda recorta con object-fit.) */
+.up-casa-hero,.up-globo-float,.up-globos-deco,.up-sello,.up-letrero,
+.up-pareja,.desp-casa,.dc-zapatos,.verse-photo img{height:auto}
+
 /* ============================================================
    ORNAMENTOS "UP" — piezas ilustradas del save-the-date de los novios
    Todas decorativas: pointer-events:none + aria-hidden en el HTML.
