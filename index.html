@@ -154,6 +154,26 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:600;color:var(--gold)}
   background:rgba(255,255,255,.72);
   border-radius:44px;
   filter:blur(9px);
+  transition:background .8s ease, filter .8s ease;
+}
+/* Las nubes blancas desaparecen sobre las secciones claras (que son casi todas).
+   Segun el tono de la seccion que domina la pantalla, cambian a azul polvo
+   con una sombra suave para que se lean sobre papel blanco. */
+body[data-tone="light"] .cloud{
+  background:rgba(155,183,214,.50);
+  filter:blur(10px) drop-shadow(0 10px 18px rgba(21,45,79,.13));
+}
+body[data-tone="dark"] .cloud{
+  background:rgba(255,255,255,.78);
+  filter:blur(9px);
+}
+/* Mismo problema con los globos blancos y plata sobre fondo claro */
+body[data-tone="light"] .b--white{
+  background:radial-gradient(circle at 32% 26%, #ffffff, #c2d3e2 72%);
+  box-shadow:inset -2px -2px 4px rgba(21,45,79,.12), 0 2px 8px rgba(21,45,79,.16);
+}
+body[data-tone="light"] .b--silver{
+  background:radial-gradient(circle at 32% 26%, #ccd6de, #9fadb9 72%);
 }
 .cloud::before,.cloud::after{
   content:"";position:absolute;background:inherit;border-radius:50%;
@@ -637,6 +657,12 @@ footer{background:linear-gradient(160deg,#e8f1f8 0%,#dfeaf4 38%,#eef3f7 70%,#f7f
 #env-flash{position:fixed;inset:0;z-index:9999;background:var(--bg);opacity:0;pointer-events:none;}
 .wrap{visibility:hidden}
 
+/* Secciones de poco contenido: el padding de 170px de la plantilla estaba
+   pensado para bloques densos y aqui dejaba medio viewport en blanco. */
+.section-tight{padding:min(10vh,88px) 0 !important}
+.section-tight .gifts-head{margin-bottom:0}
+footer{padding:min(9vh,74px) 0 !important}
+
 /* Foto del libro "Our adventure begins" dentro de la frase inicial */
 .verse-photo{
   margin:40px auto 0; max-width:340px; position:relative;
@@ -875,7 +901,7 @@ footer{background:linear-gradient(160deg,#e8f1f8 0%,#dfeaf4 38%,#eef3f7 70%,#f7f
   <div class="seam" style="--from:var(--surface);--to:var(--paper)" aria-hidden="true"></div>
 
   <!-- PADRINOS / TESTIGOS -->
-  <section class="section-paper padrinos">
+  <section class="section-paper padrinos section-tight">
     <div class="container">
       <div class="eyebrow">Quienes nos acompañan</div>
       <h2>Nuestros <em>padrinos</em></h2>
@@ -1285,7 +1311,7 @@ footer{background:linear-gradient(160deg,#e8f1f8 0%,#dfeaf4 38%,#eef3f7 70%,#f7f
   <div class="seam" style="--from:var(--surface);--to:var(--paper)" aria-hidden="true"></div>
 
   <!-- SOLO ADULTOS -->
-  <section class="section-paper">
+  <section class="section-paper section-tight">
     <div class="container">
       <div class="gifts-head">
         <div class="eyebrow">Con todo respeto</div>
@@ -1298,7 +1324,7 @@ footer{background:linear-gradient(160deg,#e8f1f8 0%,#dfeaf4 38%,#eef3f7 70%,#f7f
   <div class="seam" style="--from:var(--paper);--to:var(--surface)" aria-hidden="true"></div>
 
   <!-- ÁLBUM COMPARTIDO -->
-  <section class="section-surface">
+  <section class="section-surface section-tight">
     <div class="container">
       <div class="gifts-head">
         <div class="eyebrow">Comparte con nosotros</div>
@@ -1392,7 +1418,7 @@ footer{background:linear-gradient(160deg,#e8f1f8 0%,#dfeaf4 38%,#eef3f7 70%,#f7f
   <div class="seam" style="--from:var(--bg);--to:var(--surface)" aria-hidden="true"></div>
 
   <!-- NUESTRAS MASCOTAS -->
-  <section class="section-surface mascotas">
+  <section class="section-surface mascotas section-tight">
     <div class="container">
       <div class="eyebrow">Los últimos en la fila</div>
       <h2>Nuestros <em>compañeros</em> de aventura</h2>
@@ -2336,7 +2362,25 @@ function initUpOrnaments(){
   });
 }
 
+/* Marca el tono de fondo dominante en <body data-tone>. Las nubes y los globos
+   claros lo leen para no perderse sobre las secciones de papel blanco. */
+function initTone(){
+  var darkCount = 0;
+  document.body.dataset.tone = 'light';
+  function setTone(){ document.body.dataset.tone = darkCount > 0 ? 'dark' : 'light'; }
+  document.querySelectorAll('.hero, .date-hero').forEach(function(s){
+    ScrollTrigger.create({
+      trigger: s, start: 'top 62%', end: 'bottom 38%',
+      onEnter:     function(){ darkCount++; setTone(); },
+      onEnterBack: function(){ darkCount++; setTone(); },
+      onLeave:     function(){ darkCount = Math.max(0, darkCount-1); setTone(); },
+      onLeaveBack: function(){ darkCount = Math.max(0, darkCount-1); setTone(); }
+    });
+  });
+}
+
 function startUpLayer(){
+  initTone();
   if(prefersReduced) return;
   for(var i=0;i<14;i++) setTimeout(launchBalloon,i*1500+Math.random()*2500);
   for(var j=0;j<5;j++)  setTimeout(launchCloud,j*6000+Math.random()*7000);
