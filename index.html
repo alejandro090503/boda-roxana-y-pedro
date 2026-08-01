@@ -523,7 +523,7 @@ body[data-tone="light"] .b--silver{
   box-shadow:0 8px 32px rgba(0,0,0,.2),0 1px 4px rgba(0,0,0,.1);
 }
 .wheel-item-inner{position:relative;width:100%;height:100%;cursor:zoom-in;}
-.wheel-item-inner img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s ease;}
+.wheel-item-inner img{aspect-ratio:3/4;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s ease;}
 .wheel-item-inner:hover img{transform:scale(1.05);}
 .wheel-hub{position:absolute;width:clamp(50px,7vw,80px);height:clamp(50px,7vw,80px);color:var(--gold);opacity:.6;}
 /* ── WHEEL SPARKS ── */
@@ -880,7 +880,7 @@ footer{padding:min(9vh,74px) 0 !important}
 
 <!-- ENVELOPE OPENING -->
 <div id="envelope-screen" role="button" aria-label="Toca para abrir la invitación" tabindex="0">
-  <img id="env-image" src="envelope.jpg" alt="">
+  <img id="env-image" src="envelope.jpg" alt="" width="1072" height="1920">
   <video id="env-video" muted playsinline preload="auto" aria-hidden="true">
     <source src="envelope.mp4" type="video/mp4">
   </video>
@@ -919,14 +919,14 @@ footer{padding:min(9vh,74px) 0 !important}
     <div class="hero-bg-wrap">
       <picture>
         <source media="(min-width:900px)" srcset="hero-up-desktop.jpg">
-        <img class="hero-bg" src="hero-up.jpg" alt="" fetchpriority="high" loading="eager">
+        <img class="hero-bg" src="hero-up.jpg" alt="" fetchpriority="high" loading="eager" width="1080" height="1920">
       </picture>
     </div>
     <div class="hero-bg-overlay"></div>
     <div class="hero-frame"></div>
     <div class="hero-frame-corners"></div>
-    <img class="up-casa-hero" src="up-casa-globos.webp" alt="" aria-hidden="true" loading="eager" decoding="async">
-    <img class="up-globo-float" src="up-globo.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="left:6%;top:34%">
+    <img class="up-casa-hero" src="up-casa-globos.webp" alt="" aria-hidden="true" loading="eager" decoding="async" width="760" height="614">
+    <img class="up-globo-float" src="up-globo.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="left:6%;top:34%" width="170" height="320">
     <div class="hero-content">
       <svg class="hero-ornament-top" viewBox="0 0 200 40" fill="none" aria-hidden="true">
         <g stroke="var(--gold-soft)" stroke-width=".7" fill="none" opacity=".85">
@@ -970,9 +970,9 @@ footer{padding:min(9vh,74px) 0 !important}
         <span class="verse-quote">&ldquo;</span>
         <p class="verse-text">Dicen que la aventura está allá afuera. Nosotros la encontramos el día que nos encontramos, y desde entonces cada día ha sido un capítulo nuevo de la misma historia.</p>
         <figure class="verse-photo">
-          <img src="foto-libro.jpg" alt="Pedro y Roxana sosteniendo un libro que dice: Our adventure begins, December 12 2026" loading="lazy" decoding="async">
+          <img src="foto-libro.jpg" alt="Pedro y Roxana sosteniendo un libro que dice: Our adventure begins, December 12 2026" loading="lazy" decoding="async" width="1000" height="1400">
         </figure>
-        <img class="up-letrero" src="up-letrero.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin:26px auto 8px;display:block">
+        <img class="up-letrero" src="up-letrero.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin:26px auto 8px;display:block" width="216" height="216">
         <span class="verse-ref">Adventure is out there</span>
         <div class="verse-sig">P &amp; R</div>
       </div>
@@ -1105,7 +1105,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="familia-names">Por confirmar</div>
         </div>
       </div>
-      <img class="up-pareja" src="up-pareja.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:44px">
+      <img class="up-pareja" src="up-pareja.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:44px" width="560" height="638">
     </div>
   </section>
 
@@ -1366,7 +1366,7 @@ footer{padding:min(9vh,74px) 0 !important}
             <li>Accesorios a tu elección</li>
             <li>Zapatillas o sandalias<br>en blanco o plata</li>
           </ul>
-          <img class="dc-zapatos" src="dc-zapatos.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img class="dc-zapatos" src="dc-zapatos.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="440" height="218">
         </div>
       </div>
 
@@ -1743,7 +1743,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="familia-names">Por confirmar</div>
         </div>
       </div>
-      <img class="up-sello" src="up-sello.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:52px">
+      <img class="up-sello" src="up-sello.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:52px" width="360" height="360">
     </div>
   </section>
 
@@ -1752,7 +1752,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- DESPEDIDA -->
   <section class="section-bg despedida section-tight">
     <div class="container">
-      <img class="desp-casa" src="up-casa-globos.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="desp-casa" src="up-casa-globos.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="760" height="614">
       <div class="desp-frase">La aventura nos espera</div>
       <p class="desp-text">Gracias por ser parte del comienzo de la aventura más grande de nuestras vidas.</p>
       <div class="desp-names">Pedro &amp; Roxana</div>
@@ -2819,7 +2819,42 @@ if(musicBtn){
   window.addEventListener('load',enforce);
 })();
 
-window.addEventListener('resize',()=>ScrollTrigger.refresh());
+/* ============================================================
+   RECALCULO DE SCROLLTRIGGER
+   Los gsap.from({opacity:0}) dejan el elemento oculto hasta que su trigger
+   dispara. Si el documento cambia de alto DESPUES de crear los triggers
+   (imagenes lazy que cargan, fuentes, la FAQ al abrirse), las posiciones
+   quedan desfasadas, los triggers de abajo no disparan nunca y esas secciones
+   se ven en blanco. refresh() recalcula y aplica el estado correcto segun
+   donde este el scroll, asi que revela lo que ya deberia verse.
+   ============================================================ */
+(function(){
+  if(!window.ScrollTrigger) return;
+  var t = null;
+  function refrescar(){
+    clearTimeout(t);
+    t = setTimeout(function(){ ScrollTrigger.refresh(); }, 180);
+  }
+
+  window.addEventListener('resize', refrescar);
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+
+  // cada imagen que termina de cargar puede cambiar el alto del documento
+  document.querySelectorAll('img').forEach(function(img){
+    if(img.complete) return;
+    img.addEventListener('load',  refrescar, {once:true});
+    img.addEventListener('error', refrescar, {once:true});
+  });
+
+  // las fuentes tambien reflowean el texto al aplicarse
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
+  }
+
+  // red de seguridad: dos pasadas tardias por si algo cargo fuera de estos avisos
+  setTimeout(function(){ ScrollTrigger.refresh(); }, 1200);
+  setTimeout(function(){ ScrollTrigger.refresh(); }, 3500);
+})();
 </script>
 </body>
 </html>
