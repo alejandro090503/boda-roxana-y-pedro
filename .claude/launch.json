@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "boda-jonathan-y-maria",
+      "name": "boda-roxana-y-pedro",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-p", "3456", "-s", "."],
-      "port": 3456
+      "runtimeArgs": ["serve", "-p", "3478", "-s", "."],
+      "port": 3478
     }
   ]
 }
