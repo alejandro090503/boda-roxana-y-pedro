@@ -759,7 +759,7 @@ footer{padding:min(9vh,74px) 0 !important}
 
 /* ============ DESPEDIDA ============ */
 .despedida{position:relative;overflow:hidden;text-align:center}
-.desp-casa{display:block;margin:0 auto 8px;width:clamp(160px,32vw,300px);
+.desp-casa{display:block;margin:0 auto 38px;width:clamp(160px,32vw,300px);
   filter:drop-shadow(0 18px 40px rgba(21,45,79,.26));will-change:transform}
 .desp-frase{font-family:var(--script);font-size:clamp(30px,5vw,46px);color:var(--gold-deep);
   line-height:1.15;margin:18px 0 22px}
@@ -2726,9 +2726,9 @@ function initHistoria(){
 function initDespedida(){
   var casa = document.querySelector('.desp-casa');
   if(!casa) return;
-  gsap.from(casa,{y:110,opacity:0,scale:.82,duration:1.6,ease:'power3.out',
+  gsap.from(casa,{opacity:0,scale:.84,duration:1.5,ease:'power3.out',
     scrollTrigger:{trigger:'.despedida',start:'top 80%',once:true}});
-  gsap.to(casa,{y:'-=18',duration:5,ease:'sine.inOut',yoyo:true,repeat:-1,delay:1.6});
+  gsap.to(casa,{y:'-=14',duration:5,ease:'sine.inOut',yoyo:true,repeat:-1,delay:1.5});
   gsap.to(casa,{yPercent:-38,rotation:3,ease:'none',
     scrollTrigger:{trigger:'.despedida',start:'top bottom',end:'bottom top',scrub:1.2}});
   gsap.from('.desp-frase,.desp-text,.desp-names,.desp-date',{opacity:0,y:22,duration:.9,stagger:.12,
