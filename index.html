@@ -214,10 +214,11 @@ body[data-tone="light"] .b--silver{
   background:
     radial-gradient(ellipse at center top, transparent 20%, rgba(18,26,55,.5) 70%),
     linear-gradient(180deg,
-      rgba(18,26,55,.6) 0%,
-      rgba(18,26,55,.15) 35%,
-      rgba(18,26,55,.15) 55%,
-      rgba(18,26,55,.78) 100%);
+      rgba(18,26,55,.62) 0%,
+      rgba(18,26,55,.30) 26%,
+      rgba(18,26,55,.46) 50%,
+      rgba(18,26,55,.52) 68%,
+      rgba(18,26,55,.82) 100%);
 }
 .hero-frame{position:absolute;inset:clamp(28px,4vw,56px);z-index:-1;border:1px solid rgba(204,128,66,.32);pointer-events:none;}
 .hero-frame::before,.hero-frame::after{content:"";position:absolute;width:28px;height:28px;border:1px solid rgba(204,128,66,.65);}
@@ -244,6 +245,14 @@ body[data-tone="light"] .b--silver{
   margin-bottom:4px;letter-spacing:-.02em;perspective:800px;
 }
 .hero-name span{display:inline-block}
+@media(max-width:620px){
+  .hero-name .hero-name-p,
+  .hero-name .hero-and,
+  .hero-name .hero-name-l{display:block}
+  .hero-name{font-size:clamp(50px,13vw,72px);line-height:1.02}
+  .hero-and{font-size:clamp(38px,10vw,56px);margin:2px 0 6px}
+  .hero-content{padding:32px 24px}
+}
 .hero-and{
   display:block;font-family:var(--script);font-weight:400;
   font-size:clamp(52px,8vw,100px);
@@ -252,6 +261,7 @@ body[data-tone="light"] .b--silver{
   text-shadow:0 4px 32px rgba(0,0,0,.4);
 }
 .hero-date{
+  text-shadow:0 2px 18px rgba(10,18,40,.75);
   font-family:var(--italiana);font-weight:400;
   font-size:clamp(18px,2.4vw,26px);
   letter-spacing:.35em;color:#F8F5EC;
@@ -260,7 +270,7 @@ body[data-tone="light"] .b--silver{
   display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;
 }
 .hero-date .sep{color:var(--gold-soft);font-size:.6em;letter-spacing:0}
-.hero-place{font-family:var(--sans);font-weight:500;font-size:15px;letter-spacing:.34em;color:rgba(248,245,236,.85);margin-top:28px;padding-left:.45em;text-transform:uppercase;}
+.hero-place{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.34em;color:rgba(255,253,248,.96);margin-top:28px;padding-left:.45em;text-transform:uppercase;text-shadow:0 2px 16px rgba(10,18,40,.8);}
 .hero-scroll{
   position:absolute;bottom:56px;left:50%;transform:translateX(-50%);
   font-family:var(--sans);font-size:12px;letter-spacing:.34em;
