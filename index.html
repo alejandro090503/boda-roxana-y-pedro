@@ -175,6 +175,11 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:600;color:var(--gold)}
   transform:scale(1.12);
   filter:saturate(.9) contrast(1.05) brightness(.82);
 }
+/* En escritorio la foto es un plano general: bajamos el anclaje para que los
+   rostros suban por encima del bloque de nombres y no compitan con el. */
+@media(min-width:900px){
+  .hero-bg{object-position:center 34%;transform:scale(1.06)}
+}
 .hero-bg-overlay{
   position:absolute;inset:0;z-index:-1;
   background:
