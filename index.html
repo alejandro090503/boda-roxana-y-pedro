@@ -648,6 +648,13 @@ body[data-tone="light"] .b--silver{
 .rsvp-deadline{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-family:var(--sans);font-size:14px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-deep);padding-left:.4em;font-weight:600;}
 
 /* ============ MUSIC PLAYER (vinyl flotante) ============ */
+/* Si el navegador bloquea el audio pese a todo, el disco pulsa para invitar
+   a pulsarlo. Es el unico camino que queda: sin gesto no hay sonido. */
+.vinyl-btn.needs-tap{animation:vinylLlama 1.9s ease-in-out infinite}
+@keyframes vinylLlama{
+  0%,100%{box-shadow:0 4px 18px rgba(0,0,0,.45),0 0 0 1px rgba(155,183,214,.15),0 0 0 0 rgba(204,128,66,.55)}
+  50%    {box-shadow:0 4px 18px rgba(0,0,0,.45),0 0 0 1px rgba(155,183,214,.35),0 0 0 14px rgba(204,128,66,0)}
+}
 .vinyl-btn{position:fixed;bottom:20px;right:20px;z-index:9000;width:72px;height:72px;border-radius:50%;padding:0;border:none;cursor:pointer;background:transparent;opacity:0;transform:scale(.6);pointer-events:none;transition:transform .35s cubic-bezier(.2,.7,.2,1);box-shadow:0 4px 18px rgba(0,0,0,.45),0 0 0 1px rgba(155,183,214,.15);}
 .vinyl-btn.is-ready{opacity:1;transform:scale(1);pointer-events:auto}
 .vinyl-btn:hover{transform:scale(1.1)}
@@ -2245,19 +2252,49 @@ function launchInvitation(){
   const bgMusic  = document.getElementById('music');
   const vinylBtn = document.getElementById('music-btn');
 
+  var audioListo = false;
+
+  function desbloquearAudio(){
+    if(!bgMusic || audioListo) return;
+    bgMusic.volume = 0;
+    var pr = bgMusic.play();
+    if(pr && pr.then){
+      pr.then(function(){ audioListo = true; })
+        .catch(function(){ audioListo = false; });
+    } else { audioListo = true; }
+  }
+
   function startMusic(){
     if(!bgMusic) return;
-    try{ bgMusic.currentTime = 0; }catch(e){}
-    bgMusic.volume = 0;
-    bgMusic.play().catch(()=>{});
-    gsap.to(bgMusic,{volume:.45,duration:3,ease:'power1.inOut'});
     if(vinylBtn) vinylBtn.classList.add('is-ready');
+
+    function subirVolumen(){
+      gsap.to(bgMusic, {volume:.45, duration:3, ease:'power1.inOut'});
+    }
+
+    if(bgMusic.paused){
+      // no se pudo desbloquear en el gesto: se reintenta una vez mas
+      var pr = bgMusic.play();
+      if(pr && pr.then){
+        pr.then(subirVolumen).catch(function(){
+          // el navegador lo bloqueo: se resalta el disco para que lo pulsen
+          if(vinylBtn) vinylBtn.classList.add('needs-tap');
+        });
+      } else { subirVolumen(); }
+    } else {
+      subirVolumen();
+    }
   }
 
   function openEnvelope(){
     if(opened) return;
     opened = true;
     gsap.to(envHint,{opacity:0,duration:.35});
+
+    /* El audio se arranca AQUI, en silencio, aprovechando que este es el gesto
+       del invitado. startMusic() corre unos 8 s despues (video + fundido) y para
+       entonces el navegador ya no lo asocia al toque: iOS lo bloquearia. */
+    desbloquearAudio();
 
     if(!envVideo){ triggerFlash(); return; }
 
