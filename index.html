@@ -787,6 +787,37 @@ footer{padding:min(9vh,74px) 0 !important}
 .hotel-nota{font-family:var(--sans);font-size:14px;color:var(--ink-soft);font-weight:500;
   line-height:1.6;margin-top:30px;max-width:640px;margin-left:auto;margin-right:auto}
 
+/* ============ CORTEJO — Team Bride / Team Groom ============ */
+.ct-wrap{max-width:720px;margin:40px auto 0;position:relative}
+.ct-head{display:grid;grid-template-columns:1fr 42px 1fr;align-items:center;
+  gap:0;margin-bottom:22px}
+.ct-team{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--gold-deep);padding-left:.3em}
+.ct-sep{justify-self:center;width:11px;height:11px;background-color:var(--accent);
+  -webkit-mask:var(--heart) center/contain no-repeat;
+          mask:var(--heart) center/contain no-repeat}
+.ct-list{list-style:none;margin:0;padding:0;position:relative}
+/* hilo vertical entre las dos columnas */
+.ct-list::before{content:"";position:absolute;top:4px;bottom:4px;left:50%;
+  transform:translateX(-50%);width:1px;
+  background:linear-gradient(to bottom,transparent,var(--accent) 12%,var(--accent) 88%,transparent);
+  opacity:.55}
+.ct-list li{display:grid;grid-template-columns:1fr 42px 1fr;align-items:center;
+  padding:11px 0;border-bottom:1px solid var(--hair)}
+.ct-list li:last-child{border-bottom:none}
+.ct-a,.ct-b{font-family:var(--serif);font-size:17px;line-height:1.35;font-weight:500;
+  color:var(--ink)}
+.ct-a{grid-column:1;text-align:right;padding-right:20px}
+.ct-b{grid-column:3;text-align:left;padding-left:20px}
+@media(max-width:600px){
+  .ct-head{grid-template-columns:1fr 26px 1fr;margin-bottom:16px}
+  .ct-team{font-size:11.5px;letter-spacing:.18em}
+  .ct-list li{grid-template-columns:1fr 26px 1fr;padding:9px 0}
+  .ct-a,.ct-b{font-size:15px}
+  .ct-a{padding-right:10px}
+  .ct-b{padding-left:10px}
+}
+
 /* ============ FAQ — preguntas frecuentes ============ */
 .faq-list{max-width:720px;margin:44px auto 0;text-align:left}
 .faq-item{border-bottom:1px solid var(--hair)}
@@ -1164,9 +1195,8 @@ footer{padding:min(9vh,74px) 0 !important}
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <div class="padrino-tipo">Padrinos</div>
-          <!-- PENDIENTE: nombres de los padrinos -->
-          <div class="padrino-names">Por confirmar</div>
+          <div class="padrino-tipo">Padrino</div>
+          <div class="padrino-names">Julio César Ferreiro</div>
         </div>
         <!-- Dama de honor -->
         <div class="padrino-card">
@@ -1179,15 +1209,45 @@ footer{padding:min(9vh,74px) 0 !important}
               <path d="M9 22l3-4 3 4"/>
             </svg>
           </div>
-          <div class="padrino-tipo">Madrinas</div>
-          <!-- PENDIENTE: nombres de las madrinas -->
-          <div class="padrino-names">Por confirmar</div>
+          <div class="padrino-tipo">Madrina</div>
+          <div class="padrino-names">Janet Mercedes Ferreiro</div>
         </div>
       </div>
     </div>
   </section>
-
   <div class="seam" style="--from:var(--paper);--to:var(--surface)" aria-hidden="true"></div>
+
+  <!-- CORTEJO -->
+  <section class="section-surface cortejo section-tight">
+    <div class="container">
+      <div class="eyebrow">Quienes caminan con nosotros</div>
+      <h2>Nuestro <em>cortejo</em></h2>
+
+      <div class="ct-wrap">
+        <div class="ct-head">
+          <span class="ct-team">Team Bride</span>
+          <span class="ct-sep" aria-hidden="true"></span>
+          <span class="ct-team">Team Groom</span>
+        </div>
+        <ul class="ct-list">
+        <li><span class="ct-a">Gabriela García</span><span class="ct-b">&nbsp;</span></li>
+        <li><span class="ct-a">Allison Peralta</span><span class="ct-b">&nbsp;</span></li>
+        <li><span class="ct-a">Angélica Pardo</span><span class="ct-b">Juan Cubidies</span></li>
+        <li><span class="ct-a">Geyli</span><span class="ct-b">Blake Regalado</span></li>
+        <li><span class="ct-a">Nicol Rivas</span><span class="ct-b">Alex Villa</span></li>
+        <li><span class="ct-a">Vicky Aguirre</span><span class="ct-b">Ángel Albizu</span></li>
+        <li><span class="ct-a">Dahiana Trinidad</span><span class="ct-b">Willie Albizu</span></li>
+        <li><span class="ct-a">Dania Rodríguez</span><span class="ct-b">Michael Vega</span></li>
+        <li><span class="ct-a">Raúl Rivas</span><span class="ct-b">Samantha Regalado</span></li>
+        <li><span class="ct-a">Jesús Fajardo</span><span class="ct-b">Shayna Mayor</span></li>
+        <li><span class="ct-a">&nbsp;</span><span class="ct-b">Jodi Wisehart</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="seam" style="--from:var(--surface);--to:var(--surface)" aria-hidden="true"></div>
 
   <!-- UBICACIONES -->
   <section class="section-surface locs">
