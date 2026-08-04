@@ -417,9 +417,8 @@ body[data-tone="light"] .b--silver{
 .dc-figures{display:flex;align-items:stretch;justify-content:center;gap:0;max-width:520px;margin:0 auto 56px;}
 .dc-fig{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 18px 14px;}
 .dc-divider{width:1px;flex-shrink:0;margin:12px 0;background:linear-gradient(to bottom,transparent,var(--gold) 18%,var(--gold) 82%,transparent);opacity:.7;}
-.dc-img{height:clamp(180px,27vw,250px);width:auto;display:block;
-  filter:drop-shadow(0 10px 22px rgba(21,45,79,.16))}
-.dc-zapatos{width:clamp(96px,17vw,140px);height:auto;display:block;margin:18px auto 0;opacity:.95}
+.dc-img{height:clamp(240px,40vw,340px);width:auto;display:block;
+  filter:drop-shadow(0 14px 26px rgba(21,45,79,.18))}
 
 /* Lista de indicaciones separada por corazones azules, como en la lamina */
 .dc-list{list-style:none;margin:14px 0 0;padding:0;max-width:240px}
@@ -913,7 +912,7 @@ footer{padding:min(9vh,74px) 0 !important}
    devuelve la proporcion. (.dc-img y .hero-bg no entran: la primera fija el
    alto y deja el ancho automatico, y la segunda recorta con object-fit.) */
 .up-casa-hero,.up-globo-float,.up-globos-deco,.up-sello,.up-letrero,
-.up-pareja,.desp-casa,.dc-zapatos,.verse-photo img{height:auto}
+.up-pareja,.desp-casa,.verse-photo img{height:auto}
 
 /* ============================================================
    ORNAMENTOS "UP" — piezas ilustradas del save-the-date de los novios
@@ -1491,26 +1490,23 @@ footer{padding:min(9vh,74px) 0 !important}
       <!-- Figuras del dress code — recortes de la lamina del cliente -->
       <div class="dc-figures">
         <div class="dc-fig">
-          <img class="dc-img" src="dc-caballeros.webp" alt="Tres caballeros con traje gris claro, camisa blanca y corbata azul polvo" loading="lazy" decoding="async" width="624" height="878">
+          <img class="dc-img" src="dc-caballero.webp" alt="Caballero con traje formal negro y corbata" loading="lazy" decoding="async" width="189" height="590">
           <div class="dc-fig-name">Caballeros</div>
           <ul class="dc-list">
-            <li>Traje gris claro · camisa blanca<br>Corbata azul polvo</li>
-            <li>Accesorios a tu elección</li>
-            <li>Zapatos color miel</li>
+            <li>Traje formal en colores clásicos</li>
+            <li>Se recomienda corbata o corbatín</li>
           </ul>
         </div>
 
         <div class="dc-divider" aria-hidden="true"></div>
 
         <div class="dc-fig">
-          <img class="dc-img" src="dc-damas.webp" alt="Tres damas con vestido largo en tono azul polvo y ramo de flores blancas" loading="lazy" decoding="async" width="630" height="862">
+          <img class="dc-img" src="dc-dama.webp" alt="Dama con vestido largo color crema y hombros drapeados" loading="lazy" decoding="async" width="335" height="600">
           <div class="dc-fig-name">Damas</div>
           <ul class="dc-list">
-            <li>Vestido largo en tono azul polvo</li>
-            <li>Accesorios a tu elección</li>
-            <li>Zapatillas o sandalias<br>en blanco o plata</li>
+            <li>Vestidos largos o midi elegantes</li>
+            <li>Colores sobrios y en armonía<br>con nuestra paleta</li>
           </ul>
-          <img class="dc-zapatos" src="dc-zapatos.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="440" height="218">
         </div>
       </div>
 
@@ -2524,9 +2520,6 @@ gsap.fromTo('.dress .eyebrow,.dress h2,.dress-sub,.dress-note',{opacity:0,y:14},
   gsap.fromTo('.dc-list li', {opacity:0, y:12},
     {opacity:1, y:0, duration:.7, stagger:.07, ease:'power2.out',
      scrollTrigger:{trigger:'.dc-figures', start:'top 78%', once:true}});
-  gsap.fromTo('.dc-zapatos', {opacity:0, scale:.8},
-    {opacity:.95, scale:1, duration:.8, ease:'back.out(1.6)',
-     scrollTrigger:{trigger:'.dc-zapatos', start:'top 92%', once:true}});
 })();
 gsap.fromTo('.dress-avoid',{opacity:0,y:24},{opacity:1,y:0,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:'.dress-avoid',start:'top 88%'}});
 gsap.fromTo('.dress-note--bottom',{opacity:0,y:14},{opacity:1,y:0,duration:1,scrollTrigger:{trigger:'.dress-note--bottom',start:'top 90%'}});
