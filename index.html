@@ -819,9 +819,10 @@ footer{padding:min(9vh,74px) 0 !important}
 
 /* destello: la misma estrella de 8 puntas de las particulas */
 .ct-spark{position:absolute;pointer-events:none;opacity:0;
-  background:radial-gradient(circle,#ffffff 0%,rgba(226,240,251,.95) 22%,transparent 70%);
-  clip-path:polygon(50% 0%,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0% 50%,38% 38%);
-  filter:drop-shadow(0 0 5px rgba(255,255,255,.95)) drop-shadow(0 0 12px rgba(204,128,66,.55))}
+  background:radial-gradient(circle,#ffffff 0%,#fff6ea 18%,rgba(232,185,138,.9) 42%,transparent 72%);
+  clip-path:polygon(50% 0%,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0% 50%,40% 40%);
+  filter:drop-shadow(0 0 6px rgba(255,255,255,1)) drop-shadow(0 0 16px rgba(232,185,138,.9))
+         drop-shadow(0 0 30px rgba(204,128,66,.55))}
 
 .ct-dots{display:flex;justify-content:center;gap:7px;margin-top:26px;flex-wrap:wrap;max-width:320px;
   margin-left:auto;margin-right:auto}
@@ -2916,16 +2917,16 @@ function initCortejo(){
       (function(){
         var sp = document.createElement('div');
         sp.className = 'ct-spark';
-        var tam = 7 + Math.random()*13;
+        var tam = 11 + Math.random()*20;
         sp.style.width = tam+'px'; sp.style.height = tam+'px';
-        sp.style.left = (cx + (Math.random()-.5)*r.width*.95) + 'px';
-        sp.style.top  = (cy + (Math.random()-.5)*r.height*1.5) + 'px';
+        sp.style.left = (cx + (Math.random()-.5)*(r.width + 70)) + 'px';
+        sp.style.top  = (cy + (Math.random()-.5)*(r.height + 46)) + 'px';
         capa.appendChild(sp);
         gsap.timeline({onComplete:function(){ sp.remove(); }})
           .fromTo(sp,{opacity:0,scale:0,rotation:0},
-                     {opacity:.95,scale:1,rotation:60+Math.random()*90,duration:.42,ease:'back.out(2.4)'})
-          .to(sp,{opacity:0,scale:.25,y:'-='+(14+Math.random()*22),rotation:'+=50',
-                  duration:.85+Math.random()*.5,ease:'sine.in'},'>-.08');
+                     {opacity:1,scale:1,rotation:60+Math.random()*90,duration:.38,ease:'back.out(2.8)'})
+          .to(sp,{opacity:0,scale:.2,y:'-='+(26+Math.random()*38),rotation:'+=70',
+                  duration:1.05+Math.random()*.6,ease:'sine.in'},'>-.10');
       })();
     }
   }
@@ -2948,7 +2949,7 @@ function initCortejo(){
       .add(function(){ idx = sig; pintar(idx); })
       .fromTo([elA, elB], {opacity:0, filter:'blur(8px)', y:14},
         {opacity:1, filter:'blur(0px)', y:0, duration:.75, ease:'power2.out'})
-      .add(function(){ destellos(elA, 7); destellos(elB, 7); }, '-=.5');
+      .add(function(){ destellos(elA, 13); destellos(elB, 13); }, '-=.5');
   }
 
   pintar(0);
@@ -2959,7 +2960,7 @@ function initCortejo(){
     trigger: stage, start: 'top 85%', once: true,
     onEnter: function(){
       gsap.to([elA, elB], {opacity:1, filter:'blur(0px)', duration:.9, ease:'power2.out',
-        onComplete:function(){ destellos(elA, 9); destellos(elB, 9); }});
+        onComplete:function(){ destellos(elA, 16); destellos(elB, 16); }});
       tl = gsap.delayedCall(2.4, ciclo);
     }
   });
