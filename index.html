@@ -794,35 +794,63 @@ footer{padding:min(9vh,74px) 0 !important}
 .hotel-nota{font-family:var(--sans);font-size:14px;color:var(--ink-soft);font-weight:500;
   line-height:1.6;margin-top:30px;max-width:640px;margin-left:auto;margin-right:auto}
 
-/* ============ CORTEJO — Team Bride / Team Groom ============ */
-.ct-wrap{max-width:720px;margin:40px auto 0;position:relative}
-.ct-head{display:grid;grid-template-columns:1fr 42px 1fr;align-items:center;
-  gap:0;margin-bottom:22px}
+.mem{position:relative;white-space:nowrap}
+.mem-paloma{width:15px;height:15px;display:inline-block;vertical-align:-2px;
+  margin-left:5px;color:var(--accent);opacity:.85}
+
+/* ============ CORTEJO — rotador con fundido y destellos ============ */
+.ct-wrap{max-width:720px;margin:38px auto 0;position:relative}
+.ct-head{display:grid;grid-template-columns:1fr 42px 1fr;align-items:center;margin-bottom:8px}
 .ct-team{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.3em;
   text-transform:uppercase;color:var(--gold-deep);padding-left:.3em}
 .ct-sep{justify-self:center;width:11px;height:11px;background-color:var(--accent);
   -webkit-mask:var(--heart) center/contain no-repeat;
           mask:var(--heart) center/contain no-repeat}
-.ct-list{list-style:none;margin:0;padding:0;position:relative}
-/* hilo vertical entre las dos columnas */
-.ct-list::before{content:"";position:absolute;top:4px;bottom:4px;left:50%;
-  transform:translateX(-50%);width:1px;
-  background:linear-gradient(to bottom,transparent,var(--accent) 12%,var(--accent) 88%,transparent);
-  opacity:.55}
+
+.ct-stage{position:relative;min-height:132px;display:flex;align-items:center;justify-content:center}
+.ct-sparks{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2}
+.ct-pair{display:grid;grid-template-columns:1fr 42px 1fr;align-items:center;width:100%}
+.ct-a,.ct-b{font-family:var(--display);font-size:clamp(21px,3.4vw,30px);line-height:1.25;
+  font-weight:600;color:var(--ink);will-change:transform,opacity,filter}
+.ct-a{grid-column:1;text-align:right;padding-right:22px}
+.ct-b{grid-column:3;text-align:left;padding-left:22px}
+.ct-hilo{grid-column:2;justify-self:center;width:1px;height:56px;
+  background:linear-gradient(to bottom,transparent,var(--accent),transparent);opacity:.6}
+
+/* destello: la misma estrella de 8 puntas de las particulas */
+.ct-spark{position:absolute;pointer-events:none;opacity:0;
+  background:radial-gradient(circle,#ffffff 0%,rgba(226,240,251,.95) 22%,transparent 70%);
+  clip-path:polygon(50% 0%,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0% 50%,38% 38%);
+  filter:drop-shadow(0 0 5px rgba(255,255,255,.95)) drop-shadow(0 0 12px rgba(204,128,66,.55))}
+
+.ct-dots{display:flex;justify-content:center;gap:7px;margin-top:26px;flex-wrap:wrap;max-width:320px;
+  margin-left:auto;margin-right:auto}
+.ct-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.3;
+  transition:all .4s;flex-shrink:0}
+.ct-dot.active{opacity:1;background:var(--gold);transform:scale(1.5)}
+
+/* La lista completa solo aparece si el rotador no puede funcionar */
+.ct-list{list-style:none;margin:34px 0 0;padding:0;display:none}
 .ct-list li{display:grid;grid-template-columns:1fr 42px 1fr;align-items:center;
-  padding:11px 0;border-bottom:1px solid var(--hair)}
+  padding:10px 0;border-bottom:1px solid var(--hair)}
 .ct-list li:last-child{border-bottom:none}
-.ct-a,.ct-b{font-family:var(--serif);font-size:17px;line-height:1.35;font-weight:500;
-  color:var(--ink)}
-.ct-a{grid-column:1;text-align:right;padding-right:20px}
-.ct-b{grid-column:3;text-align:left;padding-left:20px}
+.ct-list li span:first-child{grid-column:1;text-align:right;padding-right:20px}
+.ct-list li span:last-child{grid-column:3;text-align:left;padding-left:20px}
+.ct-list span{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--ink)}
+.ct-wrap.sin-js .ct-stage,.ct-wrap.sin-js .ct-dots{display:none}
+.ct-wrap.sin-js .ct-list{display:block}
+
+@media(prefers-reduced-motion:reduce){
+  .ct-stage,.ct-dots{display:none}
+  .ct-list{display:block}
+}
 @media(max-width:600px){
-  .ct-head{grid-template-columns:1fr 26px 1fr;margin-bottom:16px}
+  .ct-head{grid-template-columns:1fr 26px 1fr}
   .ct-team{font-size:11.5px;letter-spacing:.18em}
-  .ct-list li{grid-template-columns:1fr 26px 1fr;padding:9px 0}
-  .ct-a,.ct-b{font-size:15px}
-  .ct-a{padding-right:10px}
-  .ct-b{padding-left:10px}
+  .ct-pair,.ct-list li{grid-template-columns:1fr 26px 1fr}
+  .ct-a{padding-right:11px}
+  .ct-b{padding-left:11px}
+  .ct-stage{min-height:116px}
 }
 
 /* ============ FAQ — preguntas frecuentes ============ */
@@ -1169,15 +1197,13 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="familia-role">Padres de la novia</div>
           <div class="familia-names">Yadira Briones<br>&amp; Bayardo Quiroz</div>
         </div>
-        <!-- PENDIENTE: nombres de los abuelos del novio -->
         <div class="familia-card" data-tilt>
           <div class="familia-role">Abuelos del novio</div>
-          <div class="familia-names">Por confirmar</div>
+          <div class="familia-names">Ana María Reyes<br><span class="mem">Rafael Octavio Reyes <svg class="mem-paloma" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 6.2c-1.6-.5-3.1.2-4 1.3-1 1.2-2.4 2-4 2-2.4 0-3.9-1.3-5.6-1.3-2 0-3.4 1.5-3.4 3.3 0 2.6 2.3 4.6 5.2 4.6 1.1 0 2-.2 2.8-.6"/><path d="M11.5 15.5c0 2.2 1.6 4 3.7 4.3"/><path d="M18.8 4.6c.4 0 .7.3.7.7"/></svg></span></div>
         </div>
-        <!-- PENDIENTE: nombres de los abuelos de la novia -->
         <div class="familia-card" data-tilt>
           <div class="familia-role">Abuelos de la novia</div>
-          <div class="familia-names">Por confirmar</div>
+          <div class="familia-names">Miguel Ángel Siguenza Chacón<br>Juana Francisca López Vargas</div>
         </div>
       </div>
       <img class="up-pareja" src="up-pareja.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:44px" width="560" height="638">
@@ -1236,18 +1262,31 @@ footer{padding:min(9vh,74px) 0 !important}
           <span class="ct-sep" aria-hidden="true"></span>
           <span class="ct-team">Team Groom</span>
         </div>
-        <ul class="ct-list">
-        <li><span class="ct-a">Gabriela García</span><span class="ct-b">&nbsp;</span></li>
-        <li><span class="ct-a">Allison Peralta</span><span class="ct-b">&nbsp;</span></li>
-        <li><span class="ct-a">Angélica Pardo</span><span class="ct-b">Juan Cubidies</span></li>
-        <li><span class="ct-a">Geyli</span><span class="ct-b">Blake Regalado</span></li>
-        <li><span class="ct-a">Nicol Rivas</span><span class="ct-b">Alex Villa</span></li>
-        <li><span class="ct-a">Vicky Aguirre</span><span class="ct-b">Ángel Albizu</span></li>
-        <li><span class="ct-a">Dahiana Trinidad</span><span class="ct-b">Willie Albizu</span></li>
-        <li><span class="ct-a">Dania Rodríguez</span><span class="ct-b">Michael Vega</span></li>
-        <li><span class="ct-a">Raúl Rivas</span><span class="ct-b">Samantha Regalado</span></li>
-        <li><span class="ct-a">Jesús Fajardo</span><span class="ct-b">Shayna Mayor</span></li>
-        <li><span class="ct-a">&nbsp;</span><span class="ct-b">Jodi Wisehart</span></li>
+
+        <!-- Escenario: se muestra una pareja a la vez, con fundido y destellos -->
+        <div class="ct-stage" id="ctStage" aria-live="polite">
+          <div class="ct-sparks" id="ctSparks" aria-hidden="true"></div>
+          <div class="ct-pair">
+            <span class="ct-a" id="ctA"></span>
+            <span class="ct-hilo" aria-hidden="true"></span>
+            <span class="ct-b" id="ctB"></span>
+          </div>
+        </div>
+        <div class="ct-dots" id="ctDots" aria-hidden="true"></div>
+
+        <!-- Respaldo accesible: si no hay JS o el invitado pide menos movimiento -->
+        <ul class="ct-list" id="ctList">
+          <li><span>Gabriela García</span><span>—</span></li>
+          <li><span>Allison Peralta</span><span>—</span></li>
+          <li><span>Angélica Pardo</span><span>Juan Cubidies</span></li>
+          <li><span>Geyli</span><span>Blake Regalado</span></li>
+          <li><span>Nicol Rivas</span><span>Alex Villa</span></li>
+          <li><span>Vicky Aguirre</span><span>Ángel Albizu</span></li>
+          <li><span>Dahiana Trinidad</span><span>Willie Albizu</span></li>
+          <li><span>Dania Rodríguez</span><span>Michael Vega</span></li>
+          <li><span>Raúl Rivas</span><span>Samantha Regalado</span></li>
+          <li><span>Jesús Fajardo</span><span>Shayna Mayor</span></li>
+          <li><span>—</span><span>Jodi Wisehart</span></li>
         </ul>
       </div>
     </div>
@@ -2841,12 +2880,104 @@ function initFAQ(){
   }, {passive:true});
 }
 
+
+/* ---- Cortejo: los nombres pasan de uno en uno, con fundido y destellos ---- */
+function initCortejo(){
+  var stage = document.getElementById('ctStage');
+  var elA = document.getElementById('ctA'), elB = document.getElementById('ctB');
+  var dotsBox = document.getElementById('ctDots'), lista = document.getElementById('ctList');
+  var capa = document.getElementById('ctSparks');
+  var wrap = document.querySelector('.ct-wrap');
+  if(!stage || !elA || !elB || !lista) return;
+
+  // los nombres se leen de la lista de respaldo: una sola fuente de verdad
+  var parejas = [].slice.call(lista.querySelectorAll('li')).map(function(li){
+    var sp = li.querySelectorAll('span');
+    var a = sp[0].textContent.trim(), b = sp[1].textContent.trim();
+    return [a === '—' ? '' : a, b === '—' ? '' : b];
+  });
+  if(!parejas.length) return;
+
+  if(prefersReduced){ wrap.classList.add('sin-js'); return; }
+
+  parejas.forEach(function(_, i){
+    var d = document.createElement('span');
+    d.className = 'ct-dot' + (i === 0 ? ' active' : '');
+    dotsBox.appendChild(d);
+  });
+  var dots = [].slice.call(dotsBox.children);
+
+  /* Polvo de destellos alrededor de un nombre al entrar */
+  function destellos(el, cantidad){
+    if(!el.textContent) return;
+    var r = el.getBoundingClientRect(), rs = capa.getBoundingClientRect();
+    var cx = r.left - rs.left + r.width/2, cy = r.top - rs.top + r.height/2;
+    for(var i=0;i<cantidad;i++){
+      (function(){
+        var sp = document.createElement('div');
+        sp.className = 'ct-spark';
+        var tam = 7 + Math.random()*13;
+        sp.style.width = tam+'px'; sp.style.height = tam+'px';
+        sp.style.left = (cx + (Math.random()-.5)*r.width*.95) + 'px';
+        sp.style.top  = (cy + (Math.random()-.5)*r.height*1.5) + 'px';
+        capa.appendChild(sp);
+        gsap.timeline({onComplete:function(){ sp.remove(); }})
+          .fromTo(sp,{opacity:0,scale:0,rotation:0},
+                     {opacity:.95,scale:1,rotation:60+Math.random()*90,duration:.42,ease:'back.out(2.4)'})
+          .to(sp,{opacity:0,scale:.25,y:'-='+(14+Math.random()*22),rotation:'+=50',
+                  duration:.85+Math.random()*.5,ease:'sine.in'},'>-.08');
+      })();
+    }
+  }
+
+  var idx = 0, tl = null, pausado = false;
+
+  function pintar(i){
+    var p = parejas[i];
+    elA.textContent = p[0];
+    elB.textContent = p[1];
+    dots.forEach(function(d,k){ d.classList.toggle('active', k === i); });
+  }
+
+  function ciclo(){
+    if(pausado){ tl = gsap.delayedCall(.6, ciclo); return; }
+    var sig = (idx + 1) % parejas.length;
+    tl = gsap.timeline({onComplete:function(){ tl = gsap.delayedCall(2.1, ciclo); }});
+    // salida: se desvanecen y se difuminan un poco
+    tl.to([elA, elB], {opacity:0, filter:'blur(6px)', y:-12, duration:.55, ease:'power2.in'})
+      .add(function(){ idx = sig; pintar(idx); })
+      .fromTo([elA, elB], {opacity:0, filter:'blur(8px)', y:14},
+        {opacity:1, filter:'blur(0px)', y:0, duration:.75, ease:'power2.out'})
+      .add(function(){ destellos(elA, 7); destellos(elB, 7); }, '-=.5');
+  }
+
+  pintar(0);
+  gsap.set([elA, elB], {opacity:0, filter:'blur(8px)'});
+
+  // arranca cuando la seccion entra en pantalla, no antes
+  ScrollTrigger.create({
+    trigger: stage, start: 'top 85%', once: true,
+    onEnter: function(){
+      gsap.to([elA, elB], {opacity:1, filter:'blur(0px)', duration:.9, ease:'power2.out',
+        onComplete:function(){ destellos(elA, 9); destellos(elB, 9); }});
+      tl = gsap.delayedCall(2.4, ciclo);
+    }
+  });
+
+  // se detiene mientras lo miran de cerca
+  stage.addEventListener('mouseenter', function(){ pausado = true; });
+  stage.addEventListener('mouseleave', function(){ pausado = false; });
+  stage.addEventListener('touchstart', function(){ pausado = true; }, {passive:true});
+  stage.addEventListener('touchend',   function(){ pausado = false; }, {passive:true});
+}
+
 function startUpLayer(){
   initTone();
   initHistoria();
   initDespedida();
   initFAQ();
   initCalendar();
+  initCortejo();
   if(prefersReduced) return;
   for(var i=0;i<14;i++) setTimeout(launchBalloon,i*1500+Math.random()*2500);
   for(var j=0;j<5;j++)  setTimeout(launchCloud,j*6000+Math.random()*7000);
