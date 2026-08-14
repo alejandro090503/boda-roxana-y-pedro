@@ -155,6 +155,10 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:600;color:var(--gold)}
 .b--sage  {background:radial-gradient(circle at 32% 26%, #adbda4, #8da082 70%)}
 .b--white {background:radial-gradient(circle at 32% 26%, #ffffff, #dde7ef 70%)}
 .b--silver{background:radial-gradient(circle at 32% 26%, #d6dde3, #b6c0c9 70%)}
+.b--pink  {background:radial-gradient(circle at 32% 26%, #f2c7d6, #e2a0b8 70%)}
+.b--lilac {background:radial-gradient(circle at 32% 26%, #d6c7ea, #b79fd6 70%)}
+.b--yellow{background:radial-gradient(circle at 32% 26%, #f3e1a8, #e6c96a 70%)}
+.b--mint  {background:radial-gradient(circle at 32% 26%, #b9dfd0, #8fc4ae 70%)}
 
 /* ============ NUBES QUE CRUZAN EL CIELO ============ */
 .cloud{
@@ -911,24 +915,14 @@ footer{padding:min(9vh,74px) 0 !important}
    alto del atributo se aplica tal cual y deforma la imagen. height:auto
    devuelve la proporcion. (.dc-img y .hero-bg no entran: la primera fija el
    alto y deja el ancho automatico, y la segunda recorta con object-fit.) */
-.up-casa-hero,.up-globo-float,.up-globos-deco,.up-sello,.up-letrero,
+.up-globo-float,.up-globos-deco,.up-sello,.up-letrero,
 .up-pareja,.desp-casa,.verse-photo img{height:auto}
 
 /* ============================================================
    ORNAMENTOS "UP" — piezas ilustradas del save-the-date de los novios
    Todas decorativas: pointer-events:none + aria-hidden en el HTML.
    ============================================================ */
-.up-casa-hero{
-  position:absolute;
-  top:clamp(2%,5vh,8%); right:clamp(-40px,-2vw,0px);
-  width:clamp(150px,30vw,320px);
-  z-index:2; pointer-events:none;
-  filter:drop-shadow(0 14px 34px rgba(21,45,79,.28));
-  will-change:transform;
-}
-@media(max-width:600px){
-  .up-casa-hero{width:clamp(130px,42vw,190px);right:-24px;top:4%}
-}
+
 .up-globo-float{
   position:absolute; pointer-events:none; z-index:1;
   width:clamp(38px,7vw,72px);
@@ -970,7 +964,7 @@ footer{padding:min(9vh,74px) 0 !important}
   filter:drop-shadow(0 12px 28px rgba(21,45,79,.20));
 }
 @media(prefers-reduced-motion:reduce){
-  .up-casa-hero,.up-globo-float,.up-globos-deco{display:none}
+  .up-globo-float,.up-globos-deco{display:none}
 }
 
 /* ============ LIGHTBOX ============ */
@@ -1028,7 +1022,6 @@ footer{padding:min(9vh,74px) 0 !important}
     <div class="hero-bg-overlay"></div>
     <div class="hero-frame"></div>
     <div class="hero-frame-corners"></div>
-    <img class="up-casa-hero" src="up-casa-globos.webp" alt="" aria-hidden="true" loading="eager" decoding="async" width="760" height="614">
     <img class="up-globo-float" src="up-globo.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="left:6%;top:34%" width="170" height="320">
     <div class="hero-content">
       <svg class="hero-ornament-top" viewBox="0 0 200 40" fill="none" aria-hidden="true">
@@ -1071,7 +1064,7 @@ footer{padding:min(9vh,74px) 0 !important}
           </g>
         </svg>
         <span class="verse-quote">&ldquo;</span>
-        <p class="verse-text">Dicen que la aventura está allá afuera. Nosotros la encontramos el día que nos encontramos, y desde entonces cada día ha sido un capítulo nuevo de la misma historia.</p>
+        <p class="verse-text">Dicen que la aventura está allá afuera… pero nosotros descubrimos que la aventura más hermosa comienza cuando encuentras a la persona con quien quieres compartirla. Desde el día en que nuestros caminos se cruzaron, hemos escrito una historia llena de amor, sueños y momentos inolvidables.<br><br>Hoy, comienza nuestro capítulo favorito: para siempre.</p>
         <figure class="verse-photo">
           <img src="foto-libro.jpg" alt="Pedro y Roxana sosteniendo un libro que dice: Our adventure begins, December 12 2026" loading="lazy" decoding="async" width="1000" height="1400">
         </figure>
@@ -1085,7 +1078,6 @@ footer{padding:min(9vh,74px) 0 !important}
   <div class="seam" style="--from:var(--surface);--to:var(--paper)" aria-hidden="true"></div>
 
   <!-- NUESTRA HISTORIA -->
-  <!-- PENDIENTE: textos provisionales. Los novios van a corregirlos con su historia real. -->
   <section class="section-paper historia">
     <div class="container">
       <div class="eyebrow">Cómo empezó todo</div>
@@ -1099,9 +1091,9 @@ footer{padding:min(9vh,74px) 0 !important}
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.6C6.4 16.1 1 11.3 1 7.2 1 3.4 4.1 2 6.3 2c1.3 0 4.2.5 5.7 4.5C13.6 2.5 16.5 2 17.7 2 20.3 2 23 3.6 23 7.2c0 4.1-5.1 8.6-11 14.4z"/></svg>
           </div>
           <div class="hist-card">
-            <div class="hist-when">El principio</div>
-            <div class="hist-title">Cómo nos conocimos</div>
-            <p class="hist-text">Ninguno de los dos sabía, aquel día, que esa primera conversación se iba a alargar el resto de la vida.</p>
+            <div class="hist-when">Donde todo comenzó</div>
+            <div class="hist-title">El día en que nos encontramos</div>
+            <p class="hist-text">Éramos dos personas siguiendo caminos distintos, sin imaginar que la vida estaba a punto de cambiar nuestros planes. Una conversación llevó a otra, las coincidencias se convirtieron en encuentros y, casi sin darnos cuenta, comenzamos a elegirnos.</p>
           </div>
         </div>
 
@@ -1110,9 +1102,9 @@ footer{padding:min(9vh,74px) 0 !important}
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           </div>
           <div class="hist-card">
-            <div class="hist-when">Kilómetro uno</div>
-            <div class="hist-title">Nuestro primer viaje</div>
-            <p class="hist-text">La primera maleta que hicimos juntos. Ahí entendimos que ir contigo importa más que llegar a ningún sitio.</p>
+            <div class="hist-when">El camino</div>
+            <div class="hist-title">La vida comenzó a sentirse diferente</div>
+            <p class="hist-text">Llegaron las primeras aventuras, los viajes y las risas interminables. Fuimos construyendo un amor hecho de grandes sueños, pero sobre todo de pequeñas cosas. Y entendimos que hogar nunca había sido un lugar: hogar era donde estábamos juntos.</p>
           </div>
         </div>
 
@@ -1121,9 +1113,9 @@ footer{padding:min(9vh,74px) 0 !important}
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="hist-card">
-            <div class="hist-when">La pregunta</div>
-            <div class="hist-title">La propuesta</div>
-            <p class="hist-text">Un anillo, una pregunta, y un sí que llegó antes de que terminara de preguntar.</p>
+            <div class="hist-when">La promesa</div>
+            <div class="hist-title">El comienzo de nuestro para siempre</div>
+            <p class="hist-text">Una pregunta pequeña para un sueño inmenso. Y entre emoción, nervios y un corazón que ya conocía la respuesta, llegó el sí. Sí a seguir creciendo juntos. Sí a elegirnos una y otra vez. Sí a una vida contigo.</p>
           </div>
         </div>
 
@@ -1133,8 +1125,8 @@ footer{padding:min(9vh,74px) 0 !important}
           </div>
           <div class="hist-card">
             <div class="hist-when">12 de diciembre de 2026</div>
-            <div class="hist-title">Nuestro próximo capítulo</div>
-            <p class="hist-text">El día en que la casa despega y empieza, de verdad, la aventura más grande.</p>
+            <div class="hist-title">El capítulo que siempre soñamos</div>
+            <p class="hist-text">Ese día caminaremos hacia el altar sabiendo que no estamos comenzando nuestra historia: estamos cumpliendo la promesa de seguir escribiéndola juntos. Porque al final la aventura más grande nunca estuvo allá afuera. La encontramos el día que nos encontramos.</p>
           </div>
         </div>
       </div>
@@ -1627,21 +1619,6 @@ footer{padding:min(9vh,74px) 0 !important}
     </div>
   </section>
 
-  <div class="seam" style="--from:var(--surface);--to:var(--paper)" aria-hidden="true"></div>
-
-  <!-- SOLO ADULTOS -->
-  <section class="section-paper section-tight">
-    <div class="container">
-      <div class="gifts-head">
-        <div class="eyebrow">Con todo respeto</div>
-        <h2>Una noche para <em>adultos</em></h2>
-        <p class="gifts-sub">Adoramos a sus pequeños, pero hemos decidido que nuestra celebración sea solo para adultos. Gracias por comprender y por disfrutar la noche con nosotros.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="seam" style="--from:var(--paper);--to:var(--surface)" aria-hidden="true"></div>
-
   <!-- ÁLBUM COMPARTIDO -->
   <section class="section-surface section-tight">
     <div class="container">
@@ -1724,21 +1701,21 @@ footer{padding:min(9vh,74px) 0 !important}
           <button class="faq-q" type="button" aria-expanded="false">
             <span>¿A qué hora debo llegar?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">La ceremonia empieza puntual a las <strong>2:00 pm</strong>. Te pedimos llegar entre 15 y 20 minutos antes para acomodarte con calma. La recepción arranca a las 4:30 pm.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">La ceremonia empieza puntual a las <strong>2:00 pm</strong>. Te pedimos llegar entre 15 y 20 minutos antes para acomodarte con calma. La recepción empezará con un coctail a las <strong>4:30 pm</strong>.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Puedo llevar a mis hijos?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span>¿Puedo llevar acompañantes extras?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">Adoramos a los peques, pero hemos decidido que la celebración sea solo para adultos. Aprovecha para disfrutar la noche sin prisa.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">Con mucho cariño, hemos reservado este día especialmente para las personas indicadas en esta invitación. Agradecemos su comprensión al no añadir invitados adicionales.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
             <span>¿Cuál es el código de vestimenta?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">Formal. Ellos, traje gris claro con corbata azul polvo; ellas, vestido largo en azul polvo. El <strong>blanco está reservado para la novia</strong>. Tienes la paleta completa en la sección de vestimenta.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">Vístete para celebrar con nosotros: el código de vestimenta es <strong>Formal</strong>. Dejemos el blanco para la novia y llenemos este día de color, elegancia y alegría.</div></div>
         </div>
 
         <div class="faq-item">
@@ -1752,7 +1729,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <button class="faq-q" type="button" aria-expanded="false">
             <span>¿Hay estacionamiento?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner"><!-- El salon declara parking gratuito en su ficha de Google, pero NO en su sitio oficial. La iglesia no esta confirmada por fuente oficial. Confirmar por telefono: salon 561-359-2222, parroquia 561-965-8980. -->En <strong>The Delray Ballroom</strong> hay estacionamiento propio y gratuito. En la iglesia estamos confirmando los detalles; en cuanto los tengamos actualizamos aquí.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">En la iglesia hay estacionamiento propio en los alrededores y, si hay muchos autos, posiblemente puedan parquear en el área del campo de futbol. En <strong>The Delray Ballroom</strong> hay estacionamiento propio y gratuito.</div></div>
         </div>
 
         <div class="faq-item">
@@ -2677,7 +2654,7 @@ function launchSparkle(){
    CAPA "UP" — globos que suben, nubes que cruzan
    Mismo motor GSAP que shimmer/sparkle.
    ============================================================ */
-var BALLOON_COLORS=['b--blue','b--blue','b--navy','b--orange','b--sage','b--white','b--silver','b--blue','b--silver'];
+var BALLOON_COLORS=['b--blue','b--pink','b--lilac','b--yellow','b--mint','b--orange','b--sage','b--white','b--silver','b--navy'];
 
 function launchBalloon(){
   if(prefersReduced) return;
@@ -2718,11 +2695,6 @@ function launchCloud(){
 
 function initUpOrnaments(){
   if(prefersReduced) return;
-  var casa=document.querySelector('.up-casa-hero');
-  if(casa){
-    gsap.to(casa,{y:'-=16',duration:4.5,ease:'sine.inOut',yoyo:true,repeat:-1});
-    gsap.to(casa,{yPercent:-58,rotation:-4,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1.1}});
-  }
   document.querySelectorAll('.up-globo-float').forEach(function(g,i){
     gsap.to(g,{y:'-=22',duration:3.6+i*.5,ease:'sine.inOut',yoyo:true,repeat:-1,delay:i*.4});
   });
@@ -2974,7 +2946,7 @@ function startUpLayer(){
   initCortejo();
   if(prefersReduced) return;
   for(var i=0;i<14;i++) setTimeout(launchBalloon,i*1500+Math.random()*2500);
-  for(var j=0;j<5;j++)  setTimeout(launchCloud,j*6000+Math.random()*7000);
+  for(var j=0;j<9;j++)  setTimeout(launchCloud,j*3600+Math.random()*4000);
   initUpOrnaments();
 }
 
