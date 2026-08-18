@@ -329,7 +329,7 @@ body[data-tone="light"] .b--silver{
 .mono-wm{font-family:var(--script);font-size:clamp(160px,26vw,360px);color:var(--accent);opacity:.04;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;white-space:nowrap;pointer-events:none;user-select:none;z-index:0;}
 
 /* ============ DATE HERO ============ */
-.date-hero{position:relative;padding:min(22vh,220px) 0;background:#152d4f;color:#F8F5EC;text-align:center;isolation:isolate;overflow:hidden;}
+.date-hero{position:relative;padding:min(30vh,300px) 0;background:#152d4f;color:#F8F5EC;text-align:center;isolation:isolate;overflow:hidden;}
 .date-hero::after{
   content:"";position:absolute;inset:0;z-index:0;
   background:linear-gradient(to bottom,rgba(40,25,55,.60) 0%,rgba(40,25,55,.35) 50%,rgba(40,25,55,.60) 100%),url('foto-fecha.jpg') 42% center/cover no-repeat;
@@ -528,6 +528,16 @@ body[data-tone="light"] .b--silver{
 .gallery h2{font-size:clamp(36px,5vw,58px);margin-bottom:20px;}
 .gallery-sub{font-family:var(--script);color:var(--gold-deep);font-size:32px;line-height:1;text-shadow:0 1px 12px rgba(204,128,66,.25)}
 .gallery .eyebrow{color:var(--gold-deep);}
+/* ── MASCOTAS ── */
+.pet-frame{position:relative;max-width:430px;margin:46px auto 0;padding:0}
+.pet-frame img{display:block;width:100%;height:auto;
+  box-shadow:0 22px 55px -22px rgba(21,45,79,.40), 0 3px 10px rgba(21,45,79,.10)}
+.pet-frame::before{content:"";position:absolute;inset:-13px;border:1px solid var(--hair-gold);pointer-events:none}
+.pet-frame::after{content:"";position:absolute;inset:9px;border:1px solid rgba(255,255,255,.5);pointer-events:none;z-index:2}
+.pet-frame figcaption{font-family:var(--script);font-size:30px;color:var(--gold-deep);
+  line-height:1;margin-top:26px;text-align:center}
+@media(max-width:600px){ .pet-frame{max-width:300px} .pet-frame figcaption{font-size:25px} }
+
 /* ── GALERIA · CARRUSEL de scroll-snap ──
    Sustituye a la rueda 3D, que en movil apilaba todas las fotos en el centro.
    Scroll nativo del navegador: gesto tactil correcto y cero dependencias. */
@@ -756,6 +766,8 @@ footer{padding:min(9vh,74px) 0 !important}
 .hist-title{font-family:var(--display);font-size:23px;font-weight:600;color:var(--ink);
   margin-bottom:8px;line-height:1.2}
 .hist-text{font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--ink-soft);font-weight:500}
+.hist-text + .hist-text{margin-top:.85em}
+.hist-si{font-style:italic;color:var(--gold-deep)}
 @media(max-width:700px){
   .hist-track{margin-top:40px}
   .hist-line{left:23px}
@@ -798,8 +810,10 @@ footer{padding:min(9vh,74px) 0 !important}
   line-height:1.6;margin-top:30px;max-width:640px;margin-left:auto;margin-right:auto}
 
 .mem{position:relative;white-space:nowrap}
-.mem-paloma{width:15px;height:15px;display:inline-block;vertical-align:-2px;
-  margin-left:5px;color:var(--accent);opacity:.85}
+.mem-cruz{width:12px;height:12px;display:inline-block;vertical-align:-1px;
+  margin-left:6px;color:var(--accent);opacity:.9}
+.mem-nota{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-soft);opacity:.75;margin-top:14px;font-weight:600}
 
 /* ============ CORTEJO — rotador con fundido y destellos ============ */
 .ct-wrap{max-width:720px;margin:38px auto 0;position:relative}
@@ -1093,7 +1107,9 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="hist-card">
             <div class="hist-when">Donde todo comenzó</div>
             <div class="hist-title">El día en que nos encontramos</div>
-            <p class="hist-text">Éramos dos personas siguiendo caminos distintos, sin imaginar que la vida estaba a punto de cambiar nuestros planes. Una conversación llevó a otra, las coincidencias se convirtieron en encuentros y, casi sin darnos cuenta, comenzamos a elegirnos.</p>
+            <p class="hist-text">Éramos dos personas siguiendo caminos distintos, sin imaginar que la vida estaba a punto de cambiar nuestros planes.</p>
+            <p class="hist-text">Una conversación llevó a otra. Las coincidencias se convirtieron en encuentros, los encuentros en recuerdos y, casi sin darnos cuenta, comenzamos a elegirnos.</p>
+            <p class="hist-text">Aquel día no lo sabíamos, pero acabábamos de conocer a la persona que Dios tenía pensado para compartir toda una vida. Porque sí: nos dimos cuenta de que somos la respuesta de las oraciones que le hacíamos a Dios sobre nuestro futuro.</p>
           </div>
         </div>
 
@@ -1104,7 +1120,9 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="hist-card">
             <div class="hist-when">El camino</div>
             <div class="hist-title">La vida comenzó a sentirse diferente</div>
-            <p class="hist-text">Llegaron las primeras aventuras, los viajes y las risas interminables. Fuimos construyendo un amor hecho de grandes sueños, pero sobre todo de pequeñas cosas. Y entendimos que hogar nunca había sido un lugar: hogar era donde estábamos juntos.</p>
+            <p class="hist-text">Llegaron las primeras aventuras, los viajes, las risas interminables y también los días que nos enseñaron a caminar de la mano.</p>
+            <p class="hist-text">Fuimos construyendo un amor hecho de grandes sueños, pero sobre todo de pequeñas cosas: estar, cuidarnos, acompañarnos y seguir eligiéndonos incluso en los días más ordinarios.</p>
+            <p class="hist-text">Y entendimos que hogar nunca había sido un lugar. Hogar era donde estábamos juntos.</p>
           </div>
         </div>
 
@@ -1115,7 +1133,9 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="hist-card">
             <div class="hist-when">La promesa</div>
             <div class="hist-title">El comienzo de nuestro para siempre</div>
-            <p class="hist-text">Una pregunta pequeña para un sueño inmenso. Y entre emoción, nervios y un corazón que ya conocía la respuesta, llegó el sí. Sí a seguir creciendo juntos. Sí a elegirnos una y otra vez. Sí a una vida contigo.</p>
+            <p class="hist-text">Hasta que un día llegó aquella pregunta. Una pregunta pequeña para un sueño inmenso.</p>
+            <p class="hist-text">Y entre emoción, nervios y un corazón que ya conocía la respuesta, llegó el «sí».</p>
+            <p class="hist-text hist-si">Sí a seguir creciendo juntos.<br>Sí a todas las aventuras que todavía nos esperan.<br>Sí a elegirnos una y otra vez.<br>Sí a una vida contigo.</p>
           </div>
         </div>
 
@@ -1126,7 +1146,10 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="hist-card">
             <div class="hist-when">12 de diciembre de 2026</div>
             <div class="hist-title">El capítulo que siempre soñamos</div>
-            <p class="hist-text">Ese día caminaremos hacia el altar sabiendo que no estamos comenzando nuestra historia: estamos cumpliendo la promesa de seguir escribiéndola juntos. Porque al final la aventura más grande nunca estuvo allá afuera. La encontramos el día que nos encontramos.</p>
+            <p class="hist-text">Y aquí estamos. Después de todos los caminos recorridos, cada risa, cada abrazo, cada sueño y cada recuerdo que nos trajo hasta este momento.</p>
+            <p class="hist-text">Ese día caminaremos hacia el altar sabiendo que no estamos comenzando nuestra historia: estamos cumpliendo la promesa de seguir escribiéndola juntos.</p>
+            <p class="hist-text">Porque al final descubrimos que la aventura más grande nunca estuvo allá afuera. La encontramos el día que nos encontramos.</p>
+            <p class="hist-text">Y ahora solo nos queda una cosa: vivirla juntos, para siempre, de la mano de Dios y la Virgen María, que serán nuestros pilares de vida.</p>
           </div>
         </div>
       </div>
@@ -1191,7 +1214,7 @@ footer{padding:min(9vh,74px) 0 !important}
         </div>
         <div class="familia-card" data-tilt>
           <div class="familia-role">Abuelos del novio</div>
-          <div class="familia-names">Ana María Reyes<br><span class="mem">Rafael Octavio Reyes <svg class="mem-paloma" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 6.2c-1.6-.5-3.1.2-4 1.3-1 1.2-2.4 2-4 2-2.4 0-3.9-1.3-5.6-1.3-2 0-3.4 1.5-3.4 3.3 0 2.6 2.3 4.6 5.2 4.6 1.1 0 2-.2 2.8-.6"/><path d="M11.5 15.5c0 2.2 1.6 4 3.7 4.3"/><path d="M18.8 4.6c.4 0 .7.3.7.7"/></svg></span></div>
+          <div class="familia-names">Ana María Reyes<br><span class="mem">Nancy Arencibia <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Pedro Domínguez <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Rafael Octavio Reyes <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div><div class="mem-nota">Quienes nos acompañan desde el cielo</div>
         </div>
         <div class="familia-card" data-tilt>
           <div class="familia-role">Abuelos de la novia</div>
@@ -1837,17 +1860,11 @@ footer{padding:min(9vh,74px) 0 !important}
       <p class="verse-text" style="max-width:680px;margin:26px auto 0;text-align:center">
         Ninguna aventura sería la misma sin ellos. Nos acompañaron en los días tranquilos y en los que no lo fueron tanto, y por eso también son parte de esta historia.
       </p>
-      <div class="familia-grid" style="margin-top:44px">
-        <!-- PENDIENTE: nombres (y fotos) de las mascotas -->
-        <div class="familia-card" data-tilt>
-          <div class="familia-role">Nuestra mascota</div>
-          <div class="familia-names">Por confirmar</div>
-        </div>
-        <div class="familia-card" data-tilt>
-          <div class="familia-role">Nuestra mascota</div>
-          <div class="familia-names">Por confirmar</div>
-        </div>
-      </div>
+      <figure class="pet-frame">
+        <img src="mascotas.webp" alt="Las seis mascotas de Pedro y Roxana: dos perros pequeños, un pitbull, dos gatos y un loro verde"
+             loading="lazy" decoding="async" width="1086" height="1448">
+        <figcaption>La manada completa</figcaption>
+      </figure>
       <img class="up-sello" src="up-sello.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:52px" width="360" height="360">
     </div>
   </section>
@@ -2706,6 +2723,10 @@ function initUpOrnaments(){
     gsap.set(l,{transformOrigin:'top center'});
     gsap.from(l,{rotation:-14,opacity:0,duration:1.1,ease:'elastic.out(1,.55)',scrollTrigger:{trigger:l,start:'top 88%',once:true}});
     gsap.to(l,{rotation:'+=3.5',duration:3.8,ease:'sine.inOut',yoyo:true,repeat:-1});
+  });
+  document.querySelectorAll('.pet-frame').forEach(function(f){
+    gsap.from(f,{opacity:0,y:38,scale:.95,duration:1.1,ease:'power3.out',
+      scrollTrigger:{trigger:f,start:'top 86%',once:true}});
   });
   document.querySelectorAll('.up-pareja').forEach(function(p){
     gsap.from(p,{y:70,opacity:0,duration:1.3,ease:'power3.out',scrollTrigger:{trigger:p,start:'top 88%',once:true}});
