@@ -2058,9 +2058,13 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(pasesNumEl) pasesNumEl.textContent = urlPases;
     if(!noteEl) return;
     if(urlPara){
-      noteEl.textContent = '✦ ' + urlPara + ', ' + (urlPases === 1 ? 'tienes 1 pase reservado' : 'tienes ' + urlPases + ' pases reservados') + ' ✦';
+      noteEl.textContent = (window.I18N && I18N.lang === 'en')
+        ? '✦ ' + urlPara + ', ' + (urlPases === 1 ? 'you have 1 seat reserved' : 'you have ' + urlPases + ' seats reserved') + ' ✦'
+        : '✦ ' + urlPara + ', ' + (urlPases === 1 ? 'tienes 1 pase reservado' : 'tienes ' + urlPases + ' pases reservados') + ' ✦';
     } else {
-      noteEl.textContent = '✦ ' + (urlPases === 1 ? '1 pase reservado para ti' : urlPases + ' pases reservados para ti') + ' ✦';
+      noteEl.textContent = (window.I18N && I18N.lang === 'en')
+        ? '✦ ' + (urlPases === 1 ? '1 seat reserved for you' : urlPases + ' seats reserved for you') + ' ✦'
+        : '✦ ' + (urlPases === 1 ? '1 pase reservado para ti' : urlPases + ' pases reservados para ti') + ' ✦';
     }
     noteEl.style.display = 'block';
   }
