@@ -581,6 +581,8 @@ body[data-tone="light"] .b--silver{
 /* ============ GIFTS ============ */
 .gifts-head{text-align:center;margin-bottom:72px;max-width:640px;margin-left:auto;margin-right:auto}
 .gifts-sub{font-family:var(--serif);font-size:19px;color:var(--ink-soft);line-height:1.7;margin-top:16px;font-weight:500}
+.gift-qr{display:block;width:min(240px,72%);height:auto;margin:20px auto 0;
+  border:1px solid var(--hair);padding:10px;background:#fff}
 .gift-card{background:var(--bg);padding:44px 32px 40px;border:1px solid var(--hair-gold);text-align:center;position:relative;box-shadow:0 2px 8px rgba(26,45,96,.06),0 12px 36px -12px rgba(26,45,96,.15);max-width:480px;margin:0 auto}
 .gift-icon{width:52px;height:52px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--paper);border:1px solid var(--hair-gold);color:var(--gold-deep);}
 .gift-name{font-family:var(--display);font-size:26px;color:var(--accent-deep);margin-bottom:12px;font-weight:500}
@@ -731,6 +733,28 @@ footer{background:linear-gradient(160deg,#e8f1f8 0%,#dfeaf4 38%,#eef3f7 70%,#f7f
 .footer-credit{font-family:var(--sans);font-size:12px;letter-spacing:.2em;color:var(--ink-soft);text-transform:uppercase;opacity:.7}
 .footer-credit a{color:var(--gold-deep);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .3s}
 .footer-credit a:hover{color:var(--gold);opacity:1}
+
+
+/* ============ SELECTOR DE IDIOMA ============ */
+#lang-screen{position:fixed;inset:0;z-index:10000;background:#152d4f;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:34px;padding:32px;text-align:center}
+#lang-screen.is-gone{display:none}
+.lang-orn{width:clamp(120px,26vw,190px);height:auto;opacity:.92;
+  filter:drop-shadow(0 10px 26px rgba(0,0,0,.35))}
+.lang-title{font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(30px,7vw,46px);color:#F8F5EC;line-height:1.05}
+.lang-sub{font-family:var(--sans);font-size:12px;font-weight:600;
+  letter-spacing:.32em;text-transform:uppercase;color:#e8b98a;padding-left:.32em}
+.lang-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.lang-btn{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.26em;
+  text-transform:uppercase;padding:16px 30px;padding-left:calc(30px + .26em);
+  color:#F8F5EC;background:transparent;border:1px solid rgba(232,185,138,.55);
+  cursor:pointer;min-height:52px;transition:all .45s cubic-bezier(.2,.7,.2,1)}
+.lang-btn:hover,.lang-btn:focus-visible{background:rgba(232,185,138,.14);
+  border-color:#e8b98a;transform:translateY(-2px)}
+/* Sin JS el selector no debe tapar la invitacion */
+html.no-js #lang-screen{display:none}
 
 /* ============ ENVELOPE ============ */
 #envelope-screen{position:fixed;inset:0;z-index:9998;background:#1a2d50;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;}
@@ -989,13 +1013,26 @@ footer{padding:min(9vh,74px) 0 !important}
 </head>
 <body>
 
+<!-- SELECTOR DE IDIOMA -->
+<div id="lang-screen" role="dialog" aria-modal="true" aria-label="Elige tu idioma / Choose your language">
+  <img class="lang-orn" src="up-casa-globos.webp" alt="" aria-hidden="true" width="819" height="1680">
+  <div>
+    <div class="lang-sub">Pedro &amp; Roxana</div>
+    <div class="lang-title" style="margin-top:14px">Elige tu idioma<br><span style="opacity:.72">Choose your language</span></div>
+  </div>
+  <div class="lang-btns">
+    <button class="lang-btn" type="button" data-lang="es">Español</button>
+    <button class="lang-btn" type="button" data-lang="en">English</button>
+  </div>
+</div>
+
 <!-- ENVELOPE OPENING -->
 <div id="envelope-screen" role="button" aria-label="Toca para abrir la invitación" tabindex="0">
   <img id="env-image" src="envelope.jpg" alt="" width="1072" height="1920">
   <video id="env-video" muted playsinline preload="auto" aria-hidden="true">
     <source src="envelope.mp4" type="video/mp4">
   </video>
-  <div id="env-hint">Toca para abrir</div>
+  <div id="env-hint" data-en="Tap to open">Toca para abrir</div>
 </div>
 <div id="env-flash" aria-hidden="true"></div>
 <audio id="music" preload="none" loop>
@@ -1047,7 +1084,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <path d="M75 20 L95 20"/><path d="M105 20 L125 20"/>
         </g>
       </svg>
-      <div class="hero-eyebrow" data-anim="hero-eyebrow">Nuestra gran aventura comienza</div>
+      <div class="hero-eyebrow" data-anim="hero-eyebrow" data-en="Our greatest adventure begins">Nuestra gran aventura comienza</div>
       <h1 class="hero-name">
         <span class="hero-name-p" data-split="Pedro"></span>
         <span class="hero-and">&amp;</span>
@@ -1058,7 +1095,7 @@ footer{padding:min(9vh,74px) 0 !important}
       </div>
       <div class="hero-place" data-anim="hero-place">West Palm Beach · Florida</div>
     </div>
-    <div class="hero-scroll">Descubre</div>
+    <div class="hero-scroll" data-en="Scroll">Descubre</div>
   </section>
 
   <div class="seam" style="--from:transparent;--to:var(--surface)" aria-hidden="true"></div>
@@ -1078,7 +1115,7 @@ footer{padding:min(9vh,74px) 0 !important}
           </g>
         </svg>
         <span class="verse-quote">&ldquo;</span>
-        <p class="verse-text">Dicen que la aventura está allá afuera… pero nosotros descubrimos que la aventura más hermosa comienza cuando encuentras a la persona con quien quieres compartirla. Desde el día en que nuestros caminos se cruzaron, hemos escrito una historia llena de amor, sueños y momentos inolvidables.<br><br>Hoy, comienza nuestro capítulo favorito: para siempre.</p>
+        <p class="verse-text" data-en="They say adventure is out there… but we discovered that the most beautiful adventure begins when you find the person you want to share it with. Since the day our paths crossed, we have written a story full of love, dreams and unforgettable moments.<br><br>Today, our favorite chapter begins: forever.">Dicen que la aventura está allá afuera… pero nosotros descubrimos que la aventura más hermosa comienza cuando encuentras a la persona con quien quieres compartirla. Desde el día en que nuestros caminos se cruzaron, hemos escrito una historia llena de amor, sueños y momentos inolvidables.<br><br>Hoy, comienza nuestro capítulo favorito: para siempre.</p>
         <figure class="verse-photo">
           <img src="foto-libro.jpg" alt="Pedro y Roxana sosteniendo un libro que dice: Our adventure begins, December 12 2026" loading="lazy" decoding="async" width="1000" height="1400">
         </figure>
@@ -1094,7 +1131,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- NUESTRA HISTORIA -->
   <section class="section-paper historia">
     <div class="container">
-      <div class="eyebrow">Cómo empezó todo</div>
+      <div class="eyebrow" data-en="How it all began">Cómo empezó todo</div>
       <h2>Nuestra <em>historia</em></h2>
 
       <div class="hist-track">
@@ -1105,11 +1142,11 @@ footer{padding:min(9vh,74px) 0 !important}
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.6C6.4 16.1 1 11.3 1 7.2 1 3.4 4.1 2 6.3 2c1.3 0 4.2.5 5.7 4.5C13.6 2.5 16.5 2 17.7 2 20.3 2 23 3.6 23 7.2c0 4.1-5.1 8.6-11 14.4z"/></svg>
           </div>
           <div class="hist-card">
-            <div class="hist-when">Donde todo comenzó</div>
-            <div class="hist-title">El día en que nos encontramos</div>
-            <p class="hist-text">Éramos dos personas siguiendo caminos distintos, sin imaginar que la vida estaba a punto de cambiar nuestros planes.</p>
-            <p class="hist-text">Una conversación llevó a otra. Las coincidencias se convirtieron en encuentros, los encuentros en recuerdos y, casi sin darnos cuenta, comenzamos a elegirnos.</p>
-            <p class="hist-text">Aquel día no lo sabíamos, pero acabábamos de conocer a la persona que Dios tenía pensado para compartir toda una vida. Porque sí: nos dimos cuenta de que somos la respuesta de las oraciones que le hacíamos a Dios sobre nuestro futuro.</p>
+            <div class="hist-when" data-en="Where it all started">Donde todo comenzó</div>
+            <div class="hist-title" data-en="The day we found each other">El día en que nos encontramos</div>
+            <p class="hist-text" data-en="We were two people on different paths, with no idea that life was about to change our plans.">Éramos dos personas siguiendo caminos distintos, sin imaginar que la vida estaba a punto de cambiar nuestros planes.</p>
+            <p class="hist-text" data-en="One conversation led to another. Coincidences turned into meetings, meetings into memories and, almost without noticing, we began choosing each other.">Una conversación llevó a otra. Las coincidencias se convirtieron en encuentros, los encuentros en recuerdos y, casi sin darnos cuenta, comenzamos a elegirnos.</p>
+            <p class="hist-text" data-en="We did not know it then, but we had just met the person God had in mind for us to share a whole life with. Because yes: we realized we are the answer to the prayers we said to God about our future.">Aquel día no lo sabíamos, pero acabábamos de conocer a la persona que Dios tenía pensado para compartir toda una vida. Porque sí: nos dimos cuenta de que somos la respuesta de las oraciones que le hacíamos a Dios sobre nuestro futuro.</p>
           </div>
         </div>
 
@@ -1118,11 +1155,11 @@ footer{padding:min(9vh,74px) 0 !important}
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           </div>
           <div class="hist-card">
-            <div class="hist-when">El camino</div>
-            <div class="hist-title">La vida comenzó a sentirse diferente</div>
-            <p class="hist-text">Llegaron las primeras aventuras, los viajes, las risas interminables y también los días que nos enseñaron a caminar de la mano.</p>
-            <p class="hist-text">Fuimos construyendo un amor hecho de grandes sueños, pero sobre todo de pequeñas cosas: estar, cuidarnos, acompañarnos y seguir eligiéndonos incluso en los días más ordinarios.</p>
-            <p class="hist-text">Y entendimos que hogar nunca había sido un lugar. Hogar era donde estábamos juntos.</p>
+            <div class="hist-when" data-en="The journey">El camino</div>
+            <div class="hist-title" data-en="Life began to feel different">La vida comenzó a sentirse diferente</div>
+            <p class="hist-text" data-en="The first adventures came, the trips, the endless laughter and also the days that taught us to walk hand in hand.">Llegaron las primeras aventuras, los viajes, las risas interminables y también los días que nos enseñaron a caminar de la mano.</p>
+            <p class="hist-text" data-en="We built a love made of big dreams, but above all of small things: being there, caring for each other, keeping each other company and choosing one another even on the most ordinary days.">Fuimos construyendo un amor hecho de grandes sueños, pero sobre todo de pequeñas cosas: estar, cuidarnos, acompañarnos y seguir eligiéndonos incluso en los días más ordinarios.</p>
+            <p class="hist-text" data-en="And we understood that home had never been a place. Home was wherever we were together.">Y entendimos que hogar nunca había sido un lugar. Hogar era donde estábamos juntos.</p>
           </div>
         </div>
 
@@ -1131,11 +1168,11 @@ footer{padding:min(9vh,74px) 0 !important}
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="hist-card">
-            <div class="hist-when">La promesa</div>
-            <div class="hist-title">El comienzo de nuestro para siempre</div>
-            <p class="hist-text">Hasta que un día llegó aquella pregunta. Una pregunta pequeña para un sueño inmenso.</p>
-            <p class="hist-text">Y entre emoción, nervios y un corazón que ya conocía la respuesta, llegó el «sí».</p>
-            <p class="hist-text hist-si">Sí a seguir creciendo juntos.<br>Sí a todas las aventuras que todavía nos esperan.<br>Sí a elegirnos una y otra vez.<br>Sí a una vida contigo.</p>
+            <div class="hist-when" data-en="The promise">La promesa</div>
+            <div class="hist-title" data-en="The beginning of our forever">El comienzo de nuestro para siempre</div>
+            <p class="hist-text" data-en="Until one day that question arrived. A small question for an immense dream.">Hasta que un día llegó aquella pregunta. Una pregunta pequeña para un sueño inmenso.</p>
+            <p class="hist-text" data-en="And between excitement, nerves and a heart that already knew the answer, the «yes» arrived.">Y entre emoción, nervios y un corazón que ya conocía la respuesta, llegó el «sí».</p>
+            <p class="hist-text hist-si" data-en="Yes to keep growing together.<br>Yes to all the adventures still waiting for us.<br>Yes to choosing each other again and again.<br>Yes to a life with you.">Sí a seguir creciendo juntos.<br>Sí a todas las aventuras que todavía nos esperan.<br>Sí a elegirnos una y otra vez.<br>Sí a una vida contigo.</p>
           </div>
         </div>
 
@@ -1145,11 +1182,11 @@ footer{padding:min(9vh,74px) 0 !important}
           </div>
           <div class="hist-card">
             <div class="hist-when">12 de diciembre de 2026</div>
-            <div class="hist-title">El capítulo que siempre soñamos</div>
-            <p class="hist-text">Y aquí estamos. Después de todos los caminos recorridos, cada risa, cada abrazo, cada sueño y cada recuerdo que nos trajo hasta este momento.</p>
-            <p class="hist-text">Ese día caminaremos hacia el altar sabiendo que no estamos comenzando nuestra historia: estamos cumpliendo la promesa de seguir escribiéndola juntos.</p>
-            <p class="hist-text">Porque al final descubrimos que la aventura más grande nunca estuvo allá afuera. La encontramos el día que nos encontramos.</p>
-            <p class="hist-text">Y ahora solo nos queda una cosa: vivirla juntos, para siempre, de la mano de Dios y la Virgen María, que serán nuestros pilares de vida.</p>
+            <div class="hist-title" data-en="The chapter we always dreamed of">El capítulo que siempre soñamos</div>
+            <p class="hist-text" data-en="And here we are. After every road travelled, every laugh, every embrace, every dream and every memory that brought us to this moment.">Y aquí estamos. Después de todos los caminos recorridos, cada risa, cada abrazo, cada sueño y cada recuerdo que nos trajo hasta este momento.</p>
+            <p class="hist-text" data-en="That day we will walk down the aisle knowing we are not beginning our story: we are keeping the promise to go on writing it together.">Ese día caminaremos hacia el altar sabiendo que no estamos comenzando nuestra historia: estamos cumpliendo la promesa de seguir escribiéndola juntos.</p>
+            <p class="hist-text" data-en="Because in the end we discovered that the greatest adventure was never out there. We found it the day we found each other.">Porque al final descubrimos que la aventura más grande nunca estuvo allá afuera. La encontramos el día que nos encontramos.</p>
+            <p class="hist-text" data-en="And now only one thing is left: to live it together, forever, hand in hand with God and the Virgin Mary, who will be the pillars of our life.">Y ahora solo nos queda una cosa: vivirla juntos, para siempre, de la mano de Dios y la Virgen María, que serán nuestros pilares de vida.</p>
           </div>
         </div>
       </div>
@@ -1161,7 +1198,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- VIDEO SAVE THE DATE -->
   <section class="section-surface section-tight">
     <div class="container">
-      <div class="eyebrow">Nuestro save the date</div>
+      <div class="eyebrow" data-en="Our save the date">Nuestro save the date</div>
       <h2>El día que lo <em>contamos</em></h2>
       <div class="std-wrap">
         <video class="std-video" controls playsinline preload="none"
@@ -1170,7 +1207,7 @@ footer{padding:min(9vh,74px) 0 !important}
           Tu navegador no puede reproducir este video.
         </video>
       </div>
-      <div class="std-nota">Sin sonido · deja la música puesta</div>
+      <div class="std-nota" data-en="No sound · keep the music playing">Sin sonido · deja la música puesta</div>
     </div>
   </section>
 
@@ -1179,7 +1216,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- FECHA HERO -->
   <section class="date-hero">
     <div class="container">
-      <div class="date-eyebrow" data-anim="date-eb">Aparta la fecha</div>
+      <div class="date-eyebrow" data-anim="date-eb" data-en="Save the date">Aparta la fecha</div>
       <h2 class="date-h">Nuestro <em>gran</em> día</h2>
       <div class="date-numbers">
         <div class="date-block">
@@ -1201,23 +1238,23 @@ footer{padding:min(9vh,74px) 0 !important}
   <section class="section-surface familia">
     <span class="mono-wm" aria-hidden="true">P &amp; R</span>
     <div class="container">
-      <div class="eyebrow">Con el amor de</div>
+      <div class="eyebrow" data-en="With the love of">Con el amor de</div>
       <h2>Nuestras <em>familias</em></h2>
       <div class="familia-grid">
         <div class="familia-card" data-tilt>
-          <div class="familia-role">Padres del novio</div>
+          <div class="familia-role" data-en="Parents of the groom">Padres del novio</div>
           <div class="familia-names">Beatriz Domínguez<br>&amp; Pedro Domínguez</div>
         </div>
         <div class="familia-card" data-tilt>
-          <div class="familia-role">Padres de la novia</div>
+          <div class="familia-role" data-en="Parents of the bride">Padres de la novia</div>
           <div class="familia-names">Yadira Briones<br>&amp; Bayardo Quiroz</div>
         </div>
         <div class="familia-card" data-tilt>
-          <div class="familia-role">Abuelos del novio</div>
-          <div class="familia-names">Ana María Reyes<br><span class="mem">Nancy Arencibia <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Pedro Domínguez <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Rafael Octavio Reyes <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div><div class="mem-nota">Quienes nos acompañan desde el cielo</div>
+          <div class="familia-role" data-en="Grandparents of the groom">Abuelos del novio</div>
+          <div class="familia-names">Ana María Reyes<br><span class="mem">Nancy Arencibia <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Pedro Domínguez <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Rafael Octavio Reyes <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div><div class="mem-nota" data-en="Watching over us from heaven">Quienes nos acompañan desde el cielo</div>
         </div>
         <div class="familia-card" data-tilt>
-          <div class="familia-role">Abuelos de la novia</div>
+          <div class="familia-role" data-en="Grandparents of the bride">Abuelos de la novia</div>
           <div class="familia-names">Miguel Ángel Siguenza Chacón<br>Juana Francisca López Vargas</div>
         </div>
       </div>
@@ -1243,7 +1280,7 @@ footer{padding:min(9vh,74px) 0 !important}
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <div class="padrino-tipo">Padrino</div>
+          <div class="padrino-tipo" data-en="Godfather">Padrino</div>
           <div class="padrino-names">Julio César Ferreiro</div>
         </div>
         <!-- Dama de honor -->
@@ -1257,7 +1294,7 @@ footer{padding:min(9vh,74px) 0 !important}
               <path d="M9 22l3-4 3 4"/>
             </svg>
           </div>
-          <div class="padrino-tipo">Madrina</div>
+          <div class="padrino-tipo" data-en="Godmother">Madrina</div>
           <div class="padrino-names">Janet Mercedes Ferreiro</div>
         </div>
       </div>
@@ -1268,7 +1305,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- CORTEJO -->
   <section class="section-surface cortejo section-tight">
     <div class="container">
-      <div class="eyebrow">A nuestro lado</div>
+      <div class="eyebrow" data-en="By our side">A nuestro lado</div>
       <h2>Nuestro <em>cortejo</em></h2>
 
       <div class="ct-wrap">
@@ -1314,7 +1351,7 @@ footer{padding:min(9vh,74px) 0 !important}
   <section class="section-surface locs">
     <div class="container">
       <div style="text-align:center">
-        <div class="eyebrow">Acompáñanos</div>
+        <div class="eyebrow" data-en="Join us">Acompáñanos</div>
         <h2>Ceremonia <em>&amp;</em> Recepción</h2>
         <div class="locs-sub">West Palm Beach · Florida</div>
       </div>
@@ -1336,7 +1373,7 @@ footer{padding:min(9vh,74px) 0 !important}
             </g>
           </svg>
 
-          <div class="loc-type">Ceremonia religiosa</div>
+          <div class="loc-type" data-en="Religious ceremony">Ceremonia religiosa</div>
           <div class="loc-name">St. Luke Catholic Church</div>
           <div class="loc-time">2:00 pm</div>
           <div class="loc-addr">2892 S Congress Ave<br>Palm Springs, FL 33461</div>
@@ -1349,7 +1386,7 @@ footer{padding:min(9vh,74px) 0 !important}
               title="St. Luke Catholic Church, Palm Springs, FL"></iframe>
           </div>
 
-          <a class="loc-btn" href="https://www.google.com/maps/search/?api=1&amp;query=St.+Luke+Catholic+Church+Palm+Springs+FL" target="_blank" rel="noopener" style="margin-top:32px">Cómo llegar</a>
+          <a class="loc-btn" href="https://www.google.com/maps/search/?api=1&amp;query=St.+Luke+Catholic+Church+Palm+Springs+FL" target="_blank" rel="noopener" style="margin-top:32px" data-en="Get directions">Cómo llegar</a>
         </article>
 
         <article class="loc-card loc-card--single" data-tilt>
@@ -1369,7 +1406,7 @@ footer{padding:min(9vh,74px) 0 !important}
             </g>
           </svg>
 
-          <div class="loc-type">Recepción</div>
+          <div class="loc-type" data-en="Reception">Recepción</div>
           <div class="loc-name">The Delray Ballroom</div>
           <div class="loc-time">4:30 pm</div>
           <div class="loc-addr">1550 SW 8th St<br>Boynton Beach, FL 33426</div>
@@ -1393,17 +1430,17 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- COUNTDOWN -->
   <section class="section-bg countdown">
     <div class="container">
-      <div class="eyebrow">Cuenta regresiva</div>
+      <div class="eyebrow" data-en="Countdown">Cuenta regresiva</div>
       <h2>Cuenta <em>los</em> días</h2>
-      <div class="countdown-sub">para nuestra gran aventura</div>
+      <div class="countdown-sub" data-en="to our great adventure">para nuestra gran aventura</div>
       <div class="countdown-grid" id="cd">
-        <div class="cd-block"><div class="cd-num" id="cd-d">000</div><div class="cd-lbl">Días</div></div>
-        <div class="cd-block"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Horas</div></div>
-        <div class="cd-block"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Minutos</div></div>
-        <div class="cd-block"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Segundos</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-d">000</div><div class="cd-lbl" data-en="Days">Días</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl" data-en="Hours">Horas</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl" data-en="Minutes">Minutos</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl" data-en="Seconds">Segundos</div></div>
       </div>
       <div style="margin-top:44px">
-        <button class="loc-btn" type="button" id="add-cal">Agregar a mi calendario</button>
+        <button class="loc-btn" type="button" id="add-cal" data-en="Add to my calendar">Agregar a mi calendario</button>
       </div>
     </div>
   </section>
@@ -1416,9 +1453,9 @@ footer{padding:min(9vh,74px) 0 !important}
     <div class="itv3-orb" style="width:260px;height:260px;top:45%;right:-60px;background:radial-gradient(circle,rgba(195,213,229,.12),transparent 70%);"></div>
     <div class="itv3-orb" style="width:200px;height:200px;bottom:10%;left:10%;background:radial-gradient(circle,rgba(204,128,66,.07),transparent 70%);"></div>
     <div class="container">
-      <div class="eyebrow">Itinerario</div>
+      <div class="eyebrow" data-en="Timeline">Itinerario</div>
       <h2>El <em>itinerario</em> del día</h2>
-      <span class="itinerary-sub">Sábado 12 de diciembre · 2026</span>
+      <span class="itinerary-sub" data-en="Saturday, December 12 · 2026">Sábado 12 de diciembre · 2026</span>
       <div class="itv3">
         <div class="itv3-track"></div>
         <div class="itv3-glow" id="itvGlow"></div>
@@ -1435,7 +1472,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="itv3-gem itv3-gem-lavender"></div>
           <div class="itv3-card">
             <div class="itv3-time">3:30 pm</div>
-            <div class="itv3-ev">Sesión de fotos</div>
+            <div class="itv3-ev" data-en="Photo session">Sesión de fotos</div>
           </div>
         </div>
 
@@ -1443,7 +1480,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="itv3-gem itv3-gem-mid"></div>
           <div class="itv3-card">
             <div class="itv3-time">4:30 pm</div>
-            <div class="itv3-ev">Recepción y cóctel</div>
+            <div class="itv3-ev" data-en="Reception and cocktail">Recepción y cóctel</div>
           </div>
         </div>
 
@@ -1451,7 +1488,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="itv3-gem itv3-gem-navy"></div>
           <div class="itv3-card">
             <div class="itv3-time">5:30 pm</div>
-            <div class="itv3-ev">Cena</div>
+            <div class="itv3-ev" data-en="Dinner">Cena</div>
           </div>
         </div>
 
@@ -1459,7 +1496,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="itv3-gem"></div>
           <div class="itv3-card">
             <div class="itv3-time">7:00 pm</div>
-            <div class="itv3-ev">Primer baile</div>
+            <div class="itv3-ev" data-en="First dance">Primer baile</div>
           </div>
         </div>
 
@@ -1467,7 +1504,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="itv3-gem itv3-gem-mid"></div>
           <div class="itv3-card">
             <div class="itv3-time">8:00 pm</div>
-            <div class="itv3-ev">Brindis y pastel</div>
+            <div class="itv3-ev" data-en="Toast and cake">Brindis y pastel</div>
           </div>
         </div>
 
@@ -1475,8 +1512,8 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="itv3-gem itv3-gem-lavender"></div>
           <div class="itv3-card">
             <div class="itv3-time">9:00 pm</div>
-            <div class="itv3-ev">¡A bailar!</div>
-            <div class="itv3-sub">La pista no se detiene</div>
+            <div class="itv3-ev" data-en="Let&#39;s dance!">¡A bailar!</div>
+            <div class="itv3-sub" data-en="The dance floor never stops">La pista no se detiene</div>
           </div>
         </div>
 
@@ -1484,8 +1521,8 @@ footer{padding:min(9vh,74px) 0 !important}
           <div class="itv3-gem"></div>
           <div class="itv3-card">
             <div class="itv3-time">12:00 am</div>
-            <div class="itv3-ev">Despedida</div>
-            <div class="itv3-sub">Hasta la próxima aventura</div>
+            <div class="itv3-ev" data-en="Farewell">Despedida</div>
+            <div class="itv3-sub" data-en="Until the next adventure">Hasta la próxima aventura</div>
           </div>
         </div>
       </div>
@@ -1497,19 +1534,19 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- DRESS CODE -->
   <section class="section-bg dress">
     <div class="container">
-      <div class="eyebrow">Código de vestimenta</div>
+      <div class="eyebrow" data-en="Dress code">Código de vestimenta</div>
       <h2>Formal</h2>
       <div class="dress-sub">para nuestra gran aventura</div>
-      <div class="dress-note">Caballeros · Damas · Etiqueta formal</div>
+      <div class="dress-note" data-en="Gentlemen · Ladies · Formal attire">Caballeros · Damas · Etiqueta formal</div>
 
       <!-- Figuras del dress code — recortes de la lamina del cliente -->
       <div class="dc-figures">
         <div class="dc-fig">
           <img class="dc-img" src="dc-caballero.webp" alt="Caballero con traje formal negro y corbata" loading="lazy" decoding="async" width="189" height="590">
-          <div class="dc-fig-name">Caballeros</div>
+          <div class="dc-fig-name" data-en="Gentlemen">Caballeros</div>
           <ul class="dc-list">
-            <li>Traje formal en colores clásicos</li>
-            <li>Se recomienda corbata o corbatín</li>
+            <li data-en="Formal suit in classic colors">Traje formal en colores clásicos</li>
+            <li data-en="Tie or bow tie recommended">Se recomienda corbata o corbatín</li>
           </ul>
         </div>
 
@@ -1517,47 +1554,47 @@ footer{padding:min(9vh,74px) 0 !important}
 
         <div class="dc-fig">
           <img class="dc-img" src="dc-dama.webp" alt="Dama con vestido largo color crema y hombros drapeados" loading="lazy" decoding="async" width="335" height="600">
-          <div class="dc-fig-name">Damas</div>
+          <div class="dc-fig-name" data-en="Ladies">Damas</div>
           <ul class="dc-list">
-            <li>Vestidos largos o midi elegantes</li>
-            <li>Colores sobrios y en armonía<br>con nuestra paleta</li>
+            <li data-en="Long or elegant midi dresses">Vestidos largos o midi elegantes</li>
+            <li data-en="Subtle colors in harmony<br>with our palette">Colores sobrios y en armonía<br>con nuestra paleta</li>
           </ul>
         </div>
       </div>
 
       <!-- Paleta sugerida -->
       <div class="dress-section">
-        <div class="swatch-group-title">Paleta sugerida</div>
+        <div class="swatch-group-title" data-en="Suggested palette">Paleta sugerida</div>
         <div class="dress-swatches">
-          <div class="swatch"><div class="swatch-c" style="background:#9bb3cb"></div><div class="swatch-n">Azul polvo</div></div>
-          <div class="swatch"><div class="swatch-c" style="background:#c9c7c8"></div><div class="swatch-n">Gris</div></div>
-          <div class="swatch"><div class="swatch-c" style="background:#ffffff"></div><div class="swatch-n">Blanco</div></div>
-          <div class="swatch"><div class="swatch-c" style="background:#8da082"></div><div class="swatch-n">Verde sage</div></div>
-          <div class="swatch"><div class="swatch-c" style="background:#cc8042"></div><div class="swatch-n">Naranja</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#9bb3cb"></div><div class="swatch-n" data-en="Dusty blue">Azul polvo</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#c9c7c8"></div><div class="swatch-n" data-en="Gray">Gris</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#ffffff"></div><div class="swatch-n" data-en="White">Blanco</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#8da082"></div><div class="swatch-n" data-en="Sage green">Verde sage</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#cc8042"></div><div class="swatch-n" data-en="Orange">Naranja</div></div>
         </div>
       </div>
 
       <!-- Opciones adicionales para caballeros -->
       <div class="dress-section">
-        <div class="swatch-group-title">Opciones para caballeros</div>
+        <div class="swatch-group-title" data-en="Options for gentlemen">Opciones para caballeros</div>
         <div class="dress-swatches">
-          <div class="swatch"><div class="swatch-c" style="background:#152d4f"></div><div class="swatch-n">Azul marino</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#152d4f"></div><div class="swatch-n" data-en="Navy blue">Azul marino</div></div>
           <div class="swatch"><div class="swatch-c" style="background:#7193b8"></div><div class="swatch-n">Azul polvo</div></div>
-          <div class="swatch"><div class="swatch-c" style="background:#4f5356"></div><div class="swatch-n">Gris oscuro</div></div>
-          <div class="swatch"><div class="swatch-c" style="background:#161a19"></div><div class="swatch-n">Negro</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#4f5356"></div><div class="swatch-n" data-en="Dark gray">Gris oscuro</div></div>
+          <div class="swatch"><div class="swatch-c" style="background:#161a19"></div><div class="swatch-n" data-en="Black">Negro</div></div>
         </div>
       </div>
 
       <!-- Colores a evitar -->
       <div class="dress-avoid">
-        <div class="swatch-group-title">Color a evitar</div>
+        <div class="swatch-group-title" data-en="Color to avoid">Color a evitar</div>
         <div class="avoid-list">
           <div class="avoid-item"><span class="avoid-c" style="background:#FFFFFF;border:1.5px solid #ccd8e8"></span>Blanco</div>
         </div>
-        <div class="avoid-note">El blanco está reservado para la novia</div>
+        <div class="avoid-note" data-en="White is reserved for the bride">El blanco está reservado para la novia</div>
       </div>
 
-      <div class="dress-note--bottom">Queremos que cada uno de ustedes se sienta especial y luzca espectacular en nuestro gran día.</div>
+      <div class="dress-note--bottom" data-en="We want each of you to feel special and look spectacular on our big day.">Queremos que cada uno de ustedes se sienta especial y luzca espectacular en nuestro gran día.</div>
 
     </div>
   </section>
@@ -1567,22 +1604,22 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- GALLERY -->
   <section class="gallery" aria-label="Galería de fotos">
     <div class="container">
-      <div class="eyebrow">Nuestros momentos</div>
+      <div class="eyebrow" data-en="Our moments">Nuestros momentos</div>
       <h2>Nuestros <em>recuerdos</em></h2>
       <div class="gallery-sub">Pedro &amp; Roxana</div>
 
       <div class="gal-carousel">
         <div class="gal-track" id="galTrack">
-        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785521965617-5.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap">Nuestra aventura</span></div>
-        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522217285-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap">Juntos</span></div>
-        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522583806-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap">Allá afuera</span></div>
-        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522649943-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap">Cada momento</span></div>
-        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522742056-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap">Nuestro capítulo</span></div>
+        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785521965617-5.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap" data-en="Our adventure">Nuestra aventura</span></div>
+        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522217285-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap" data-en="Together">Juntos</span></div>
+        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522583806-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap" data-en="Out there">Allá afuera</span></div>
+        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522649943-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap" data-en="Every moment">Cada momento</span></div>
+        <div class="gal-slide"><img src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/fe3afdbe-81a7-486d-9bb8-42a3e156ff07/1785522742056-0.jpeg" alt="Pedro y Roxana" loading="lazy" decoding="async"><span class="gal-cap" data-en="Our chapter">Nuestro capítulo</span></div>
         </div>
         <div class="gal-dots" id="galDots"></div>
         <div class="gal-swipe" aria-hidden="true">
           <svg viewBox="0 0 26 13"><polyline points="6 2 1 6.5 6 11"/><polyline points="20 2 25 6.5 20 11"/><line x1="1" y1="6.5" x2="25" y2="6.5"/></svg>
-          Desliza
+          <span data-en="Swipe">Desliza</span>
         </div>
       </div>
     </div>
@@ -1594,9 +1631,9 @@ footer{padding:min(9vh,74px) 0 !important}
   <section class="section-surface">
     <div class="container">
       <div class="gifts-head">
-        <div class="eyebrow">Con cariño</div>
+        <div class="eyebrow" data-en="With love">Con cariño</div>
         <h2>Ayúdanos a crear <em>nuevas aventuras</em></h2>
-        <p class="gifts-sub">Su presencia es el mejor regalo que podríamos recibir. Si además desean acompañarnos con un detalle, pueden hacerlo con un sobre el día del evento o a nuestra cuenta.</p>
+        <p class="gifts-sub" data-en="Your presence is the greatest gift we could receive. If you also wish to join us with a little something, you may do so with an envelope on the day of the event or through our account.">Su presencia es el mejor regalo que podríamos recibir. Si además desean acompañarnos con un detalle, pueden hacerlo con un sobre el día del evento o a nuestra cuenta.</p>
       </div>
       <div class="familia-grid">
 
@@ -1619,23 +1656,20 @@ footer{padding:min(9vh,74px) 0 !important}
               <text x="22" y="23" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="7" fill="#ffffff">P&amp;R</text>
             </svg>
           </div>
-          <div class="gift-name">Lluvia de sobres</div>
-          <div class="gift-desc">Habrá un buzón el día del evento para recibir su sobre con todo nuestro cariño.</div>
+          <div class="gift-name" data-en="Envelope shower">Lluvia de sobres</div>
+          <div class="gift-desc" data-en="There will be a box on the day of the event to receive your envelope with all our love.">Habrá un buzón el día del evento para recibir su sobre con todo nuestro cariño.</div>
         </div>
 
         <div class="gift-card">
           <div class="gift-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="6" width="20" height="13" rx="2"/>
-              <path d="M2 10h20"/>
-              <path d="M6 15h4"/>
+              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 19h2v2h-2z"/>
             </svg>
           </div>
-          <div class="gift-name">Cuenta CHASE</div>
-          <div class="gift-desc">
-            <span id="cuenta-num" style="font-family:var(--display);font-size:24px;letter-spacing:.12em;color:var(--accent-deep);display:block;margin-bottom:18px">2907902285</span>
-          </div>
-          <button class="loc-btn" id="copy-cuenta" type="button">Copiar número</button>
+          <div class="gift-name" data-en="Zelle">Zelle</div>
+          <div class="gift-desc" data-en="Scan the code from your banking app.">Escanea el código desde tu app del banco.</div>
+          <img class="gift-qr" src="qr-zelle.webp" alt="Código QR de Zelle" loading="lazy" decoding="async" width="760" height="883">
         </div>
 
       </div>
@@ -1646,9 +1680,9 @@ footer{padding:min(9vh,74px) 0 !important}
   <section class="section-surface section-tight">
     <div class="container">
       <div class="gifts-head">
-        <div class="eyebrow">Comparte con nosotros</div>
+        <div class="eyebrow" data-en="Share with us">Comparte con nosotros</div>
         <h2>Nuestro <em>álbum compartido</em></h2>
-        <p class="gifts-sub">Cada foto que tomen ese día es un pedacito de nuestra aventura. Suban sus fotos y videos al álbum compartido escaneando el código y así viviremos la boda desde todos los ángulos.</p>
+        <p class="gifts-sub" data-en="Every photo you take that day is a piece of our adventure. Upload your photos and videos to the shared album by scanning the code, and we will relive the wedding from every angle.">Cada foto que tomen ese día es un pedacito de nuestra aventura. Suban sus fotos y videos al álbum compartido escaneando el código y así viviremos la boda desde todos los ángulos.</p>
       </div>
       <!-- PENDIENTE: link real del album + QR -->
       <div class="gift-card">
@@ -1661,10 +1695,10 @@ footer{padding:min(9vh,74px) 0 !important}
             <path d="M20 14v3M14 20h3M20 20h1"/>
           </svg>
         </div>
-        <div class="gift-name">Código QR del álbum</div>
+        <div class="gift-name" data-en="Album QR code">Código QR del álbum</div>
         <div class="gift-desc">
           <span style="display:block;width:150px;height:150px;margin:0 auto 20px;border:1px dashed var(--hair-gold);border-radius:2px"></span>
-          Por confirmar
+          <span data-en="To be confirmed">Por confirmar</span>
         </div>
       </div>
     </div>
@@ -1675,34 +1709,34 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- HOSPEDAJE -->
   <section class="section-paper hospedaje section-tight" id="hospedaje">
     <div class="container">
-      <div class="eyebrow">Si vienes de fuera</div>
+      <div class="eyebrow" data-en="If you are travelling in">Si vienes de fuera</div>
       <h2>Dónde <em>quedarse</em></h2>
 
       <div class="hotel-grid">
         <div class="hotel-card">
-          <div class="hotel-tag">A 3 minutos del salón</div>
+          <div class="hotel-tag" data-en="3 minutes from the venue">A 3 minutos del salón</div>
           <div class="hotel-name">Holiday Inn Express &amp; Suites Boynton Beach West</div>
           <div class="hotel-meta">2001 Ocean Drive, Boynton Beach</div>
-          <div class="hotel-meta">1.1 km · desde ~$110 USD la noche</div>
-          <p class="hotel-detalle">El más cercano de los tres, casi enfrente. Desayuno caliente y estacionamiento incluidos, alberca y gimnasio 24 h.</p>
-          <a class="loc-btn" href="https://www.ihg.com/holidayinnexpress/hotels/us/en/boynton-beach/boyhi/hoteldetail" target="_blank" rel="noopener">Ver disponibilidad</a>
+          <div class="hotel-meta" data-en="0.7 mi · from ~$110 USD per night">1.1 km · desde ~$110 USD la noche</div>
+          <p class="hotel-detalle" data-en="The closest of the three, almost across the street. Hot breakfast and parking included, pool and 24 h gym.">El más cercano de los tres, casi enfrente. Desayuno caliente y estacionamiento incluidos, alberca y gimnasio 24 h.</p>
+          <a class="loc-btn" href="https://www.ihg.com/holidayinnexpress/hotels/us/en/boynton-beach/boyhi/hoteldetail" target="_blank" rel="noopener" data-en="Check availability">Ver disponibilidad</a>
         </div>
 
         <div class="hotel-card">
-          <div class="hotel-tag">A 8 minutos del salón</div>
+          <div class="hotel-tag" data-en="8 minutes from the venue">A 8 minutos del salón</div>
           <div class="hotel-name">Hampton Inn &amp; Suites Boynton Beach</div>
           <div class="hotel-meta">1475 W Gateway Blvd, Boynton Beach</div>
-          <div class="hotel-meta">5.2 km · desde ~$110 USD la noche</div>
-          <p class="hotel-detalle">Desayuno caliente y estacionamiento gratuitos, alberca, habitaciones comunicadas y admite mascotas.</p>
+          <div class="hotel-meta" data-en="3.2 mi · from ~$110 USD per night">5.2 km · desde ~$110 USD la noche</div>
+          <p class="hotel-detalle" data-en="Free hot breakfast and parking, pool, connecting rooms and pet friendly.">Desayuno caliente y estacionamiento gratuitos, alberca, habitaciones comunicadas y admite mascotas.</p>
           <a class="loc-btn" href="https://www.hilton.com/en/hotels/boybhhx-hampton-suites-boynton-beach/" target="_blank" rel="noopener">Ver disponibilidad</a>
         </div>
 
         <div class="hotel-card">
-          <div class="hotel-tag">A 13 minutos · frente al mar</div>
+          <div class="hotel-tag" data-en="13 minutes · oceanfront">A 13 minutos · frente al mar</div>
           <div class="hotel-name">Opal Grand Oceanfront Resort &amp; Spa</div>
           <div class="hotel-meta">10 N Ocean Blvd, Delray Beach</div>
-          <div class="hotel-meta">10.3 km · desde ~$300 USD la noche</div>
-          <p class="hotel-detalle">Frente a la playa y sobre Atlantic Avenue, con spa, dos albercas y rooftop. Ten en cuenta que solo tiene valet ($35 la noche) y cobra cuota de resort aparte.</p>
+          <div class="hotel-meta" data-en="6.4 mi · from ~$300 USD per night">10.3 km · desde ~$300 USD la noche</div>
+          <p class="hotel-detalle" data-en="On the beach and on Atlantic Avenue, with a spa, two pools and a rooftop. Note that it only has valet parking ($35 per night) and charges a separate resort fee.">Frente a la playa y sobre Atlantic Avenue, con spa, dos albercas y rooftop. Ten en cuenta que solo tiene valet ($35 la noche) y cobra cuota de resort aparte.</p>
           <a class="loc-btn" href="https://www.opalcollection.com/opal-grand/" target="_blank" rel="noopener">Ver disponibilidad</a>
         </div>
       </div>
@@ -1716,48 +1750,48 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- PREGUNTAS FRECUENTES -->
   <section class="section-surface faq section-tight" id="faq">
     <div class="container">
-      <div class="eyebrow">Antes de que preguntes</div>
+      <div class="eyebrow" data-en="Before you ask">Antes de que preguntes</div>
       <h2>Preguntas <em>frecuentes</em></h2>
 
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿A qué hora debo llegar?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="What time should I arrive?">¿A qué hora debo llegar?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">La ceremonia empieza puntual a las <strong>2:00 pm</strong>. Te pedimos llegar entre 15 y 20 minutos antes para acomodarte con calma. La recepción empezará con un coctail a las <strong>4:30 pm</strong>.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Puedo llevar acompañantes extras?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="Can I bring extra guests?">¿Puedo llevar acompañantes extras?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">Con mucho cariño, hemos reservado este día especialmente para las personas indicadas en esta invitación. Agradecemos su comprensión al no añadir invitados adicionales.</div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-en="With much love, we have reserved this day especially for the people named on this invitation. We appreciate your understanding in not adding additional guests.">Con mucho cariño, hemos reservado este día especialmente para las personas indicadas en esta invitación. Agradecemos su comprensión al no añadir invitados adicionales.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Cuál es el código de vestimenta?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="What is the dress code?">¿Cuál es el código de vestimenta?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">Vístete para celebrar con nosotros: el código de vestimenta es <strong>Formal</strong>. Dejemos el blanco para la novia y llenemos este día de color, elegancia y alegría.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Las dos sedes están en el mismo lugar?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="Are both venues in the same place?">¿Las dos sedes están en el mismo lugar?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">No. La ceremonia es en <strong>St. Luke Catholic Church</strong> (Palm Springs) y la recepción en <strong>The Delray Ballroom</strong> (Boynton Beach). Hay unos 16 km entre ambas, de 16 a 20 minutos en coche por la I-95. Con dos horas y media entre una y otra vas sobrado.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Hay estacionamiento?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="Is there parking?">¿Hay estacionamiento?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">En la iglesia hay estacionamiento propio en los alrededores y, si hay muchos autos, posiblemente puedan parquear en el área del campo de futbol. En <strong>The Delray Ballroom</strong> hay estacionamiento propio y gratuito.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Qué tiempo hace en diciembre?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="What is the weather like in December?">¿Qué tiempo hace en diciembre?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">Diciembre en el sur de Florida es cálido y agradable: entre <strong>25&nbsp;°C</strong> de día y <strong>18&nbsp;°C</strong> por la noche (77&nbsp;°F / 65&nbsp;°F). Aun así, el salón tendrá aire acondicionado y algún frente frío puede refrescar la noche, así que un chal o saco ligero no sobra.</div></div>
         </div>
@@ -1765,22 +1799,22 @@ footer{padding:min(9vh,74px) 0 !important}
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Qué hoteles recomiendan?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="Which hotels do you recommend?">¿Qué hoteles recomiendan?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">Te dejamos tres opciones a distintos precios en la sección <a href="#hospedaje" style="color:var(--gold-deep);text-decoration:underline">Dónde quedarse</a>, todas a menos de 15 minutos del salón.</div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Cómo me muevo por la zona?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="How do I get around?">¿Cómo me muevo por la zona?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">Uber y Lyft funcionan con normalidad en todo el condado de Palm Beach y en el aeropuerto. Aun así, la zona depende mucho del coche: si vienes de fuera, rentar uno te va a facilitar bastante el fin de semana.</div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-en="Uber and Lyft operate normally throughout Palm Beach County and at the airport. Even so, the area relies heavily on cars: if you are travelling in, renting one will make your weekend much easier.">Uber y Lyft funcionan con normalidad en todo el condado de Palm Beach y en el aeropuerto. Aun así, la zona depende mucho del coche: si vienes de fuera, rentar uno te va a facilitar bastante el fin de semana.</div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">
-            <span>¿Puedo tomar fotos?</span><span class="faq-ico" aria-hidden="true"></span>
+            <span data-en="Can I take photos?">¿Puedo tomar fotos?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">Claro que sí. Solo te pedimos que durante la ceremonia guardes el teléfono para vivirla con nosotros. Después, todas las fotos que quieras — y súbelas a nuestro álbum compartido.</div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-en="Of course. We only ask that you put your phone away during the ceremony so you can live it with us. Afterwards, take all the photos you want — and upload them to our shared album.">Claro que sí. Solo te pedimos que durante la ceremonia guardes el teléfono para vivirla con nosotros. Después, todas las fotos que quieras — y súbelas a nuestro álbum compartido.</div></div>
         </div>
       </div>
     </div>
@@ -1812,7 +1846,7 @@ footer{padding:min(9vh,74px) 0 !important}
             </g>
           </svg>
 
-          <div class="eyebrow">Confírmanos</div>
+          <div class="eyebrow" data-en="Let us know">Confírmanos</div>
           <h2 class="rsvp-title">Tu presencia <em>lo es</em> todo</h2>
           <p class="rsvp-text">Por favor confirma tu asistencia antes del <strong>domingo 1 de noviembre de 2026</strong>. Con un solo toque nos ayudas a preparar cada detalle de nuestra gran aventura.</p>
 
@@ -1821,22 +1855,22 @@ footer{padding:min(9vh,74px) 0 !important}
           </div>
 
           <div class="rsvp-pases-display">
-            <div class="rsvp-pases-label">Pases reservados</div>
+            <div class="rsvp-pases-label" data-en="Seats reserved">Pases reservados</div>
             <div class="rsvp-pases-num" id="rsvp-pases-num">1</div>
           </div>
 
           <div class="rsvp-deadline" id="rsvp-pases-note" style="display:none;text-transform:none;letter-spacing:.08em;font-size:12px;margin-top:0;margin-bottom:26px"></div>
 
           <div id="rsvp-toggle-std" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:420px;margin:0 auto 24px">
-            <button class="loc-btn" id="btnYes" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px">Sí, ahí estaré</button>
-            <button class="loc-btn" id="btnNo" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px">Lamento no poder asistir</button>
+            <button class="loc-btn" id="btnYes" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px" data-en="Yes, I&#39;ll be there">Sí, ahí estaré</button>
+            <button class="loc-btn" id="btnNo" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px" data-en="Sorry, I can&#39;t make it">Lamento no poder asistir</button>
           </div>
 
           <div class="rsvp-fields" id="rsvp-fields" style="display:none"></div>
           <div class="rsvp-fields" id="rsvp-asignados" style="display:none"></div>
 
           <button class="rsvp-btn" id="rsvp-confirm-btn" type="button">
-            <span id="rsvp-btn-text">Confirmar asistencia</span>
+            <span id="rsvp-btn-text" data-en="Confirm attendance">Confirmar asistencia</span>
           </button>
 
           <div class="rsvp-deadline" id="rsvp-feedback" style="display:none;text-transform:none;letter-spacing:.05em;font-size:13px"></div>
@@ -1855,15 +1889,15 @@ footer{padding:min(9vh,74px) 0 !important}
   <!-- NUESTRAS MASCOTAS -->
   <section class="section-surface mascotas section-tight">
     <div class="container">
-      <div class="eyebrow">Los últimos en la fila</div>
+      <div class="eyebrow" data-en="Last in line">Los últimos en la fila</div>
       <h2>Nuestros <em>compañeros</em> de aventura</h2>
-      <p class="verse-text" style="max-width:680px;margin:26px auto 0;text-align:center">
+      <p class="verse-text" data-en="No adventure would be the same without them. They were with us on the quiet days and on the ones that were not, and that is why they are part of this story too." style="max-width:680px;margin:26px auto 0;text-align:center">
         Ninguna aventura sería la misma sin ellos. Nos acompañaron en los días tranquilos y en los que no lo fueron tanto, y por eso también son parte de esta historia.
       </p>
       <figure class="pet-frame">
         <img src="mascotas.webp" alt="Las seis mascotas de Pedro y Roxana: dos perros pequeños, un pitbull, dos gatos y un loro verde"
              loading="lazy" decoding="async" width="1086" height="1448">
-        <figcaption>La manada completa</figcaption>
+        <figcaption data-en="The whole pack">La manada completa</figcaption>
       </figure>
       <img class="up-sello" src="up-sello.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:52px" width="360" height="360">
     </div>
@@ -1875,8 +1909,8 @@ footer{padding:min(9vh,74px) 0 !important}
   <section class="section-bg despedida section-tight">
     <div class="container">
       <img class="desp-casa" src="up-casa-globos.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="760" height="614">
-      <div class="desp-frase">La aventura nos espera</div>
-      <p class="desp-text">Gracias por ser parte del comienzo de la aventura más grande de nuestras vidas.</p>
+      <div class="desp-frase" data-en="Adventure is waiting">La aventura nos espera</div>
+      <p class="desp-text" data-en="Thank you for being part of the beginning of the greatest adventure of our lives.">Gracias por ser parte del comienzo de la aventura más grande de nuestras vidas.</p>
       <div class="desp-names">Pedro &amp; Roxana</div>
       <div class="desp-date">12 de diciembre de 2026</div>
     </div>
@@ -1898,7 +1932,7 @@ footer{padding:min(9vh,74px) 0 !important}
       <div class="footer-names">Pedro <span class="amp">&amp;</span> Roxana</div>
       <div class="footer-date">12 · Diciembre · 2026 · West Palm Beach, Florida</div>
       <div class="footer-credit">
-        <span>Invitación diseñada por &nbsp;</span>
+        <span data-en="Invitation designed by &nbsp;">Invitación diseñada por &nbsp;</span>
         <a href="https://www.instagram.com/elysium.invitaciones/" target="_blank" rel="noopener">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <rect x="3" y="3" width="18" height="18" rx="5"/>
@@ -2039,7 +2073,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       var inp = document.createElement('input');
       inp.className = 'rsvp-input';
       inp.type = 'text';
-      inp.placeholder = count === 1 ? 'Tu nombre completo' : 'Invitado ' + (i + 1);
+      inp.placeholder = count === 1 ? (window.I18N && I18N.lang==='en' ? 'Your full name' : 'Tu nombre completo') : ((window.I18N ? I18N.t('invitado') : 'Invitado') + ' ' + (i + 1));
       inp.autocomplete = 'off';
       inp.maxLength = 60;
       if(savedNames[i]) inp.value = savedNames[i];
@@ -2095,7 +2129,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
                 asignadosChoices[idx] = confirmadosLower.indexOf(nm.toLowerCase().trim()) >= 0 ? 'yes' : 'no';
               }
             });
-            if(btnText) btnText.textContent = 'Actualizar respuesta';
+            if(btnText) btnText.textContent = (window.I18N ? I18N.t('actualizar') : 'Actualizar respuesta');
             say(d.estado === 'confirmado'
               ? '¡Ya tienes registrada tu respuesta! Puedes actualizarla.'
               : 'Ya tienes registrado que no podrán asistir. Puedes cambiar la respuesta.');
@@ -2109,7 +2143,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
             savedNames = d.nombres_confirmados.slice();
           }
           selectRsvp(d.estado === 'confirmado' ? 'yes' : 'no');
-          if(btnText) btnText.textContent = 'Actualizar respuesta';
+          if(btnText) btnText.textContent = (window.I18N ? I18N.t('actualizar') : 'Actualizar respuesta');
         }
       })
       .catch(function(){});
@@ -2119,7 +2153,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(btnYes) btnYes.disabled = true;
     if(btnNo) btnNo.disabled = true;
     if(confirmBtn) confirmBtn.disabled = true;
-    if(btnText) btnText.textContent = 'La fecha límite ha pasado';
+    if(btnText) btnText.textContent = (window.I18N ? I18N.t('vencida') : 'La fecha límite ha pasado');
   }
 
   if(confirmBtn){
@@ -2171,7 +2205,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       }).then(function(r){
         if(!r.ok) throw new Error('Error');
         confirmBtn.disabled = false;
-        if(btnText) btnText.textContent = 'Actualizar respuesta';
+        if(btnText) btnText.textContent = (window.I18N ? I18N.t('actualizar') : 'Actualizar respuesta');
         if(estadoFinal === 'confirmado'){
           say(nombres.length === 1
             ? '¡Confirmado para ' + nombres[0] + '! Nos vemos pronto.'
@@ -2189,29 +2223,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 })();
 
 // ------ COPIAR NÚMERO DE CUENTA ------
-(function(){
-  var btn = document.getElementById('copy-cuenta');
-  var num = document.getElementById('cuenta-num');
-  if(!btn || !num) return;
-  btn.addEventListener('click', function(){
-    var valor = '2907902285';
-    var done = function(){
-      var prev = btn.textContent;
-      btn.textContent = '¡Copiado!';
-      setTimeout(function(){ btn.textContent = prev; }, 1800);
-    };
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(valor).then(done).catch(function(){});
-    } else {
-      var ta = document.createElement('textarea');
-      ta.value = valor;
-      document.body.appendChild(ta);
-      ta.select();
-      try{ document.execCommand('copy'); done(); }catch(e){}
-      document.body.removeChild(ta);
-    }
-  });
-})();
+
 
 // ------ SPLIT helpers ------
 function splitToChars(el){
@@ -2261,6 +2273,74 @@ function launchInvitation(){
   startParticles();
   if(window.ScrollTrigger) ScrollTrigger.refresh();
 }
+
+
+/* ============================================================
+   IDIOMA — un solo DOM, se intercambia el contenido
+   Cada elemento traducible lleva data-en. Al elegir ingles se guarda el
+   español original en data-es y se escribe el ingles; al volver a español
+   se restaura. Nunca hay dos idiomas en pantalla a la vez.
+   ============================================================ */
+(function(){
+  var pantalla = document.getElementById('lang-screen');
+  if(!pantalla) return;
+
+  var TXT = {
+    es:{ hint:'Toca para abrir', abrir:'Toca para abrir la invitación',
+         musica:'Reproducir la música de la invitación',
+         invitado:'Invitado', actualizar:'Actualizar respuesta',
+         vencida:'La fecha límite ha pasado', enviar:'Confirmar asistencia' },
+    en:{ hint:'Tap to open', abrir:'Tap to open the invitation',
+         musica:'Play the invitation music',
+         invitado:'Guest', actualizar:'Update response',
+         vencida:'The deadline has passed', enviar:'Confirm attendance' }
+  };
+  window.I18N = { lang:'es', t:function(k){ return (TXT[this.lang]||TXT.es)[k]; } };
+
+  function aplicar(lang){
+    var esIngles = lang === 'en';
+    document.documentElement.setAttribute('lang', esIngles ? 'en' : 'es');
+
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      if(!el.hasAttribute('data-es')) el.setAttribute('data-es', el.innerHTML);
+      el.innerHTML = esIngles ? el.getAttribute('data-en') : el.getAttribute('data-es');
+    });
+
+    // textos que no viven en el DOM
+    window.I18N.lang = lang;
+    var hint = document.getElementById('env-hint');
+    if(hint) hint.textContent = TXT[lang].hint;
+    var env = document.getElementById('envelope-screen');
+    if(env) env.setAttribute('aria-label', TXT[lang].abrir);
+    var mb = document.getElementById('music-btn');
+    if(mb) mb.setAttribute('aria-label', TXT[lang].musica);
+
+    try{ localStorage.setItem('pr-lang', lang); }catch(e){}
+    if(window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 260);
+  }
+  window.aplicarIdioma = aplicar;
+
+  function elegir(lang){
+    aplicar(lang);
+    pantalla.style.transition = 'opacity .55s ease';
+    pantalla.style.opacity = '0';
+    setTimeout(function(){ pantalla.classList.add('is-gone'); }, 560);
+  }
+
+  pantalla.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ elegir(b.getAttribute('data-lang')); });
+  });
+
+  // Si ya eligieron antes, no se vuelve a preguntar
+  var guardado = null;
+  try{ guardado = localStorage.getItem('pr-lang'); }catch(e){}
+  if(guardado === 'es' || guardado === 'en'){
+    aplicar(guardado);
+    pantalla.classList.add('is-gone');
+  } else {
+    aplicar('es');   // el DOM ya esta en español: solo fija data-es
+  }
+})();
 
 // ------ ENVELOPE SEQUENCE ------
 (function(){
