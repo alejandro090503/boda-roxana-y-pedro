@@ -628,6 +628,13 @@ body[data-tone="light"] .b--silver{
 .rsvp-divider::before,.rsvp-divider::after{content:"";flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(204,128,66,.45),transparent);}
 .rsvp-divider-heart{color:var(--gold);flex-shrink:0;opacity:.8;}
 .rsvp-fields{display:flex;flex-direction:column;gap:14px;max-width:420px;margin:0 auto 28px}
+.rsvp-gracias{max-width:420px;margin:0 auto;padding:26px 22px;background:rgba(155,183,214,.16);border:1.5px solid rgba(204,128,66,.3);border-radius:16px;text-align:center}
+.rsvp-gracias-icon{color:var(--gold-deep);margin:0 auto 10px;display:block}
+.rsvp-gracias-title{font-family:var(--display);font-size:22px;font-weight:600;color:var(--gold-deep);margin-bottom:8px;line-height:1.35}
+.rsvp-gracias-sub{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:18px}
+.rsvp-editar-btn{padding:11px 22px;border:1.5px solid rgba(204,128,66,.36);background:transparent;cursor:pointer;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-deep);border-radius:24px;transition:all .25s}
+.rsvp-editar-btn:hover{background:rgba(204,128,66,.12)}
+.rsvp-editar-btn:disabled{opacity:.45;cursor:not-allowed}
 .rsvp-input{
   width:100%;padding:15px 20px;
   border:1.5px solid rgba(204,128,66,.28);
@@ -741,7 +748,17 @@ footer{background:linear-gradient(160deg,#e8f1f8 0%,#dfeaf4 38%,#eef3f7 70%,#f7f
   gap:34px;padding:32px;text-align:center}
 #lang-screen.is-gone{display:none}
 .lang-orn{width:clamp(120px,26vw,190px);height:auto;opacity:.92;
-  filter:drop-shadow(0 10px 26px rgba(0,0,0,.35))}
+  filter:drop-shadow(0 10px 26px rgba(0,0,0,.35));
+  animation:levitar 6s ease-in-out infinite;
+  transform-origin:50% 85%;will-change:transform}
+/* Sube y baja apenas, con un balanceo minimo: la casa cuelga de los globos */
+@keyframes levitar{
+  0%   {transform:translateY(0)     rotate(0deg)}
+  35%  {transform:translateY(-13px) rotate(-1.1deg)}
+  70%  {transform:translateY(-6px)  rotate(1deg)}
+  100% {transform:translateY(0)     rotate(0deg)}
+}
+@media(prefers-reduced-motion:reduce){ .lang-orn{animation:none} }
 .lang-title{font-family:var(--display);font-style:italic;font-weight:500;
   font-size:clamp(30px,7vw,46px);color:#F8F5EC;line-height:1.05}
 .lang-sub{font-family:var(--sans);font-size:12px;font-weight:600;
@@ -1904,24 +1921,35 @@ footer{padding:min(9vh,74px) 0 !important}
             <svg class="rsvp-divider-heart" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
           </div>
 
-          <div class="rsvp-pases-display">
-            <div class="rsvp-pases-label" data-en="Seats reserved">Pases reservados</div>
-            <div class="rsvp-pases-num" id="rsvp-pases-num">1</div>
+          <div id="rsvp-bandeja">
+            <div class="rsvp-pases-display">
+              <div class="rsvp-pases-label" data-en="Seats reserved">Pases reservados</div>
+              <div class="rsvp-pases-num" id="rsvp-pases-num">1</div>
+            </div>
+
+            <div class="rsvp-deadline" id="rsvp-pases-note" style="display:none;text-transform:none;letter-spacing:.08em;font-size:12px;margin-top:0;margin-bottom:26px"></div>
+
+            <div id="rsvp-toggle-std" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:420px;margin:0 auto 24px">
+              <button class="loc-btn" id="btnYes" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px" data-en="Yes, I&#39;ll be there">Sí, ahí estaré</button>
+              <button class="loc-btn" id="btnNo" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px" data-en="Sorry, I can&#39;t make it">Lamento no poder asistir</button>
+            </div>
+
+            <div class="rsvp-fields" id="rsvp-fields" style="display:none"></div>
+            <div class="rsvp-fields" id="rsvp-asignados" style="display:none"></div>
+
+            <button class="rsvp-btn" id="rsvp-confirm-btn" type="button">
+              <span id="rsvp-btn-text" data-en="Confirm attendance">Confirmar asistencia</span>
+            </button>
           </div>
 
-          <div class="rsvp-deadline" id="rsvp-pases-note" style="display:none;text-transform:none;letter-spacing:.08em;font-size:12px;margin-top:0;margin-bottom:26px"></div>
-
-          <div id="rsvp-toggle-std" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:420px;margin:0 auto 24px">
-            <button class="loc-btn" id="btnYes" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px" data-en="Yes, I&#39;ll be there">Sí, ahí estaré</button>
-            <button class="loc-btn" id="btnNo" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px" data-en="Sorry, I can&#39;t make it">Lamento no poder asistir</button>
+          <div class="rsvp-gracias" id="rsvp-gracias" style="display:none">
+            <svg class="rsvp-gracias-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><polyline points="8.5 12.5 11 15 16 9.5"/>
+            </svg>
+            <p class="rsvp-gracias-title" id="rsvp-gracias-title"></p>
+            <p class="rsvp-gracias-sub" id="rsvp-gracias-sub"></p>
+            <button class="rsvp-editar-btn" id="rsvp-editar-btn" type="button" data-en="Update my response">Modificar mi respuesta</button>
           </div>
-
-          <div class="rsvp-fields" id="rsvp-fields" style="display:none"></div>
-          <div class="rsvp-fields" id="rsvp-asignados" style="display:none"></div>
-
-          <button class="rsvp-btn" id="rsvp-confirm-btn" type="button">
-            <span id="rsvp-btn-text" data-en="Confirm attendance">Confirmar asistencia</span>
-          </button>
 
           <div class="rsvp-deadline" id="rsvp-feedback" style="display:none;text-transform:none;letter-spacing:.05em;font-size:13px"></div>
 
@@ -2036,6 +2064,41 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var confirmBtn = document.getElementById('rsvp-confirm-btn');
   var btnText    = document.getElementById('rsvp-btn-text');
   var feedbackEl = document.getElementById('rsvp-feedback');
+  var bandejaEl  = document.getElementById('rsvp-bandeja');
+  var graciasEl  = document.getElementById('rsvp-gracias');
+  var gTitleEl   = document.getElementById('rsvp-gracias-title');
+  var gSubEl     = document.getElementById('rsvp-gracias-sub');
+  var editarBtn  = document.getElementById('rsvp-editar-btn');
+
+  function T(k, fb){ return window.I18N ? I18N.t(k) : fb; }
+
+  /* Cierra la bandeja y muestra el agradecimiento con el resumen. */
+  function mostrarGracias(estado, nombres){
+    var lista = (nombres || []).filter(function(n){ return n && String(n).trim(); });
+    if(estado === 'confirmado'){
+      gTitleEl.textContent = T('graciasSi', '¡Gracias por confirmar!');
+      gSubEl.textContent = lista.length === 1
+        ? T('graciasUno', 'Te esperamos, ') + lista[0] + '.'
+        : T('graciasVarios', 'Confirmamos ') + lista.length + T('graciasLugares', ' lugares: ') + lista.join(', ') + '.';
+    } else {
+      gTitleEl.textContent = T('graciasNo', 'Gracias por avisarnos');
+      gSubEl.textContent = T('graciasNoSub', 'Lamentamos que no puedas acompañarnos. Te vamos a extrañar.');
+    }
+    bandejaEl.style.display = 'none';
+    graciasEl.style.display = '';
+    editarBtn.textContent = T('editar', 'Modificar mi respuesta');
+    editarBtn.disabled = frozen;
+    if(feedbackEl) feedbackEl.style.display = 'none';
+  }
+
+  /* Reabre la bandeja conservando lo ya capturado. */
+  function abrirBandeja(){
+    graciasEl.style.display = 'none';
+    bandejaEl.style.display = '';
+    if(feedbackEl) feedbackEl.style.display = 'none';
+  }
+
+  if(editarBtn) editarBtn.addEventListener('click', function(){ if(!frozen) abrirBandeja(); });
 
   var ON_BG  = 'var(--accent-deep)';
   var ON_FG  = 'var(--paper)';
@@ -2127,7 +2190,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       var inp = document.createElement('input');
       inp.className = 'rsvp-input';
       inp.type = 'text';
-      inp.placeholder = count === 1 ? (window.I18N && I18N.lang==='en' ? 'Your full name' : 'Tu nombre completo') : ((window.I18N ? I18N.t('invitado') : 'Invitado') + ' ' + (i + 1));
+      inp.placeholder = (window.I18N ? I18N.t('nombreDe') : 'Nombre completo del invitado ') + (i + 1);
       inp.autocomplete = 'off';
       inp.maxLength = 60;
       if(savedNames[i]) inp.value = savedNames[i];
@@ -2189,6 +2252,10 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
               : 'Ya tienes registrado que no podrán asistir. Puedes cambiar la respuesta.');
           }
           renderAsignados();
+          if(d.estado === 'confirmado' || d.estado === 'declino'){
+            /* Ya hay respuesta guardada: la sección arranca cerrada. */
+            mostrarGracias(d.estado, (d.nombres_confirmados || []));
+          }
           return;
         }
 
@@ -2198,6 +2265,8 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
           }
           selectRsvp(d.estado === 'confirmado' ? 'yes' : 'no');
           if(btnText) btnText.textContent = (window.I18N ? I18N.t('actualizar') : 'Actualizar respuesta');
+          /* Ya hay respuesta guardada: la sección arranca cerrada. */
+          mostrarGracias(d.estado, savedNames);
         }
       })
       .catch(function(){});
@@ -2260,13 +2329,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
         if(!r.ok) throw new Error('Error');
         confirmBtn.disabled = false;
         if(btnText) btnText.textContent = (window.I18N ? I18N.t('actualizar') : 'Actualizar respuesta');
-        if(estadoFinal === 'confirmado'){
-          say(nombres.length === 1
-            ? '¡Confirmado para ' + nombres[0] + '! Nos vemos pronto.'
-            : '¡Confirmado para ' + nombres.length + ' invitados! Nos vemos pronto.', '#2F5A28');
-        } else {
-          say('Hemos registrado que no podrán asistir. ¡Gracias por avisarnos!');
-        }
+        mostrarGracias(estadoFinal, nombres);
       }).catch(function(){
         confirmBtn.disabled = false;
         if(btnText) btnText.textContent = 'Confirmar asistencia';
@@ -2343,11 +2406,19 @@ function launchInvitation(){
     es:{ hint:'Toca para abrir', abrir:'Toca para abrir la invitación',
          musica:'Reproducir la música de la invitación',
          invitado:'Invitado', actualizar:'Actualizar respuesta',
-         vencida:'La fecha límite ha pasado', enviar:'Confirmar asistencia' },
+         vencida:'La fecha límite ha pasado', enviar:'Confirmar asistencia',
+         graciasSi:'¡Gracias por confirmar!', graciasNo:'Gracias por avisarnos',
+         graciasUno:'Te esperamos, ', graciasVarios:'Confirmamos ', graciasLugares:' lugares: ',
+         graciasNoSub:'Lamentamos que no puedas acompañarnos. Te vamos a extrañar.',
+         editar:'Modificar mi respuesta', nombreDe:'Nombre completo del invitado ' },
     en:{ hint:'Tap to open', abrir:'Tap to open the invitation',
          musica:'Play the invitation music',
          invitado:'Guest', actualizar:'Update response',
-         vencida:'The deadline has passed', enviar:'Confirm attendance' }
+         vencida:'The deadline has passed', enviar:'Confirm attendance',
+         graciasSi:'Thank you for confirming!', graciasNo:'Thank you for letting us know',
+         graciasUno:'We look forward to seeing you, ', graciasVarios:'We confirmed ', graciasLugares:' seats: ',
+         graciasNoSub:'We are sorry you cannot join us. We will miss you.',
+         editar:'Update my response', nombreDe:'Guest full name ' }
   };
   window.I18N = { lang:'es', t:function(k){ return (TXT[this.lang]||TXT.es)[k]; } };
 
