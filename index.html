@@ -839,6 +839,34 @@ footer{padding:min(9vh,74px) 0 !important}
 .mem-nota{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink-soft);opacity:.75;margin-top:14px;font-weight:600}
 
+/* ============ ROLES ESPECIALES — revelado tras una linea ============ */
+.rol-wrap{max-width:640px;margin:34px auto 0;position:relative}
+.rol-stage{position:relative;min-height:150px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px}
+.rol-rule{width:0;height:1px;margin:0 auto 22px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.rol-label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--gold-deep);padding-left:.34em;
+  overflow:hidden;will-change:clip-path}
+.rol-names{font-family:var(--display);font-size:clamp(21px,3.6vw,30px);font-weight:600;
+  color:var(--ink);line-height:1.45;overflow:hidden;will-change:clip-path}
+.rol-dots{display:flex;justify-content:center;gap:7px;margin-top:28px}
+.rol-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.3;
+  transition:all .4s}
+.rol-dot.active{opacity:1;background:var(--gold);transform:scale(1.5)}
+.rol-list{list-style:none;margin:30px 0 0;padding:0;display:none}
+.rol-list li{padding:12px 0;border-bottom:1px solid var(--hair)}
+.rol-list li:last-child{border-bottom:none}
+.rol-list b{display:block;font-family:var(--sans);font-size:12px;font-weight:600;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
+.rol-list span{font-family:var(--display);font-size:19px;font-weight:600;color:var(--ink)}
+.rol-wrap.sin-js .rol-stage,.rol-wrap.sin-js .rol-dots{display:none}
+.rol-wrap.sin-js .rol-list{display:block}
+@media(prefers-reduced-motion:reduce){
+  .rol-stage,.rol-dots{display:none}
+  .rol-list{display:block}
+}
+
 /* ============ CORTEJO — rotador con fundido y destellos ============ */
 .ct-wrap{max-width:720px;margin:38px auto 0;position:relative}
 .ct-head{display:grid;grid-template-columns:1fr 42px 1fr;align-items:center;margin-bottom:8px}
@@ -1255,7 +1283,7 @@ footer{padding:min(9vh,74px) 0 !important}
         </div>
         <div class="familia-card" data-tilt>
           <div class="familia-role" data-en="Grandparents of the bride">Abuelos de la novia</div>
-          <div class="familia-names">Miguel Ángel Siguenza Chacón<br>Juana Francisca López Vargas</div>
+          <div class="familia-names">Miguel Ángel Siguenza Chacón<br>Juana Francisca López Vargas<br><span class="mem">Pascual Briones <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div><div class="mem-nota" data-en="Watching over us from heaven">Quienes nos acompañan desde el cielo</div>
         </div>
       </div>
       <img class="up-pareja" src="up-pareja.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:44px" width="560" height="638">
@@ -1328,22 +1356,44 @@ footer{padding:min(9vh,74px) 0 !important}
 
         <!-- Respaldo accesible: si no hay JS o el invitado pide menos movimiento -->
         <ul class="ct-list" id="ctList">
-          <li><span>Gabriela García</span><span>—</span></li>
-          <li><span>Allison Peralta</span><span>—</span></li>
-          <li><span>Angélica Pardo</span><span>Juan Cubidies</span></li>
-          <li><span>Geyli</span><span>Blake Regalado</span></li>
+          <li><span>Jesús Fajardo</span><span>Samantha Regalado</span></li>
+          <li><span>Gabriela García</span><span>Juan Cubides</span></li>
+          <li><span>Geyli López</span><span>Blake Regalado</span></li>
           <li><span>Nicol Rivas</span><span>Alex Villa</span></li>
           <li><span>Vicky Aguirre</span><span>Ángel Albizu</span></li>
           <li><span>Dahiana Trinidad</span><span>Willie Albizu</span></li>
-          <li><span>Dania Rodríguez</span><span>Michael Vega</span></li>
-          <li><span>Raúl Rivas</span><span>Samantha Regalado</span></li>
-          <li><span>Jesús Fajardo</span><span>Shayna Mayor</span></li>
-          <li><span>—</span><span>Jodi Wisehart</span></li>
+          <li><span>Dania Rodríguez</span><span>Michael Veiga</span></li>
+          <li><span>Raúl Rivas</span><span>Shayna Major</span></li>
+          <li><span>Allison Peralta</span><span>Jodi Wisehart</span></li>
         </ul>
       </div>
     </div>
   </section>
 
+
+    <!-- ROLES ESPECIALES -->
+  <section class="section-surface roles section-tight">
+    <div class="container">
+      <div class="eyebrow" data-en="The little ones and the details">Los pequeños y los detalles</div>
+      <h2 data-en="Special <em>roles</em>">Roles <em>especiales</em></h2>
+
+      <div class="rol-wrap">
+        <div class="rol-stage" id="rolStage" aria-live="polite">
+          <div class="rol-label" id="rolLabel"></div>
+          <div class="rol-rule" id="rolRule" aria-hidden="true"></div>
+          <div class="rol-names" id="rolNames"></div>
+        </div>
+        <div class="rol-dots" id="rolDots" aria-hidden="true"></div>
+
+        <ul class="rol-list" id="rolList">
+          <li><b data-en="Ring bearers">Portadores de anillos</b><span>Liam Quiroz · Liam Regalado · Luis Regalado</span></li>
+          <li><b data-en="Flower girls">Niñas de las flores</b><span>Clara Cubides · Olivia Rodríguez</span></li>
+          <li><b data-en="Rosary">Rosario</b><span>Alondra Quiroz</span></li>
+          <li><b data-en="Bible">Biblia</b><span>Beatriz Quiroz</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <div class="seam" style="--from:var(--surface);--to:var(--surface)" aria-hidden="true"></div>
 
@@ -2320,6 +2370,7 @@ function launchInvitation(){
     if(mb) mb.setAttribute('aria-label', TXT[lang].musica);
 
     try{ localStorage.setItem('pr-lang', lang); }catch(e){}
+    if(window.repintarRoles) window.repintarRoles();
     if(window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 260);
   }
   window.aplicarIdioma = aplicar;
@@ -3042,6 +3093,84 @@ function initCortejo(){
   stage.addEventListener('touchend',   function(){ pausado = false; }, {passive:true});
 }
 
+
+/* ---- Roles especiales: revelado tras una linea que se abre ----
+   Efecto distinto al del cortejo a proposito: alli los nombres se disuelven
+   con desenfoque y destellos; aqui el texto se descubre de abajo hacia arriba
+   detras de un filete dorado que se abre y se cierra. ---- */
+function initRoles(){
+  var stage = document.getElementById('rolStage');
+  var elLab = document.getElementById('rolLabel');
+  var elNom = document.getElementById('rolNames');
+  var rule  = document.getElementById('rolRule');
+  var dotsB = document.getElementById('rolDots');
+  var lista = document.getElementById('rolList');
+  var wrap  = document.querySelector('.rol-wrap');
+  if(!stage || !lista) return;
+
+  // los datos se leen de la lista de respaldo: una sola fuente de verdad
+  var roles = [].slice.call(lista.querySelectorAll('li')).map(function(li){
+    return { el: li.querySelector('b'), nombres: li.querySelector('span').textContent.trim() };
+  });
+  if(!roles.length) return;
+
+  if(prefersReduced){ wrap.classList.add('sin-js'); return; }
+
+  roles.forEach(function(_, i){
+    var d = document.createElement('span');
+    d.className = 'rol-dot' + (i === 0 ? ' active' : '');
+    dotsB.appendChild(d);
+  });
+  var dots = [].slice.call(dotsB.children);
+
+  var idx = 0, pausado = false, tl = null;
+  var OCULTO = 'inset(0 0 100% 0)', VISIBLE = 'inset(0 0 0% 0)';
+
+  function pintar(i){
+    // la etiqueta se toma del propio <b>, asi respeta el idioma elegido
+    elLab.textContent = roles[i].el.textContent.trim();
+    elNom.textContent = roles[i].nombres;
+    dots.forEach(function(d,k){ d.classList.toggle('active', k === i); });
+  }
+
+  function entrar(){
+    gsap.set([elLab, elNom], {clipPath: OCULTO, y: 14, opacity: 1});
+    gsap.set(rule, {width: 0});
+    var t = gsap.timeline();
+    t.to(rule,  {width: 132, duration: .55, ease: 'power2.out'})
+     .to(elLab, {clipPath: VISIBLE, y: 0, duration: .5, ease: 'power2.out'}, '-=.30')
+     .to(elNom, {clipPath: VISIBLE, y: 0, duration: .62, ease: 'power2.out'}, '-=.34');
+    return t;
+  }
+
+  function ciclo(){
+    if(pausado){ tl = gsap.delayedCall(.6, ciclo); return; }
+    var sig = (idx + 1) % roles.length;
+    tl = gsap.timeline({onComplete: function(){ tl = gsap.delayedCall(2.3, ciclo); }});
+    tl.to([elNom, elLab], {clipPath: OCULTO, y: -12, duration: .45, ease: 'power2.in', stagger: .06})
+      .to(rule, {width: 0, duration: .35, ease: 'power2.in'}, '-=.28')
+      .add(function(){ idx = sig; pintar(idx); })
+      .add(entrar());
+  }
+
+  pintar(0);
+  gsap.set([elLab, elNom], {clipPath: OCULTO});
+  gsap.set(rule, {width: 0});
+
+  ScrollTrigger.create({
+    trigger: stage, start: 'top 85%', once: true,
+    onEnter: function(){ entrar(); tl = gsap.delayedCall(2.6, ciclo); }
+  });
+
+  stage.addEventListener('mouseenter', function(){ pausado = true; });
+  stage.addEventListener('mouseleave', function(){ pausado = false; });
+  stage.addEventListener('touchstart', function(){ pausado = true; }, {passive:true});
+  stage.addEventListener('touchend',   function(){ pausado = false; }, {passive:true});
+
+  // al cambiar de idioma se repinta la etiqueta visible
+  window.repintarRoles = function(){ pintar(idx); };
+}
+
 function startUpLayer(){
   initTone();
   initHistoria();
@@ -3049,6 +3178,7 @@ function startUpLayer(){
   initFAQ();
   initCalendar();
   initCortejo();
+  initRoles();
   if(prefersReduced) return;
   for(var i=0;i<14;i++) setTimeout(launchBalloon,i*1500+Math.random()*2500);
   for(var j=0;j<9;j++)  setTimeout(launchCloud,j*3600+Math.random()*4000);
