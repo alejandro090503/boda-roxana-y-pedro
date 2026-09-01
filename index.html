@@ -275,16 +275,20 @@ body[data-tone="light"] .b--silver{
   text-shadow:0 4px 32px rgba(0,0,0,.4);
 }
 .hero-date{
-  text-shadow:0 2px 18px rgba(10,18,40,.75);
-  font-size:clamp(22px,5.6vw,30px);
+  text-shadow:0 2px 20px rgba(10,18,40,.85),0 0 44px rgba(10,18,40,.5);
   font-family:var(--italiana);font-weight:400;
-  font-size:clamp(18px,2.4vw,26px);
-  letter-spacing:.35em;color:#F8F5EC;
-  text-transform:uppercase;padding-left:.35em;
+  font-size:clamp(27px,7.4vw,38px);
+  letter-spacing:.26em;color:#FFFDF6;
+  text-transform:uppercase;padding-left:.26em;
   font-variant-numeric:tabular-nums;margin-top:56px;
   display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;
 }
-.hero-date .sep{color:var(--gold-soft);font-size:.6em;letter-spacing:0}
+.hero-date .sep{color:var(--gold-soft);font-size:.62em;letter-spacing:0}
+@media(max-width:520px){
+  /* En movil la fecha entra en dos lineas: reducimos el tracking y el hueco
+     para que "Diciembre" no se parta, sin bajar el tamano de letra. */
+  .hero-date{letter-spacing:.18em;padding-left:.18em;gap:12px;margin-top:44px}
+}
 .hero-place{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.34em;color:rgba(255,253,248,.96);margin-top:28px;padding-left:.45em;text-transform:uppercase;text-shadow:0 2px 16px rgba(10,18,40,.8);}
 .hero-scroll{
   position:absolute;bottom:56px;left:50%;transform:translateX(-50%);
@@ -860,9 +864,13 @@ footer{padding:min(9vh,74px) 0 !important}
   margin-left:6px;color:var(--accent);opacity:.9}
 .mem-nota{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--gold-deep);opacity:.85;margin:0 0 12px;font-weight:600}
+/* Va DEBAJO de los abuelos vivos y encima de los que ya no estan */
+.mem-nota-abajo{margin:18px 0 10px;display:flex;align-items:center;justify-content:center;gap:10px}
+.mem-nota-abajo::before,.mem-nota-abajo::after{content:"";height:1px;width:26px;
+  background:var(--hair-gold);flex:0 0 auto}
 
 .rsvp-guia{font-family:var(--serif);font-size:16px;line-height:1.6;color:var(--ink-soft);
-  font-weight:500;max-width:400px;margin:14px auto 26px;text-align:center}
+  font-weight:500;max-width:430px;margin:22px auto 24px;text-align:center}
 .paleta-nota{font-family:var(--sans);font-size:14px;color:var(--ink-soft);
   font-weight:500;margin-top:18px;line-height:1.6}
 .padrino-unico{max-width:520px;margin:40px auto 0;text-align:center}
@@ -886,6 +894,11 @@ footer{padding:min(9vh,74px) 0 !important}
 .env-rain{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .env-rain-item{position:absolute;top:-46px;will-change:transform;opacity:0}
 .env-stage{position:relative;z-index:1}
+/* El sobre y su leyenda ocupan la fila entera: sueltos dentro del grid de dos
+   columnas la leyenda caia en la columna de al lado, desalineada del sobre. */
+.env-bloque{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;
+  text-align:center;margin-bottom:8px}
+.env-bloque .env-interactive{margin-top:0}
 .env-interactive{display:flex;flex-direction:column;align-items:center;cursor:pointer;
   -webkit-tap-highlight-color:transparent;outline:none;border:none;background:none;
   padding:0;margin:30px auto 0;opacity:0}
@@ -925,14 +938,36 @@ footer{padding:min(9vh,74px) 0 !important}
   font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.22em;
   text-transform:uppercase;color:var(--ink-soft);opacity:.45}
 .hist-foto:has(img)::after{display:none}
-.hist-item{grid-template-columns:1fr 60px 1fr}
-.hist-item .hist-foto{align-self:center}
+/* OJO: aqui NO se vuelve a declarar grid-template-columns. Al estar despues
+   del @media de movil, con la misma especificidad, ganaba y devolvia el
+   layout de escritorio (1fr 60px 1fr) a una pantalla de 390px: la tarjeta
+   caia en una columna de ~150px y el texto se apilaba letra por letra. */
+.hist-item .hist-foto{align-self:center;max-width:300px}
+.hist-item:nth-child(odd) .hist-foto{justify-self:start;margin-left:14px}
+.hist-item:nth-child(even) .hist-foto{justify-self:end;margin-right:14px}
 .hist-item:nth-child(odd) .hist-foto{grid-column:3}
 .hist-item:nth-child(even) .hist-foto{grid-column:1}
 @media(max-width:700px){
+  /* En movil la foto se pega a la tarjeta para que se lean como una sola
+     pieza y no como un recuadro suelto. */
   .hist-item:nth-child(odd) .hist-foto,
-  .hist-item:nth-child(even) .hist-foto{grid-column:2;grid-row:2;margin-top:14px}
+  .hist-item:nth-child(even) .hist-foto{grid-column:2;grid-row:2;
+    margin:0;max-width:none;border-top:none;aspect-ratio:3/2}
+  .hist-item .hist-card{border-bottom:none}
 }
+
+/* Confirmar asistencia: la unica accion del menu, va en dorado con un
+   resplandor lento para que se distinga de las secciones informativas. */
+.nav-rsvp{color:var(--gold) !important;font-weight:600;position:relative;
+  text-shadow:0 0 14px rgba(204,128,66,.45);
+  animation:navGlow 2.8s ease-in-out infinite}
+.nav-rsvp::after{content:"";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);
+  width:52px;height:1px;background:var(--gold);opacity:.7}
+@keyframes navGlow{
+  0%,100%{text-shadow:0 0 12px rgba(204,128,66,.32);opacity:.92}
+  50%    {text-shadow:0 0 24px rgba(204,128,66,.75),0 0 3px rgba(204,128,66,.5);opacity:1}
+}
+@media(prefers-reduced-motion:reduce){.nav-rsvp{animation:none}}
 
 /* ============ MENU DE NAVEGACION ============ */
 .nav-btn{position:fixed;top:16px;right:16px;z-index:9200;width:54px;height:54px;
@@ -1200,7 +1235,7 @@ footer{padding:min(9vh,74px) 0 !important}
     <li><a href="#s-mascotas" data-en="Our pets">Nuestras mascotas</a></li>
     <li><a href="#hospedaje" data-en="Where to stay">Dónde quedarse</a></li>
     <li><a href="#faq" data-en="Questions">Preguntas frecuentes</a></li>
-    <li><a href="#rsvp" data-en="Confirm attendance">Confirmar asistencia</a></li>
+    <li><a href="#rsvp" class="nav-rsvp" data-en="Confirm attendance">Confirmar asistencia</a></li>
   </ul>
 </nav>
 
@@ -1431,11 +1466,11 @@ footer{padding:min(9vh,74px) 0 !important}
         </div>
         <div class="familia-card" data-tilt>
           <div class="familia-role" data-en="Grandparents of the groom">Abuelos del novio</div>
-          <div class="mem-nota" data-en="Watching over us from heaven">Quienes nos acompañan desde el cielo</div><div class="familia-names">Ana María Reyes<br><span class="mem">Nancy Arencibia <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Pedro Domínguez <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Rafael Octavio Reyes <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div>
+          <div class="familia-names">Ana María Reyes</div><div class="mem-nota mem-nota-abajo" data-en="Watching over us from heaven">Quienes nos acompañan desde el cielo</div><div class="familia-names"><span class="mem">Nancy Arencibia <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Pedro Domínguez <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span><br><span class="mem">Rafael Octavio Reyes <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div>
         </div>
         <div class="familia-card" data-tilt>
           <div class="familia-role" data-en="Grandparents of the bride">Abuelos de la novia</div>
-          <div class="mem-nota" data-en="Watching over us from heaven">Quienes nos acompañan desde el cielo</div><div class="familia-names">Miguel Ángel Siguenza Chacón<br>Juana Francisca López Vargas<br><span class="mem">Pascual Briones <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div>
+          <div class="familia-names">Miguel Ángel Siguenza Chacón<br>Juana Francisca López Vargas</div><div class="mem-nota mem-nota-abajo" data-en="Watching over us from heaven">Quien nos acompaña desde el cielo</div><div class="familia-names"><span class="mem">Pascual Briones <svg class="mem-cruz" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 3.2h2.8v5.4h5.4v2.8h-5.4v9.4h-2.8v-9.4H5.2V8.6h5.4z" fill="currentColor"/></svg></span></div>
         </div>
       </div>
       <img class="up-pareja" src="up-pareja.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:44px" width="560" height="638">
@@ -1801,6 +1836,7 @@ footer{padding:min(9vh,74px) 0 !important}
       </div>
       <div class="familia-grid">
 
+        <div class="env-bloque">
         <button class="env-interactive" id="envGift" type="button" aria-label="Sobre — toca para abrir" aria-expanded="false">
           <div class="env-body">
             <svg class="env-svg" viewBox="0 0 260 200" preserveAspectRatio="none" aria-hidden="true">
@@ -1841,6 +1877,7 @@ footer{padding:min(9vh,74px) 0 !important}
           </div>
         </button>
         <p class="env-tap-hint" id="envGiftHint" data-en="Tap to open">Toca para abrir</p>
+        </div>
 
         <div class="gift-card">
           <div class="gift-icon">
@@ -2041,9 +2078,10 @@ footer{padding:min(9vh,74px) 0 !important}
 
             <div class="rsvp-pases-display">
               <div class="rsvp-pases-label" data-en="Seats reserved">Pases reservados</div>
-            <p class="rsvp-guia" data-en="Please write the full name of each person who will attend, one per field. Only the names listed here will be expected at the venue.">Escribe el nombre completo de cada persona que asistirá, uno en cada campo. Solo esperaremos en el evento a los nombres que anotes aquí.</p>
               <div class="rsvp-pases-num" id="rsvp-pases-num">1</div>
             </div>
+
+            <p class="rsvp-guia" data-en="Please write the full name of each person who will attend, one per field. Only the names listed here will be expected at the venue.">Escribe el nombre completo de cada persona que asistirá, uno en cada campo. Solo esperaremos en el evento a los nombres que anotes aquí.</p>
 
             <div id="rsvp-toggle-std" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:420px;margin:0 auto 24px">
               <button class="loc-btn" id="btnYes" type="button" style="flex:1 1 170px;letter-spacing:.2em;padding-left:calc(20px + .2em);padding-right:20px" data-en="Yes, I&#39;ll be there">Sí, ahí estaré</button>
