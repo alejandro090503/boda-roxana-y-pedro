@@ -897,7 +897,7 @@ footer{padding:min(9vh,74px) 0 !important}
 /* El sobre y su leyenda ocupan la fila entera: sueltos dentro del grid de dos
    columnas la leyenda caia en la columna de al lado, desalineada del sobre. */
 .env-bloque{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;
-  text-align:center;margin-bottom:8px}
+  text-align:center;margin-bottom:-14px}
 .env-bloque .env-interactive{margin-top:0}
 .env-interactive{display:flex;flex-direction:column;align-items:center;cursor:pointer;
   -webkit-tap-highlight-color:transparent;outline:none;border:none;background:none;
@@ -958,11 +958,11 @@ footer{padding:min(9vh,74px) 0 !important}
 
 /* Confirmar asistencia: la unica accion del menu, va en dorado con un
    resplandor lento para que se distinga de las secciones informativas. */
-.nav-rsvp{color:var(--gold) !important;font-weight:600;position:relative;
+.nav-rsvp{color:#f0c79a !important;font-weight:600;position:relative;
   text-shadow:0 0 14px rgba(204,128,66,.45);
   animation:navGlow 2.8s ease-in-out infinite}
 .nav-rsvp::after{content:"";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);
-  width:52px;height:1px;background:var(--gold);opacity:.7}
+  width:52px;height:1px;background:#f0c79a;opacity:.75}
 @keyframes navGlow{
   0%,100%{text-shadow:0 0 12px rgba(204,128,66,.32);opacity:.92}
   50%    {text-shadow:0 0 24px rgba(204,128,66,.75),0 0 3px rgba(204,128,66,.5);opacity:1}
