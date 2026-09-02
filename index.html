@@ -823,16 +823,22 @@ footer{padding:min(9vh,74px) 0 !important}
 .hist-si{font-style:italic;color:var(--gold-deep)}
 @media(max-width:700px){
   .hist-track{margin-top:40px}
-  .hist-line{left:23px}
-  .hist-item{grid-template-columns:46px 1fr;column-gap:18px;align-items:start;margin-bottom:26px}
-  .hist-node{grid-column:1;grid-row:1}
+  .hist-line{left:15px}
+  /* Tres columnas tambien en movil: nodo, foto y tarjeta. La clienta pidio
+     expresamente la foto al lado de la tarjeta blanca, nunca encima ni debajo. */
+  .hist-item{grid-template-columns:30px 108px 1fr;column-gap:11px;align-items:start;margin-bottom:26px}
+  .hist-node{grid-column:1;grid-row:1;width:30px;height:30px;
+    box-shadow:0 0 0 5px var(--bg),0 6px 14px -6px rgba(21,45,79,.30)}
+  .hist-node svg{width:15px;height:15px}
   /* Los dos selectores repiten :nth-child a proposito: si no, la regla de
      escritorio (grid-column:3) gana por especificidad y la tarjeta cae en una
      columna implicita inexistente, donde el texto se apila letra por letra. */
   .hist-item:nth-child(odd)  .hist-card,
   .hist-item:nth-child(even) .hist-card{
-    grid-column:2;grid-row:1;text-align:left;padding:18px 20px}
-  .hist-title{font-size:20px}
+    grid-column:3;grid-row:1;text-align:left;padding:16px 15px}
+  .hist-title{font-size:18px;letter-spacing:-.01em}
+  .hist-when{font-size:10.5px;letter-spacing:.18em}
+  .hist-text{font-size:15.5px;line-height:1.55}
 }
 
 /* ============ VIDEO SAVE THE DATE ============ */
@@ -884,6 +890,14 @@ footer{padding:min(9vh,74px) 0 !important}
 
 .itin-oculto[hidden]{display:none}
 
+/* ---- Solo adultos ---- */
+.adultos-wrap{max-width:660px;margin:38px auto 0;text-align:center}
+.adultos-orn{width:120px;height:44px;color:var(--accent);margin:0 auto 22px;display:block}
+.adultos-text{font-family:var(--serif);font-size:17px;line-height:1.8;color:var(--ink-soft);
+  font-weight:500}
+.adultos-text + .adultos-text{margin-top:22px;color:var(--ink);
+  border-top:1px solid var(--hair-gold);padding-top:24px}
+
 /* La cuenta regresiva ahora vive sobre la banda oscura de la foto */
 .date-hero .countdown-sub{color:#e8b98a;margin-top:26px;margin-bottom:48px;line-height:1.25}
 .date-hero .cd-num{color:#F8F5EC}
@@ -921,7 +935,11 @@ footer{padding:min(9vh,74px) 0 !important}
   transition:max-height .55s .3s ease,opacity .4s .38s ease;
   display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 16px;
   text-align:center;pointer-events:none}
-.env-interactive.open .env-open-content{max-height:340px;opacity:1;pointer-events:auto;margin-top:22px}
+.env-interactive.open .env-open-content{max-height:980px;opacity:1;pointer-events:auto;margin-top:22px}
+.env-zelle{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:6px}
+.env-zelle-rule{width:70px;height:1px;background:var(--hair-gold);margin:16px 0 12px}
+.env-zelle .gift-qr{width:min(228px,62vw);height:auto;display:block;margin-top:6px;
+  border:1px solid var(--hair-gold);background:#fff;padding:10px}
 .env-mailbox-icon{width:42px;height:42px;color:var(--gold-deep);margin-top:6px}
 .env-title{font-family:var(--script);font-size:clamp(28px,8vw,36px);line-height:1.4;
   color:var(--gold-deep);padding:.08em 0}
@@ -951,12 +969,9 @@ footer{padding:min(9vh,74px) 0 !important}
 .hist-item:nth-child(odd) .hist-foto{grid-column:3}
 .hist-item:nth-child(even) .hist-foto{grid-column:1}
 @media(max-width:700px){
-  /* En movil la foto se pega a la tarjeta para que se lean como una sola
-     pieza y no como un recuadro suelto. */
   .hist-item:nth-child(odd) .hist-foto,
-  .hist-item:nth-child(even) .hist-foto{grid-column:2;grid-row:2;
-    margin:0;max-width:none;border-top:none;aspect-ratio:3/2}
-  .hist-item .hist-card{border-bottom:none}
+  .hist-item:nth-child(even) .hist-foto{grid-column:2;grid-row:1;
+    margin:0;max-width:none;justify-self:stretch;align-self:start}
 }
 
 /* Confirmar asistencia: la unica accion del menu, va en dorado con un
@@ -1234,6 +1249,7 @@ footer{padding:min(9vh,74px) 0 !important}
     <li><a href="#s-lugar" data-en="Ceremony &amp; Reception">Ceremonia y recepción</a></li>
     <li><span class="nav-pronto" data-en="Timeline<small>Coming soon</small>">Itinerario<small data-en="Coming soon">Próximamente</small></span></li>
     <li><a href="#s-dress" data-en="Dress code">Código de vestimenta</a></li>
+    <li><a href="#s-adultos" data-en="A note with love">Una nota con cariño</a></li>
     <li><a href="#s-galeria" data-en="Our memories">Nuestros recuerdos</a></li>
     <li><a href="#s-mascotas" data-en="Our pets">Nuestras mascotas</a></li>
     <li><a href="#hospedaje" data-en="Where to stay">Dónde quedarse</a></li>
@@ -1364,7 +1380,7 @@ footer{padding:min(9vh,74px) 0 !important}
             <p class="hist-text" data-en="One conversation led to another. Coincidences turned into meetings, meetings into memories and, almost without noticing, we began choosing each other.">Una conversación llevó a otra. Las coincidencias se convirtieron en encuentros, los encuentros en recuerdos y, casi sin darnos cuenta, comenzamos a elegirnos.</p>
             <p class="hist-text" data-en="We did not know it then, but we had just met the person God had in mind for us to share a whole life with. Because yes: we realized we are the answer to the prayers we said to God about our future.">Aquel día no lo sabíamos, pero acabábamos de conocer a la persona que Dios tenía pensado para compartir toda una vida. Porque sí: nos dimos cuenta de que somos la respuesta de las oraciones que le hacíamos a Dios sobre nuestro futuro.</p>
           </div>
-          <div class="hist-foto" data-nota="Foto por venir" aria-hidden="true"></div>
+          <figure class="hist-foto"><img src="hist-1.webp" alt="Pedro y Roxana abrazados frente al castillo de Hogwarts" loading="lazy" decoding="async" width="720" height="900"></figure>
         </div>
 
         <div class="hist-item">
@@ -1378,7 +1394,7 @@ footer{padding:min(9vh,74px) 0 !important}
             <p class="hist-text" data-en="We built a love made of big dreams, but above all of small things: being there, caring for each other, keeping each other company and choosing one another even on the most ordinary days.">Fuimos construyendo un amor hecho de grandes sueños, pero sobre todo de pequeñas cosas: estar, cuidarnos, acompañarnos y seguir eligiéndonos incluso en los días más ordinarios.</p>
             <p class="hist-text" data-en="And we understood that home had never been a place. Home was wherever we were together.">Y entendimos que hogar nunca había sido un lugar. Hogar era donde estábamos juntos.</p>
           </div>
-          <div class="hist-foto" data-nota="Foto por venir" aria-hidden="true"></div>
+          <figure class="hist-foto"><img src="hist-2.webp" alt="Pedro y Roxana caminando de la mano por un jardin" loading="lazy" decoding="async" width="720" height="900"></figure>
         </div>
 
         <div class="hist-item">
@@ -1392,7 +1408,7 @@ footer{padding:min(9vh,74px) 0 !important}
             <p class="hist-text" data-en="And between excitement, nerves and a heart that already knew the answer, the «yes» arrived.">Y entre emoción, nervios y un corazón que ya conocía la respuesta, llegó el «sí».</p>
             <p class="hist-text hist-si" data-en="Yes to keep growing together.<br>Yes to all the adventures still waiting for us.<br>Yes to choosing each other again and again.<br>Yes to a life with you.">Sí a seguir creciendo juntos.<br>Sí a todas las aventuras que todavía nos esperan.<br>Sí a elegirnos una y otra vez.<br>Sí a una vida contigo.</p>
           </div>
-          <div class="hist-foto" data-nota="Foto por venir" aria-hidden="true"></div>
+          <figure class="hist-foto"><img src="hist-3.webp" alt="Pedro dando el anillo a Roxana bajo un arbol" loading="lazy" decoding="async" width="720" height="900"></figure>
         </div>
 
         <div class="hist-item">
@@ -1406,7 +1422,7 @@ footer{padding:min(9vh,74px) 0 !important}
             <p class="hist-text" data-en="That day we will walk down the aisle knowing we are not beginning our story: we are keeping the promise to go on writing it together.">Ese día caminaremos hacia el altar sabiendo que no estamos comenzando nuestra historia: estamos cumpliendo la promesa de seguir escribiéndola juntos.</p>
             <p class="hist-text" data-en="And now only one thing is left: to live it together, forever, hand in hand with God and the Virgin Mary, who will be the pillars of our life.">Y ahora solo nos queda una cosa: vivirla juntos, para siempre, de la mano de Dios y la Virgen María, que serán nuestros pilares de vida.</p>
           </div>
-          <div class="hist-foto" data-nota="Foto por venir" aria-hidden="true"></div>
+          <figure class="hist-foto"><img src="hist-4.webp" alt="Pedro y Roxana con el anillo frente al castillo de Disney" loading="lazy" decoding="async" width="720" height="900"></figure>
         </div>
       </div>
     </div>
@@ -1761,10 +1777,9 @@ footer{padding:min(9vh,74px) 0 !important}
 
       <div class="dress-section">
         <div class="swatch-group-title" data-en="Color palette">Paleta de colores</div>
-        <!-- PENDIENTE: la novia enviara el link de Pinterest con la paleta -->
-        <a class="loc-btn" id="paleta-link" href="#" target="_blank" rel="noopener"
-           data-en="View the palette">Ver la paleta</a>
-        <div class="paleta-nota" data-en="We will share the board with the exact shades very soon.">Muy pronto compartimos el tablero con los tonos exactos.</div>
+        <a class="loc-btn" id="paleta-link" href="https://pin.it/5rjOrBwgV" target="_blank" rel="noopener"
+           data-en="Outfit ideas">Ideas de vestimenta</a>
+        <div class="paleta-nota" data-en="We are sharing some ideas to inspire you.">Te compartimos ideas para que te inspires.</div>
       </div>
 
       <div class="dress-avoid">
@@ -1780,7 +1795,25 @@ footer{padding:min(9vh,74px) 0 !important}
     </div>
   </section>
 
-  <div class="seam" style="--from:var(--bg);--to:var(--bg)" aria-hidden="true"></div>
+  <div class="seam" style="--from:var(--bg);--to:var(--surface)" aria-hidden="true"></div>
+
+  <!-- SOLO ADULTOS -->
+  <section class="section-surface adultos section-tight" id="s-adultos">
+    <div class="container">
+      <div class="eyebrow" data-en="A note with love">Una nota con cariño</div>
+      <h2 data-en="A night <em>for us</em>">Una noche <em>para nosotros</em></h2>
+      <div class="adultos-wrap">
+        <svg class="adultos-orn" viewBox="0 0 120 44" fill="none" aria-hidden="true">
+          <path d="M8 22h34M78 22h34" stroke="currentColor" stroke-width="1"/>
+          <path d="M60 13c4 0 7 3 7 6.5S60 31 60 31s-7-8-7-11.5S56 13 60 13z" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <p class="adultos-text" data-en="For this occasion we have dreamed of a night meant to be enjoyed: to toast, to dance, to celebrate and to live every one of the experiences we have prepared with so much love. We hope that night you will also allow yourselves to disconnect, to enjoy and to celebrate by our side, because there are adventures that remind us that, no matter our age, we can always feel like children again.">Para esta ocasión, hemos soñado con una noche pensada para disfrutar: brindar, bailar, celebrar y vivir cada una de las experiencias que hemos preparado con mucho cariño. Esperamos que esa noche también se permitan desconectarse, disfrutar y celebrar a nuestro lado, porque hay aventuras que nos recuerdan que, sin importar la edad, siempre podemos volver a sentirnos como niños.</p>
+        <p class="adultos-text" data-en="For this reason, our reception will be exclusively for adults. The only little ones who will join us will be those who are part of our wedding party and have a special role during the ceremony.">Por esta razón, nuestra recepción será exclusivamente para adultos. Los únicos pequeños que nos acompañarán serán quienes formen parte de nuestro cortejo y tengan un papel especial durante la ceremonia.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="seam" style="--from:var(--surface);--to:var(--bg)" aria-hidden="true"></div>
 
   <!-- GALLERY -->
   <section class="gallery" aria-label="Galería de fotos" id="s-galeria">
@@ -1816,8 +1849,8 @@ footer{padding:min(9vh,74px) 0 !important}
         Ninguna aventura sería la misma sin ellos. Nos acompañaron en los días tranquilos y en los que no lo fueron tanto, y por eso también son parte de esta historia.
       </p>
       <figure class="pet-frame">
-        <img src="mascotas.webp" alt="Las seis mascotas de Pedro y Roxana: dos perros pequeños, un pitbull, dos gatos y un loro verde"
-             loading="lazy" decoding="async" width="1086" height="1448">
+        <img src="mascotas.webp" alt="Las mascotas de Pedro y Roxana: dos perros pequeños, un pitbull, dos gatos y un loro verde"
+             loading="lazy" decoding="async" width="1100" height="733">
         <figcaption data-en="The whole pack">La manada completa</figcaption>
       </figure>
       <img class="up-sello" src="up-sello.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="margin-top:52px" width="360" height="360">
@@ -1875,21 +1908,16 @@ footer{padding:min(9vh,74px) 0 !important}
             </svg>
             <p class="env-title" data-en="Your presence is our gift">Tu presencia es nuestro regalo</p>
             <p class="env-desc" data-en="On the day of the event there will be a box where you can leave your envelope with all our love.">El día del evento habrá una urna donde podrás depositar tu sobre con todo nuestro cariño.</p>
+
+            <div class="env-zelle">
+              <div class="env-zelle-rule" aria-hidden="true"></div>
+              <div class="gift-name" data-en="Zelle">Zelle</div>
+              <div class="gift-desc" data-en="Scan the code from your banking app.">Escanea el código desde tu app del banco.</div>
+              <img class="gift-qr" src="qr-zelle.webp" alt="Código QR de Zelle" loading="lazy" decoding="async" width="760" height="883">
+            </div>
           </div>
         </button>
         <p class="env-tap-hint" id="envGiftHint" data-en="Tap to open">Toca para abrir</p>
-        </div>
-
-        <div class="gift-card">
-          <div class="gift-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 19h2v2h-2z"/>
-            </svg>
-          </div>
-          <div class="gift-name" data-en="Zelle">Zelle</div>
-          <div class="gift-desc" data-en="Scan the code from your banking app.">Escanea el código desde tu app del banco.</div>
-          <img class="gift-qr" src="qr-zelle.webp" alt="Código QR de Zelle" loading="lazy" decoding="async" width="760" height="883">
         </div>
 
       </div>
@@ -1978,7 +2006,7 @@ footer{padding:min(9vh,74px) 0 !important}
           <button class="faq-q" type="button" aria-expanded="false">
             <span data-en="What time should I arrive?">¿A qué hora debo llegar?</span><span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner" data-en="The ceremony starts promptly at <strong>2:00 pm</strong>. We ask you to arrive 15 to 20 minutes early so you can settle in calmly. The reception begins with a cocktail at <strong>4:30 pm</strong>.">La ceremonia empieza puntual a las <strong>2:00 pm</strong>. Te pedimos llegar entre 15 y 20 minutos antes para acomodarte con calma. La recepción empezará con un coctail a las <strong>4:30 pm</strong>.</div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-en="We ask you to arrive 15 to 20 minutes before the ceremony begins so you can settle in calmly. The reception will start with a cocktail and you will find the time in the timeline.">Te pedimos llegar entre 15 y 20 minutos antes del inicio de la ceremonia para acomodarte con calma. La recepción empezará con un coctail y la hora la encontrarán en el itinerario.</div></div>
         </div>
 
         <div class="faq-item">
