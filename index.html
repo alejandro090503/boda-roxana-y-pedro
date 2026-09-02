@@ -3522,6 +3522,13 @@ function initLluviaSobres(){
     if(e) e.preventDefault();
     var abierto = btn.classList.toggle('open');
     btn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    // La leyenda seguia diciendo "toca para abrir" con el sobre ya abierto.
+    if(hint){
+      var en = abierto ? 'Tap to close' : 'Tap to open';
+      hint.setAttribute('data-en', en);
+      hint.textContent = (window.I18N && window.I18N.lang === 'en')
+        ? en : (abierto ? 'Toca para cerrar' : 'Toca para abrir');
+    }
     if(window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 620);
   }
   btn.addEventListener('click', toggle);
