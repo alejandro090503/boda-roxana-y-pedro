@@ -826,16 +826,16 @@ footer{padding:min(9vh,74px) 0 !important}
   .hist-line{left:15px}
   /* Tres columnas tambien en movil: nodo, foto y tarjeta. La clienta pidio
      expresamente la foto al lado de la tarjeta blanca, nunca encima ni debajo. */
-  .hist-item{grid-template-columns:30px 108px 1fr;column-gap:11px;align-items:start;margin-bottom:26px}
-  .hist-node{grid-column:1;grid-row:1;width:30px;height:30px;
-    box-shadow:0 0 0 5px var(--bg),0 6px 14px -6px rgba(21,45,79,.30)}
-  .hist-node svg{width:15px;height:15px}
+  /* En movil el nodo y la linea del tiempo se retiran para que la foto y la
+     tarjeta formen un diptico: la clienta pidio la foto al lado, y con la
+     columna del nodo el texto se quedaba en 130px y era ilegible. */
+  .hist-item{grid-template-columns:120px 1fr;column-gap:0;align-items:stretch;margin-bottom:30px}
+  .hist-node,.hist-line{display:none}
   /* Los dos selectores repiten :nth-child a proposito: si no, la regla de
      escritorio (grid-column:3) gana por especificidad y la tarjeta cae en una
      columna implicita inexistente, donde el texto se apila letra por letra. */
-  .hist-item:nth-child(odd)  .hist-card,
-  .hist-item:nth-child(even) .hist-card{
-    grid-column:3;grid-row:1;text-align:left;padding:16px 15px}
+  .hist-item:nth-child(odd)  .hist-card{grid-column:2;grid-row:1;text-align:left;padding:16px 15px}
+  .hist-item:nth-child(even) .hist-card{grid-column:1;grid-row:1;text-align:left;padding:16px 15px}
   .hist-title{font-size:18px;letter-spacing:-.01em}
   .hist-when{font-size:10.5px;letter-spacing:.18em}
   .hist-text{font-size:15.5px;line-height:1.55}
@@ -969,9 +969,13 @@ footer{padding:min(9vh,74px) 0 !important}
 .hist-item:nth-child(odd) .hist-foto{grid-column:3}
 .hist-item:nth-child(even) .hist-foto{grid-column:1}
 @media(max-width:700px){
-  .hist-item:nth-child(odd) .hist-foto,
-  .hist-item:nth-child(even) .hist-foto{grid-column:2;grid-row:1;
-    margin:0;max-width:none;justify-self:stretch;align-self:start}
+  /* La foto se estira a la altura de la tarjeta: como banda vertical acompana
+     al texto en vez de quedar como un cuadrito suelto arriba. */
+  .hist-item:nth-child(odd)  .hist-foto{grid-column:1;grid-row:1}
+  .hist-item:nth-child(even) .hist-foto{grid-column:2;grid-row:1}
+  .hist-item .hist-foto{margin:0;max-width:none;aspect-ratio:auto;height:100%;
+    justify-self:stretch;align-self:stretch;border-right:none}
+  .hist-item:nth-child(even) .hist-foto{border-right:1px solid var(--hair-gold);border-left:none}
 }
 
 /* Confirmar asistencia: la unica accion del menu, va en dorado con un
