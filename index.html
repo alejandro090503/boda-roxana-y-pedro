@@ -1257,8 +1257,8 @@ footer{padding:min(9vh,74px) 0 !important}
     <li><a href="#s-familia" data-en="Our families">Nuestras familias</a></li>
     <li><a href="#s-lugar" data-en="Ceremony &amp; Reception">Ceremonia y recepción</a></li>
     <li><span class="nav-pronto" data-en="Timeline<small>Coming soon</small>">Itinerario<small data-en="Coming soon">Próximamente</small></span></li>
-    <li><a href="#s-dress" data-en="Dress code">Código de vestimenta</a></li>
     <li><a href="#s-adultos" data-en="A note with love">Una nota con cariño</a></li>
+    <li><a href="#s-dress" data-en="Dress code">Código de vestimenta</a></li>
     <li><a href="#s-galeria" data-en="Our memories">Nuestros recuerdos</a></li>
     <li><a href="#s-mascotas" data-en="Our pets">Nuestras mascotas</a></li>
     <li><a href="#hospedaje" data-en="Where to stay">Dónde quedarse</a></li>
@@ -1751,7 +1751,25 @@ footer{padding:min(9vh,74px) 0 !important}
     </div>
   </section>
 
-  <div class="seam" style="--from:var(--bg);--to:var(--bg)" aria-hidden="true"></div>
+  <div class="seam" style="--from:var(--bg);--to:var(--surface)" aria-hidden="true"></div>
+
+  <!-- SOLO ADULTOS -->
+  <section class="section-surface adultos section-tight" id="s-adultos">
+    <div class="container">
+      <div class="eyebrow" data-en="A note with love">Una nota con cariño</div>
+      <h2 data-en="A night <em>for us</em>">Una noche <em>para nosotros</em></h2>
+      <div class="adultos-wrap">
+        <svg class="adultos-orn" viewBox="0 0 120 44" fill="none" aria-hidden="true">
+          <path d="M8 22h34M78 22h34" stroke="currentColor" stroke-width="1"/>
+          <path d="M60 13c4 0 7 3 7 6.5S60 31 60 31s-7-8-7-11.5S56 13 60 13z" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <p class="adultos-text" data-en="For this occasion we have dreamed of a night meant to be enjoyed: to toast, to dance, to celebrate and to live every one of the experiences we have prepared with so much love. We hope that night you will also allow yourselves to disconnect, to enjoy and to celebrate by our side, because there are adventures that remind us that, no matter our age, we can always feel like children again.">Para esta ocasión, hemos soñado con una noche pensada para disfrutar: brindar, bailar, celebrar y vivir cada una de las experiencias que hemos preparado con mucho cariño. Esperamos que esa noche también se permitan desconectarse, disfrutar y celebrar a nuestro lado, porque hay aventuras que nos recuerdan que, sin importar la edad, siempre podemos volver a sentirnos como niños.</p>
+        <p class="adultos-text" data-en="For this reason, our reception will be exclusively for adults. The only little ones who will join us will be those who are part of our wedding party and have a special role during the ceremony.">Por esta razón, nuestra recepción será exclusivamente para adultos. Los únicos pequeños que nos acompañarán serán quienes formen parte de nuestro cortejo y tengan un papel especial durante la ceremonia.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="seam" style="--from:var(--surface);--to:var(--bg)" aria-hidden="true"></div>
 
   <!-- DRESS CODE -->
   <section class="section-bg dress" id="s-dress">
@@ -1804,25 +1822,7 @@ footer{padding:min(9vh,74px) 0 !important}
     </div>
   </section>
 
-  <div class="seam" style="--from:var(--bg);--to:var(--surface)" aria-hidden="true"></div>
-
-  <!-- SOLO ADULTOS -->
-  <section class="section-surface adultos section-tight" id="s-adultos">
-    <div class="container">
-      <div class="eyebrow" data-en="A note with love">Una nota con cariño</div>
-      <h2 data-en="A night <em>for us</em>">Una noche <em>para nosotros</em></h2>
-      <div class="adultos-wrap">
-        <svg class="adultos-orn" viewBox="0 0 120 44" fill="none" aria-hidden="true">
-          <path d="M8 22h34M78 22h34" stroke="currentColor" stroke-width="1"/>
-          <path d="M60 13c4 0 7 3 7 6.5S60 31 60 31s-7-8-7-11.5S56 13 60 13z" stroke="currentColor" stroke-width="1"/>
-        </svg>
-        <p class="adultos-text" data-en="For this occasion we have dreamed of a night meant to be enjoyed: to toast, to dance, to celebrate and to live every one of the experiences we have prepared with so much love. We hope that night you will also allow yourselves to disconnect, to enjoy and to celebrate by our side, because there are adventures that remind us that, no matter our age, we can always feel like children again.">Para esta ocasión, hemos soñado con una noche pensada para disfrutar: brindar, bailar, celebrar y vivir cada una de las experiencias que hemos preparado con mucho cariño. Esperamos que esa noche también se permitan desconectarse, disfrutar y celebrar a nuestro lado, porque hay aventuras que nos recuerdan que, sin importar la edad, siempre podemos volver a sentirnos como niños.</p>
-        <p class="adultos-text" data-en="For this reason, our reception will be exclusively for adults. The only little ones who will join us will be those who are part of our wedding party and have a special role during the ceremony.">Por esta razón, nuestra recepción será exclusivamente para adultos. Los únicos pequeños que nos acompañarán serán quienes formen parte de nuestro cortejo y tengan un papel especial durante la ceremonia.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="seam" style="--from:var(--surface);--to:var(--bg)" aria-hidden="true"></div>
+  <div class="seam" style="--from:var(--bg);--to:var(--bg)" aria-hidden="true"></div>
 
   <!-- GALLERY -->
   <section class="gallery" aria-label="Galería de fotos" id="s-galeria">
