@@ -277,6 +277,9 @@ body[data-tone="light"] .b--silver{
   font-size:clamp(44px,9.4vw,112px);line-height:.95;color:#F8F5EC;
   text-shadow:0 4px 40px rgba(0,0,0,.35);
   margin-bottom:4px;letter-spacing:-.02em;perspective:800px;
+  /* Columna en todos los tamanos: con los apellidos, la linea unica
+     "Pedro Dominguez Y Roxana / Quiroz" se partia donde no debia. */
+  display:flex;flex-direction:column;align-items:center;
 }
 .hero-name span{display:inline-block}
 @media(max-width:620px){
