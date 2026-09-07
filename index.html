@@ -2132,7 +2132,7 @@ footer{padding:min(9vh,74px) 0 !important}
 
           <div class="eyebrow" data-en="Let us know">Confírmanos</div>
           <h2 class="rsvp-title" data-en="Your presence <em>is</em> everything">Tu presencia <em>lo es</em> todo</h2>
-          <p class="rsvp-text" data-en="Please confirm your attendance before <strong>Sunday, November 1, 2026</strong>. With a single tap you help us prepare every detail of our great adventure.">Por favor confirma tu asistencia antes del <strong>domingo 1 de noviembre de 2026</strong>. Con un solo toque nos ayudas a preparar cada detalle de nuestra gran aventura.</p>
+          <p class="rsvp-text" data-en="Please confirm your attendance before <strong>Thursday, October 15, 2026</strong>. With a single tap you help us prepare every detail of our great adventure.">Por favor confirma tu asistencia antes del <strong>jueves 15 de octubre de 2026</strong>. Con un solo toque nos ayudas a preparar cada detalle de nuestra gran aventura.</p>
 
           <div class="rsvp-divider">
             <svg class="rsvp-divider-heart" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
@@ -2174,7 +2174,7 @@ footer{padding:min(9vh,74px) 0 !important}
 
           <div class="rsvp-deadline">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg>
-            <span data-en="Deadline · November 1, 2026">Fecha límite · 1 de noviembre de 2026</span>
+            <span data-en="Deadline · October 15, 2026">Fecha límite · 15 de octubre de 2026</span>
           </div>
         </div>
       </div>
@@ -2245,7 +2245,7 @@ const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){
   var PANEL_API = 'https://panel-invitados.vercel.app/api/confirmar';
   var RSVP_URL  = 'https://boda-roxana-y-pedro.vercel.app';
-  var DEADLINE  = new Date(2026, 10, 1, 23, 59, 59, 999);
+  var DEADLINE  = new Date(2026, 9, 15, 23, 59, 59, 999);   /* 15 oct 2026 */
   var frozen    = Date.now() > DEADLINE.getTime();
 
   var params   = new URLSearchParams(window.location.search);
